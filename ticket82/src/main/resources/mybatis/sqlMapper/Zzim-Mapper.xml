@@ -4,7 +4,7 @@
 <mapper namespace="ZzimMapper">
 	
 	<select id="listZzim" resultType="zzim">
-		select z.zzim_no, z.mem_id, t.ttr_no, m.mem_id, t.ttr_title
+		select z.zzim_no, z.mem_id, t.ttr_no, m.mem_id, t.ttr_title, z.zzim_date
 		from zzim z, theater t, member m
 		where m.mem_id = z.mem_id
 		and t.ttr_no = z.ttr_no

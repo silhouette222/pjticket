@@ -95,7 +95,7 @@
               </div>
             </li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('ROLE_USER')">
+            <sec:authorize access="isAuthenticated()">
             	<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                	<b>${loginUser.mem_name }</b>님의 마이페이지

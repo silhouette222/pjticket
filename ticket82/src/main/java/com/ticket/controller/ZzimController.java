@@ -56,6 +56,7 @@ public class ZzimController {
 		String mem_id =mem.getMem_id();
 		Map<String, Object> map = new HashMap<String , Object>();
 		List<ZzimVO> list = zs.listZzim(mem_id);
+		System.out.println(list);
 		for(ZzimVO a:list){
 			String t=bs.readBoardByNo(a.getTtr_no()).getTtr_title();
 			a.setTtr_title(t);

@@ -95,7 +95,7 @@
               </div>
             </li>
             </sec:authorize>
-            <sec:authorize access="hasAuthority('ROLE_MANAGER')">
+            <sec:authorize access="isAuthenticated()">
             	<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                	마이페이지
