@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="str" type="java.lang.String" />
+		<typeAlias alias="int" type="java.lang.Integer" />
+		<typeAlias alias="member" type="com.ticket.domain.MemberVO" />
+		<typeAlias alias="company" type="com.ticket.domain.CompanyVO" />
+		<typeAlias alias="admin" type="com.ticket.domain.AdminVO" />
+		<typeAlias alias="mc" type="com.ticket.domain.MusicalVO" />
+		<typeAlias alias="zzim" type="com.ticket.domain.ZzimVO" />
+		<typeAlias alias="event" type="com.ticket.domain.EventVO" />
+		<typeAlias alias="dub" type="java.lang.Double" />
+		<typeAlias alias="res" type="com.ticket.domain.ResVO"/>
+		<typeAlias alias="mem" type="com.ticket.domain.MemberVO"/>
+		<typeAlias alias="reply" type="com.ticket.domain.ReplyVO"/>
+		<typeAlias alias="com" type="com.ticket.domain.CompanyVO"/>
+		<typeAlias alias="admin" type="com.ticket.domain.AdminVO"/>
+		<typeAlias alias="zzim" type="com.ticket.domain.ZzimVO"/>
+		<typeAlias alias="board" type="com.ticket.domain.BoardVO"/>
+		<typeAlias alias="seatinfo" type="com.ticket.domain.Seatinfo"/>
+	</typeAliases>	
+</configuration>

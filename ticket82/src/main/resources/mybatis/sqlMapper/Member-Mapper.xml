@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberMapper">
+	
+	<select id="selectMemberList" resultType="member">
+		select * from member
+	</select>
+	
+	<select id="selectMemberById" resultType="member">
+		select * from member
+		where mem_id=#{mem_id}	
+	</select>
+	
+	<select id="selectMemberByEmail" resultType="member">
+		select * from member
+		where mem_mail=#{mem_mail}
+	</select>
+	
+	<update id="insertMember" parameterType="member">
+		insert into member(mem_id,mem_pw,mem_name,mem_gender,
+		mem_birth,mem_mail,mem_mobile,mem_addr)
+		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_gender},
+		#{mem_birth},#{mem_mail},#{mem_mobile},#{mem_addr})
+	</update>
+	
+	<update id="insertMemberAuthority">
+		insert into mem_authorities (mem_id, authority)
+		values(#{mem_id}, 'ROLE_USER')
+	</update>
+	
+	<update id="updateMember" parameterType="member">
+		update member set
+		mem_id=#{mem_id},mem_pw=#{mem_pw},mem_name=#{mem_name},mem_gender=#{mem_gender},
+		mem_birth=#{mem_birth},mem_mail=#{mem_mail},mem_mobile=#{mem_mobile},mem_addr=#{mem_addr}
+		where mem_id=#{mem_id}
+	</update>
+	
+	<update id="deleteMember" parameterType="str">
+		delete from member
+		where mem_id=#{mem_id}
+	</update>
+	
+	<select id="selectCountPaging" resultType="str">
+		select count(mem_id) from member
+	</select>	
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				where mem_id like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				where mem_name like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				where mem_mail like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				where ( mem_id like '%'||#{keyword}||'%') OR mem_name
+				like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				where ( mem_name like '%'||#{keyword}||'%' OR mem_mail
+				like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				where ( mem_id like '%'||#{keyword}||'%'
+				OR
+				mem_name
+				like '%'||#{keyword}||'%'
+				OR
+				mem_mail like '%'||#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectSearchMemberList" resultType="member">
+	<![CDATA[ 
+		select *
+		from member
+		order by
+		mem_date desc
+	]]>
+		<include refid="search"></include>
+	</select>
+	
+	<select id="selectSearchMemberCount" resultType="int">
+		<![CDATA[  
+		  select count(mem_id) 
+		  from member
+		]]>
+		<include refid="search"></include>
+
+	</select>
+	
+	<select id="checkId" parameterType="member" resultType="int">
+		select count(*) from member
+		where mem_id=#{mem_id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReplyMapper">
+
+
+	<select id="selectReplyList" resultType="reply">
+		select * 
+		from theater_reply
+		where ttr_no=#{ttr_no}
+		order by tr_date desc
+	</select>
+	
+	<update id="insertReply" parameterType="reply">
+		insert into theater_reply(tr_rno,tr_content,tr_date,mem_id,ttr_no,ttr_score)
+		values(reply_seq.nextval,#{tr_content},sysdate,#{mem_id},#{ttr_no},#{ttr_score})
+	</update>
+	
+	<update id="updateReply" parameterType="reply">
+		update theater_reply set tr_content=#{tr_content},ttr_score=#{ttr_score},tr_date=sysdate
+		where tr_rno=#{tr_rno}
+	</update>
+	
+	<update id="deleteReply" parameterType="int">
+		delete from theater_reply where tr_rno=#{tr_rno}
+	</update>
+	
+	<select id="selectReplyListPage" resultType="reply">
+		select *
+		from theater_reply
+		where ttr_no=#{ttr_no}
+		order by tr_date desc		
+	</select>
+	
+	<select id="countReply" resultType="int">
+		select count(ttr_no) from theater_reply where ttr_no=#{ttr_no}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

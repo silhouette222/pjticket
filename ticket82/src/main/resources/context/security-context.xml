@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 인증처리 -->
+	<authentication-manager id="user">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="select mem_id as username, mem_pw as password, enabled
+									 from member
+									 where mem_id = ?"
+			authorities-by-username-query="select mem_id as username, authority
+			                               from mem_authorities
+			                               where mem_id = ?"
+		/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<authentication-manager id="company">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="select com_id as username, com_pw as password, enabled
+									 from company
+									 where com_id = ?"
+			authorities-by-username-query="select com_id as username, authority
+			                               from com_authorities
+			                               where com_id = ?"
+		/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<authentication-manager id="admin">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="select am_id as username, am_pw as password, enabled
+									 from admin
+									 where am_id = ?"
+			authorities-by-username-query="select am_id as username, authority
+			                               from am_authorities
+			                               where am_id = ?"
+		/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- 인허가 처리 -->
+	<!-- 보안 미적용 -->
+	<http pattern="/resources/**" security="none"/>
+	<!-- 일반회원 -->
+	
+	<beans:bean id="loginSuccessHandler"
+            	class="com.ticket.security.LoginSuccessHandler"
+            p:loginFormPath="/member/index"/>
+
+	<beans:bean id="customAuthenticationEntryPoint"
+            	class="com.ticket.security.CustomAuthenticationEntryPoint"
+            	p:loginFormPath="/member/login" />
+            
+	<beans:bean id="nullRequestCache"
+   				class="org.springframework.security.web.savedrequest.NullRequestCache"/>
+
+	<beans:bean id="loginFailureHandler"
+	 			class="com.ticket.security.LoginFailureHandler"
+	 			p:loginFormPath="/member/login?error=true" />
+	
+	<!-- 기업회원 -->
+	<http use-expressions="true" pattern="/cboard/**"  authentication-manager-ref="company"
+		entry-point-ref="customAuthenticationEntryPoint1">
+	<request-cache ref="nullRequestCache" />
+	<access-denied-handler error-page="/security/accessDenied"/>
+	<intercept-url pattern="/cboard/login" access="permitAll"/>
+	<intercept-url pattern="/**" access="permitAll"/>
+	
+	<form-login login-page="/cboard/login"
+				login-processing-url="/cboard/loginPost"
+				username-parameter="id"
+				password-parameter="pw"
+				
+				authentication-success-handler-ref="loginSuccessHandler1"
+				authentication-failure-handler-ref="loginFailureHandler1"
+	/>
+	
+	<logout logout-url="/cboard/logout"
+			invalidate-session="true"
+			logout-success-url="/cboard/index"
+	/>
+	</http>
+
+	<beans:bean id="loginSuccessHandler1"
+            	class="com.ticket.security.LoginSuccessHandler"
+            p:loginFormPath="/cboard/index"/>
+
+	<beans:bean id="customAuthenticationEntryPoint1"
+            	class="com.ticket.security.CustomAuthenticationEntryPoint"
+            	p:loginFormPath="/cboard/login" />
+            
+	<beans:bean id="loginFailureHandler1"
+	 			class="com.ticket.security.LoginFailureHandler"
+	 			p:loginFormPath="/cboard/login?error=true" />
+	 			
+	<!-- 관리자 -->
+	<http use-expressions="true" pattern="/aboard/**"  authentication-manager-ref="admin"
+		entry-point-ref="customAuthenticationEntryPoint1">
+	<request-cache ref="nullRequestCache" />
+	<access-denied-handler error-page="/security/accessDenied"/>
+	<intercept-url pattern="/aboard/login" access="permitAll"/>
+	<intercept-url pattern="/**" access="permitAll"/>
+	
+	<form-login login-page="/aboard/login"
+				login-processing-url="/aboard/loginPost"
+				username-parameter="id"
+				password-parameter="pw"
+				
+				authentication-success-handler-ref="loginSuccessHandler2"
+				authentication-failure-handler-ref="loginFailureHandler2"
+	/>
+	
+	<logout logout-url="/aboard/logout"
+			invalidate-session="true"
+			logout-success-url="/aboard/index"
+	/>
+	</http>
+	
+	<!-- 일반회원 -->
+	<http use-expressions="true" pattern="/**"  authentication-manager-ref="user"
+		entry-point-ref="customAuthenticationEntryPoint">
+	<request-cache ref="nullRequestCache" />
+	<access-denied-handler error-page="/security/accessDenied"/>
+	<intercept-url pattern="/member/login" access="permitAll"/>	
+	<intercept-url pattern="/**" access="permitAll"/>
+	
+	<form-login login-page="/member/login"
+				login-processing-url="/member/loginPost"
+				username-parameter="id"
+				password-parameter="pw"
+				
+				authentication-success-handler-ref="loginSuccessHandler"
+				authentication-failure-handler-ref="loginFailureHandler"
+	/>
+	
+	<logout logout-url="/member/logout"
+			invalidate-session="true"
+			logout-success-url="/member/index"
+	/>
+	</http>
+	
+	<beans:bean id="loginSuccessHandler2"
+            	class="com.ticket.security.LoginSuccessHandler"
+            	p:loginFormPath="/aboard/index"/>
+
+	<beans:bean id="customAuthenticationEntryPoint2"
+            	class="com.ticket.security.CustomAuthenticationEntryPoint"
+            	p:loginFormPath="/aboard/login" />
+            
+	<beans:bean id="loginFailureHandler2"
+	 			class="com.ticket.security.LoginFailureHandler"
+	 			p:loginFormPath="/aboard/login?error=true" />
+	 			
+</beans:beans>

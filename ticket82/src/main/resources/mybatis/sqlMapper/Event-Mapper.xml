@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EventMapper">
+	<update id="insertEvent">
+		insert into event (et_no,et_title,et_content,et_count,am_id)
+		values(et_seq.nextval,#{et_title},#{et_content},#{et_count},#{am_id})
+	</update>
+	
+	<select id="selectEventByNo" resultType="event">
+		select *
+		from event
+		where et_no=#{et_no}
+	</select>
+	
+	<update id="updateEvent">
+		update event
+		set et_title=#{et_title}, et_content=#{et_content},et_count=#{et_count}
+		where et_no=#{et_no}
+	</update>
+	
+	<update id="deleteEvent">
+		delte from event where et_no=#{et_no}
+	</update>
+	
+	<select id="selectEventList" resultType="event">
+		select * from event
+		order by et_no desc
+	</select>
+	
+	
+	
+		
+	
+	
+</mapper>

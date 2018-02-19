@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CompanyMapper">
+	<select id="selectCompanyList" resultType="company">
+		select * from company
+	</select>
+	
+	<select id="selectCompanyById" resultType="company">
+		select * from company
+		where com_id=#{com_id}	
+	</select>
+	
+	<update id="insertCompany" parameterType="company">
+		insert into company(com_no,com_id,com_pw,com_name,com_dname,com_mobile,com_mail,com_addr)
+		values(#{com_no},#{com_id},#{com_pw},#{com_name},#{com_dname},#{com_mobile},#{com_mail},#{com_addr})
+	</update>
+	
+	<update id="insertCompanyAuthority">
+		insert into com_authorities(com_id, authority)
+		values(#{com_id}, 'ROLE_MANAGER')
+	</update>
+	
+	<update id="updateCompany" parameterType="company">
+		update company set
+		com_no=#{com_no}, com_id=#{com_id}, com_pw=#{com_pw}, com_name=#{com_name},
+		com_dname=#{com_dname}, com_mobile=#{com_mobile}, com_mail=#{com_mail}, com_addr=#{com_addr}, enabled=#{enabled}
+		where com_id=#{com_id}
+	</update>
+	
+	<update id="deleteCompany" parameterType="str">
+		delete from company
+		where com_id=#{com_id}
+	</update>
+	
+	<select id="selectCountPaging" resultType="str">
+		<![CDATA[
+			select count(com_id)
+			from company
+		]]>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				where com_id like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				where com_name like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				where com_no like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				where ( com_id like '%'||#{keyword}||'%') OR com_name
+				like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				where ( com_name like '%'||#{keyword}||'%' OR com_no
+				like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				where ( com_id like '%'||#{keyword}||'%'
+				OR
+				com_name
+				like '%'||#{keyword}||'%'
+				OR
+				com_no like '%'||#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectSearchCompanyList" resultType="company">
+	<![CDATA[ 
+		select *
+		from company
+		order by
+		com_date desc
+	]]>
+		<include refid="search"></include>
+	</select>
+
+	<select id="selectSearchCompanyCount" resultType="int">
+		<![CDATA[  
+		  select count(com_id) 
+		  from company
+		]]>
+		<include refid="search"></include>
+
+	</select>
+	
+	<select id="checkId" parameterType="company" resultType="int">
+		select count(*) from company
+		where com_id=#{com_id}
+	</select>
+	
+</mapper>

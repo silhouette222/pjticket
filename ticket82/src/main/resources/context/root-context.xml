@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	
+	<context:property-placeholder location="classpath:configuration/oracle/oracle-config.properties"/>
+	
+	<bean id="dataSource" 
+		  class="org.apache.commons.dbcp2.BasicDataSource"
+		  p:driverClassName="${jdbc.driverClassName}"		  
+		  p:url="${jdbc.url}"
+		  p:username="${jdbc.username}"
+		  p:password="${jdbc.password}"
+		  />
+	
+	<bean id="sqlSessionFactory"
+	      class="org.mybatis.spring.SqlSessionFactoryBean"
+	      p:dataSource-ref="dataSource"
+	      p:configLocation="classpath:/mybatis/sqlConfig/mybatis-config.xml"
+	      p:mapperLocations="classpath:/mybatis/sqlMapper/**/*-Mapper.xml"
+	      />
+	<bean id="sqlSession" 
+	      class="org.mybatis.spring.SqlSessionTemplate"
+	      destroy-method="clearCache"
+		  c:sqlSessionFactory-ref="sqlSessionFactory"		  
+		  />
+		  
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		  p:dataSource-ref="dataSource"
+		  />
+		  
+	<bean id="transactionTemplate"
+	      class="org.springframework.transaction.support.TransactionTemplate"
+	      p:transactionManager-ref="transactionManager"
+	      />
+	      
+	<bean id="memberDAO"
+		  class="com.ticket.dao.impl.MemberDAOImpl"
+		  p:sqlSession-ref="sqlSession" />
+		  
+	<bean id="companyDAO"
+		  class="com.ticket.dao.impl.CompanyDAOImpl"
+		  p:sqlSession-ref="sqlSession" />
+		  
+	<bean id="adminDAO"
+		  class="com.ticket.dao.impl.AdminDAOImpl"
+		  p:sqlSession-ref="sqlSession" />
+		  
+	<bean id="memberService"
+		  class="com.ticket.service.impl.MemberServiceImpl"
+		  p:memberDAO-ref="memberDAO" />
+	
+	<bean id="companyService"
+		  class="com.ticket.service.impl.CompanyServiceImpl"
+		  p:companyDAO-ref="companyDAO" />
+	
+	<bean id="adminService"
+		  class="com.ticket.service.impl.AdminServiceImpl"
+		  p:adminDAO-ref="adminDAO" />
+			
+	<bean 	id="MusicalDAO"
+			class="com.ticket.dao.impl.MusicalDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean	id="MusicalService"
+			class="com.ticket.service.impl.MusicalServiceImpl"
+			p:musicalDAO-ref="MusicalDAO"/>
+			
+	<bean 	id="ZzimDAO"
+			class="com.ticket.dao.impl.ZzimDAOImpl"
+			p:sqlSession-ref="sqlSession"/>
+			
+	<bean	id="ZzimService"
+			class="com.ticket.service.impl.ZzimServiceImpl"
+			p:zzimDAO-ref="ZzimDAO"/>
+	
+	<bean 	id="eventDAO"
+			class="com.ticket.dao.impl.EventDAOImpl"
+			p:sqlSession-ref="sqlSession"/>
+	
+	<bean	id="eventService"
+			class="com.ticket.service.impl.EventServiceImpl"
+			p:eventDAO-ref="eventDAO"/>
+			
+	<bean	id="boardDAO"
+			class="com.ticket.dao.impl.BoardDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean	id="boardService"
+			class="com.ticket.service.impl.BoardServiceImpl"
+			p:boardDAO-ref="boardDAO"
+			/>
+	<bean	id="resDAO"
+			class="com.ticket.dao.impl.ResDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean  id="resService"
+		   class="com.ticket.service.impl.ResServiceImpl"
+		   p:resDAO-ref="resDAO"
+		   />
+	<bean	id="userDAO"
+			class="com.ticket.dao.impl.UserDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean  id="userService"
+		   class="com.ticket.service.impl.UserServiceImpl"
+		   p:userDAO-ref="userDAO"
+		   />
+	<bean id="replyDAO"
+		  class="com.ticket.dao.impl.ReplyDAOImpl"
+		  p:namespace="ReplyMapper"
+		  p:sqlSession-ref="sqlSession"	/>  
+	<bean id="replyService"
+	      class="com.ticket.service.impl.ReplyServiceImpl"
+	      p:replyDAO-ref="replyDAO"
+	      />
+			
+			
+			
+	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>	
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="username" value="rkgkldklwelk@gmail.com" />
+		<property name="password" value="jungang11" />
+		<!-- 각 메일서버의 smtp 설정내용  -->
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+	</bean>
+		
+</beans>

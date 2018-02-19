@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/config/decorator">
+	<!-- sample -->
+	
+	<decorator name="admin" page="decorator1.jsp">
+		<pattern>/aboard/**</pattern>
+	</decorator>
+	
+	<decorator name="company" page="decorator2.jsp">
+		<pattern>/cboard/**</pattern>
+	</decorator>
+	
+	<decorator name="main" page="decorator.jsp">
+		<pattern>/**</pattern>
+	</decorator>
+	
+	
+
+	<!-- decorators를 적용시키지 않을 url 패턴 -->
+	<excludes>
+		<pattern>/member/regist</pattern>
+		<pattern>/company/regist</pattern>
+		<pattern>/admin/index</pattern>
+		<pattern>/company/index</pattern>
+		<pattern></pattern>
+	</excludes>
+</decorators>

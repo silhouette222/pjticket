@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MusicalMapper">
+	
+	<update id="insertMusical">
+		insert into theater(ttr_no,com_id,ttr_cat,ttr_title,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content)
+		values(ttr_seq.nextval,#{com_id},#{ttr_cat},#{ttr_title},#{ttr_sdate},#{ttr_edate},#{ttr_place},#{ttr_time},#{ttr_alert},#{ttr_content})
+	</update>
+	<select id="selectMusicalBymcno" resultType="mc">
+		select
+		ttr_no,com_id,ttr_cat,ttr_title,ttr_date,
+		ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
+		from
+		theater
+		where ttr_no = #{ttr_no}
+	</select>
+
+	<update id="updateMc">
+		update theater set ttr_title =#{ttr_title}, ttr_content =#{ttr_content} ,com_id=#{com_id},ttr_sdate=#{ttr_sdate},ttr_edate=#{ttr_edate},
+		ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert}
+		where ttr_no = #{ttr_no}
+	</update>
+
+	<update id="deleteMc">
+		delete from theater where ttr_no = #{ttr_no}
+	</update>
+	
+	<select id="selectMcList" resultType="mc">
+	 	<![CDATA[
+		 	select ttr_no, ttr_title, ttr_content, ttr_date,ttr_sdate,ttr_edate
+		 	from theater	
+		 	where ttr_no > 0
+	 	]]>
+	</select>
+	<update id="insertfile">
+		insert into file_tbl(file_id,file_name,ttr_no)
+		values(file_seq.nextval,#{file_name},#{ttr_no})
+	</update>
+	
+	<update id="deletefile">
+		delete from file_tbl
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectfile" resultType="str">
+		select file_name from file_tbl
+		where ttr_no=#{ttr_no}
+		order by file_id
+	</select>
+	
+	<!-- <update id="insertAttach">
+		insert into file_tbl(file_name,ttr_no) 
+		values(#{file_name},#{ttr_no})
+	</update>
+	<select id="selectAttach" resultType="str">
+		select file_name 
+		from file_tbl
+		where ttr_no=#{ttr_no}
+		order by ttr_date
+	</select>
+	<update id="deleteAttach">
+		delete from file_tbl
+		where ttr_no=#{ttr_no}
+	</update>
+	<update id="replaceAttach">
+		insert into file_tbl(file_name,ttr_no)
+		values(#{file_name},#{ttr_no})
+	</update> -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

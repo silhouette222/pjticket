@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+	<update id="insertBoard">
+		insert into theater (ttr_no,com_id,ttr_cat,ttr_title,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content)
+		values(ttr_seq.nextval,#{com_id},#{ttr_cat},#{ttr_title},#{ttr_sdate},#{ttr_edate},#{ttr_place},#{ttr_time},#{ttr_alert},#{ttr_content})
+	</update>
+	
+	<select id="selectBoardByNo" resultType="board">
+		select *
+		from theater
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="updateBoard">
+		update theater set ttr_title=#{ttr_title},ttr_date=sysdate,ttr_sdate=#{ttr_sdate},ttr_edate=#{ttr_edate},ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert},ttr_content=#{ttr_content}
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<update id="deleteBoard">
+		delete from theater where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectBoardList" resultType="board">
+		select ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
+		from theater
+		order by ttr_no desc
+	</select>
+	
+	<select id="selectBoardListByCat" resultType="board">
+		select *
+		from theater
+		where ttr_cat=#{ttr_cat}
+		order by ttr_no desc
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and ttr_title like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and ttr_content like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'p'.toString()">
+				and ttr_place like '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectSearchBoardList" resultType="board">
+		select *
+		from theater
+		where ttr_cat=#{ttr_cat}
+		<include refid="search"></include>
+		order by ttr_no desc
+	</select>
+	
+	<select id="selectmaxttr_no" resultType="int">
+		select max(ttr_no) from theater
+	</select>
+	
+	<update id="insertThumb">
+		insert into thumb(ttr_no,thumb_name)
+		values(#{ttr_no,jdbcType=INTEGER},#{thumb_name,jdbcType=VARCHAR})
+	</update>
+	
+	<update id="deleteThumb">
+		delete from thumb
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectThumb" resultType="str">
+		select thumb_name from thumb
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertseatmap">
+		insert into seatmap(ttr_no,seatmap_name)
+		values(#{ttr_no},#{seatmap_name})
+	</update>
+	
+	<update id="deleteseatmap">
+		delete from seatmap
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectseatmap" resultType="str">
+		select seatmap_name from seatmap
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertfile">
+		insert into file_tbl(file_id,file_name,ttr_no)
+		values(file_seq.nextval,#{file_name},#{ttr_no})
+	</update>
+	
+	<update id="deletefile">
+		delete from file_tbl
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectfile" resultType="str">
+		select file_name from file_tbl
+		where ttr_no=#{ttr_no}
+		order by file_id
+	</select>
+	
+	<select id="selectseatbyttr_no" resultType="seatinfo">
+		select * from seat
+		where ttr_no=#{ttr_no}
+		order by seat_id
+	</select>
+	
+	<select id="selectseatbyseat_id" resultType="seatinfo">
+		select * from seat
+		where seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectseat" resultType="seatinfo">
+		select * from seat
+	</select>
+	
+	<update id="insertseat">
+		insert into seat(seat_id,ttr_no,seat_grd,seat_no,seat_pri,seat_date,seat_time)
+		values(seat_seq.nextval,#{ttr_no},#{seat_grd},#{seat_no},#{seat_pri},#{seat_date},#{seat_time})
+	</update>
+	
+	<update id="updateseatbyseat_id">
+		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri},seat_date=#{seat_date},seat_time=#{seat_time}
+		where seat_id=#{seat_id}
+	</update>
+	
+	<update id="updateseatbyttr_no">
+		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri},seat_date=#{seat_date},seat_time=#{seat_time}
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<update id="deleteseatbyseat_id">
+		delete seat where seat_id=#{seat_id}
+	</update>
+	
+	<update id="deleteseatbyttr_no">
+		delete seat where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectresbyres_id" resultType="res">
+		select * from reserve where res_id=#{res_id}
+	</select>
+	
+	<select id="selectresbyres_nom" resultType="res">
+		select * from reserve where res_nom=#{res_nom} and seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectresbyseat_id" resultType="res">
+		select * from reserve where seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectresbymem_id" resultType="res">
+		select * from reserve where mem_id=#{mem_id}
+	</select>
+	
+	<select id="selectresbyttr_no" resultType="res">
+		select * from reserve where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertres">
+		insert into reserve(res_id,res_date,res_nom,seat_id,mem_id,ttr_no,imp_uid)
+		values(res_seq.nextval,sysdate,#{res_nom},#{seat_id},#{mem_id},#{ttr_no},#{imp_uid})
+	</update>
+	
+	<update id="deletresbyres_id">
+		delete from reserve where res_id=#{res_id}
+	</update>
+	
+	<update id="deletresbyres_nom">
+		delete from reserve where res_nom=#{res_nom}
+	</update>
+	
+	<update id="deletresbyttr_no">
+		delete from reserve where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectmem" resultType="mem">
+		select * from member where mem_id=#{mem_id}
+	</select>
+	
+	<update id="insertzzim">
+		insert into zzim(zzim_no,mem_id,ttr_no,zzim_date)
+		values(zzim_seq.nextval,#{mem_id},#{ttr_no},sysdate)
+	</update>
+	
+	<update id="deletezzim">
+		delete from zzim where mem_id=#{mem_id} and ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectzzim" resultType="zzim">
+		select * from zzim where mem_id=#{mem_id} and ttr_no=#{ttr_no}
+	</select>
+	
+	<select id="scoreavg" resultType="dub">
+		SELECT AVG(ttr_score) FROM theater_reply where ttr_no=#{ttr_no}
+	</select>
+</mapper>
