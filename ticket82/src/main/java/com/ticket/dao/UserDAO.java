@@ -43,4 +43,6 @@ public interface UserDAO {
 	ResVO selectpkres(String res_id) throws SQLException;
 	
 	void deleteres(String res_id) throws SQLException;
+	
+	void updateboard(BoardVO board) throws SQLException;
 }

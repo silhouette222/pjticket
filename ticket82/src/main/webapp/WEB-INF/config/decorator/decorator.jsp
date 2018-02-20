@@ -54,10 +54,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="mclistA">뮤지컬</a>
+              <a class="nav-link" href="/mclistA">뮤지컬</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="zzim/theaterList">콘서트</a>
+              <a class="nav-link" href="/cclistA">콘서트</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="services.html">연극</a>
@@ -95,7 +95,7 @@
               </div>
             </li>
             </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="hasAuthority('ROLE_USER')">
             	<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                	<b>${loginUser.mem_name }</b>님의 마이페이지
@@ -120,10 +120,11 @@
     </nav>
     
     <!-- 찜목록(사이드바) -->
-    <div id="btncollapzion" class=" btn_collapzion">
+    <sec:authorize access="isAuthenticated()">
+    	<div id="btncollapzion" class=" btn_collapzion">
     	
-    </div>
-
+    	</div>
+	</sec:authorize>
 	
 	<!-- 바디시작 -->
     <decorator:body />

@@ -9,8 +9,7 @@
 	</update>
 	<select id="selectMusicalBymcno" resultType="mc">
 		select
-		ttr_no,com_id,ttr_cat,ttr_title,ttr_date,
-		ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
+		*
 		from
 		theater
 		where ttr_no = #{ttr_no}
@@ -26,47 +25,141 @@
 		delete from theater where ttr_no = #{ttr_no}
 	</update>
 	
-	<select id="selectMcList" resultType="mc">
-	 	<![CDATA[
-		 	select ttr_no, ttr_title, ttr_content, ttr_date,ttr_sdate,ttr_edate
-		 	from theater	
-		 	where ttr_no > 0
-	 	]]>
+	<select id="selectSearchListCount" resultType="int">
+		select max(ttr_no) from theater
 	</select>
-	<update id="insertfile">
+	<select id="selectMcList" resultType="mc">
+		select ttr_no,com_id,ttr_cat,ttr_title,ttr_date,ttr_sdate,ttr_edate,ttr_place,ttr_time,ttr_alert,ttr_content
+		from theater
+		order by ttr_no desc
+	</select>
+	<select id="selectBoardListByCat" resultType="mc">
+		select *
+		from theater
+		where ttr_cat=#{ttr_cat}
+		order by ttr_no desc
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and ttr_title like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and ttr_content like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'p'.toString()">
+				and ttr_place like '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+	<select id="selectSearchBoardList" resultType="mc">
+		select *
+		from board
+		<include refid="search"></include>
+		order by ttr_no desc
+	</select>
+	<update id="insertThumb">
+		insert into thumb(ttr_no,thumb_name)
+		values(#{ttr_no},#{thumb_name})
+		<!-- values(#{ttr_no,jdbcType=INTEGER},#{thumb_name,jdbcType=VARCHAR}) -->
+	</update>
+	
+	<update id="deleteThumb">
+		delete from thumb
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectThumb" resultType="str">
+		select thumb_name from thumb
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertSeatMap">
+		insert into seatMap(ttr_no,seatmap_name)
+		values(#{ttr_no},#{seatmap_name})
+	</update>
+	
+	<update id="deleteSeatMap">
+		delete from seatMap
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectSeatMap" resultType="str">
+		select seatmap_name from seatMap
+		where ttr_no=#{ttr_no}
+	</select>
+	
+	<update id="insertAttach">
 		insert into file_tbl(file_id,file_name,ttr_no)
 		values(file_seq.nextval,#{file_name},#{ttr_no})
 	</update>
 	
-	<update id="deletefile">
-		delete from file_tbl
-		where ttr_no=#{ttr_no}
-	</update>
-	
-	<select id="selectfile" resultType="str">
-		select file_name from file_tbl
-		where ttr_no=#{ttr_no}
-		order by file_id
-	</select>
-	
-	<!-- <update id="insertAttach">
-		insert into file_tbl(file_name,ttr_no) 
-		values(#{file_name},#{ttr_no})
-	</update>
-	<select id="selectAttach" resultType="str">
-		select file_name 
-		from file_tbl
-		where ttr_no=#{ttr_no}
-		order by ttr_date
-	</select>
 	<update id="deleteAttach">
 		delete from file_tbl
 		where ttr_no=#{ttr_no}
 	</update>
-	<update id="replaceAttach">
-		insert into file_tbl(file_name,ttr_no)
-		values(#{file_name},#{ttr_no})
-	</update> -->
+	
+	<select id="selectAttach" resultType="str">
+		select file_name from file_tbl
+		where ttr_no=#{ttr_no}
+		order by file_id
+	</select>
+	<select id="selectSeatByTtr_no" resultType="seatinfo">
+		select * from seat
+		where ttr_no=#{ttr_no}
+		order by seat_id
+	</select>
+	<select id="selectSeatBySeat_id" resultType="seatinfo">
+		select * from seat
+		where seat_id=#{seat_id}
+	</select>
+	<select id="selectSeat" resultType="seatinfo">
+		select * from seat
+	</select>
+	<update id="insertSeat">
+		insert into seat(seat_id,ttr_no,seat_grd,seat_no,seat_pri,seat_date,seat_time)
+		values(seat_seq.nextval,#{ttr_no},#{seat_grd},#{seat_no},#{seat_pri},#{seat_date},#{seat_time})
+	</update>
+	
+	<update id="updateSeatBySeat_id">
+		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri},seat_date=#{seat_date},seat_time=#{seat_time}
+		where seat_id=#{seat_id}
+	</update>
+	
+	<update id="updateSeatByTtr_no">
+		update seat set seat_grd=#{seat_grd},seat_no=#{seat_no},seat_pri=#{seat_pri},seat_date=#{seat_date},seat_time=#{seat_time}
+		where ttr_no=#{ttr_no}
+	</update>
+	
+	<update id="deleteSeatBySeat_id">
+		delete seat where seat_id=#{seat_id}
+	</update>
+	
+	<update id="deleteSeatByTtr_no">
+		delete seat where ttr_no=#{ttr_no}
+	</update>
+	<update id="insertzzim">
+		insert into zzim(zzim_no,mem_id,ttr_no,zzim_date)
+		values(zzim_seq.nextval,#{mem_id},#{ttr_no},sysdate)
+	</update>
+	<select id="selectSearchMusicalList" resultType="mc">
+		select *
+		from theater
+		where ttr_cat=#{ttr_cat}
+		<include refid="search"></include>
+		order by ttr_no desc
+	</select>
+	<update id="deletezzim">
+		delete from zzim where mem_id=#{mem_id} and ttr_no=#{ttr_no}
+	</update>
+	
+	<select id="selectzzim" resultType="zzim">
+		select * from zzim where mem_id=#{mem_id} and ttr_no=#{ttr_no}
+	</select>
+	<select id="scoreavg" resultType="dub">
+		SELECT AVG(ttr_score) FROM theater_reply where ttr_no=#{ttr_no}
+	</select>
 </mapper>
 
 

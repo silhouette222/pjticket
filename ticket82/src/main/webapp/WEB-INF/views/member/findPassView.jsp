@@ -11,13 +11,13 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>ID/PW 찾기</title>
 
-    <!-- Bootstrap -->
+    <%-- <!-- Bootstrap -->
     <link href="<%=request.getContextPath() %>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <!-- Custom style -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/css/style.css" media="screen" title="no title" charset="utf-8">
-
+ --%>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,6 +39,13 @@
                 <div class="col-md-10">
                 	<input type="text" class="form-control" name="mem_mail" value="${memberVO.mem_mail}" placeholder="이메일을 작성해주세요">
                 </div>
+                <div class="form-group" style="margin-left:82%">
+            	<!-- Button -->
+                                                  
+                <div class="col-md-offset-10 col-md-9">
+                	<button id="btn-signup" type="submit" class="btn btn-warning">확인</button>
+                </div>
+            	</div>
                                     
             	<div class="col-md-offset-2 col-md-10">
             		<div style="color:red ; margin-top:2px" >
@@ -49,13 +56,7 @@
                                     
             </div>
                                     
-            <div class="form-group" style="margin-left:82%">
-            	<!-- Button -->
-                                                  
-                <div class="col-md-offset-10 col-md-9">
-                	<button id="btn-signup" type="submit" class="btn btn-warning">확인</button>
-                </div>
-            </div>
+            
                                 
             <div class="form-group">
             	<div class="col-md-12 control">

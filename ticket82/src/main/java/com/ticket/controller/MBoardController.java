@@ -126,7 +126,7 @@ public class MBoardController {
 			res_nom[i]=Integer.parseInt(rescheck[i].split("_")[1]);
 		}
 		for(int i=0;i<rescheck.length;i++){
-			ResVO res=new ResVO(null,null,res_nom[i],seat_id[i],"qwe",board.getTtr_no(),null);
+			ResVO res=new ResVO(null,null,res_nom[i],seat_id[i],mem.getMem_id(),board.getTtr_no(),null,1);
 			reslist.add(res);
 		}
 		for(ResVO res:reslist){
@@ -135,7 +135,7 @@ public class MBoardController {
 		for(Seatinfo seat:seatlist){
 			pri+=seat.getSeat_pri();
 		}
-		PayVO pay=new PayVO(board.getTtr_title(),pri,mem.getMem_mail(),mem.getMem_name(),mem.getMem_mobile(),mem.getMem_addr(),null);
+		PayVO pay=new PayVO(board.getTtr_title(),pri,mem.getMem_mail(),mem.getMem_id(),mem.getMem_mobile(),mem.getMem_addr(),null);
 		model.addAttribute("reslist",reslist);
 		model.addAttribute("seatlist",seatlist);
 		model.addAttribute("pay",pay);
@@ -145,13 +145,16 @@ public class MBoardController {
 	@RequestMapping(value="/respay",method=RequestMethod.POST)
 	@ResponseBody
 	public String respay(@RequestParam("reslist")String param,@RequestParam("imp_uid")String imp_uid) throws Exception{
-		ResponseEntity<String> entity=null;
-		entity=new ResponseEntity<String>("everythings_fine", HttpStatus.OK);
 		List<Map<String, Object>> maplist=new ArrayList<Map<String,Object>>();
 		maplist=JSONArray.fromObject(param);
 		for(Map<String, Object> map:maplist){
-			ResVO res=new ResVO(null,null,(int)map.get("res_nom"),(String)map.get("seat_id"),(String)map.get("mem_id"),(int)map.get("ttr_no"),(String)map.get("imp_uid"));
-			rs.insertres(res);
+			ResVO res=new ResVO(null,null,(int)map.get("res_nom"),(String)map.get("seat_id"),(String)map.get("mem_id"),(int)map.get("ttr_no"),(String)map.get("imp_uid"),1);
+			ResVO rescheck=rs.selectresbyres_nom((int)map.get("res_nom"),(String)map.get("seat_id"));
+			if(rescheck.getStatus()==1){
+				return "already reserved";
+			}else{
+				rs.insertres(res);
+			}
 		}
 		return "everythings_fine";
 	}

@@ -67,14 +67,6 @@
 		  class="com.ticket.service.impl.AdminServiceImpl"
 		  p:adminDAO-ref="adminDAO" />
 			
-	<bean 	id="MusicalDAO"
-			class="com.ticket.dao.impl.MusicalDAOImpl"
-			p:sqlSession-ref="sqlSession"
-			/>
-	<bean	id="MusicalService"
-			class="com.ticket.service.impl.MusicalServiceImpl"
-			p:musicalDAO-ref="MusicalDAO"/>
-			
 	<bean 	id="ZzimDAO"
 			class="com.ticket.dao.impl.ZzimDAOImpl"
 			p:sqlSession-ref="sqlSession"/>
@@ -123,6 +115,23 @@
 	      class="com.ticket.service.impl.ReplyServiceImpl"
 	      p:replyDAO-ref="replyDAO"
 	      />
+	
+	<bean 	id="MusicalDAO"
+			class="com.ticket.dao.impl.MusicalDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean	id="MusicalService"
+			class="com.ticket.service.impl.MusicalServiceImpl"
+			p:musicalDAO-ref="MusicalDAO"/>
+	
+	<bean 	id="ReservationDAO"
+			class="com.ticket.dao.impl.ReservationDAOImpl"
+			p:sqlSession-ref="sqlSession"
+			/>
+	<bean	id="ReservationService"
+			class="com.ticket.service.impl.ReservationServiceImpl"
+			p:reservationDAO-ref="ReservationDAO"/>      
+	
 			
 			
 			

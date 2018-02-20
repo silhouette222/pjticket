@@ -20,5 +20,6 @@
 		<typeAlias alias="zzim" type="com.ticket.domain.ZzimVO"/>
 		<typeAlias alias="board" type="com.ticket.domain.BoardVO"/>
 		<typeAlias alias="seatinfo" type="com.ticket.domain.Seatinfo"/>
+		<typeAlias alias="Res" type="com.ticket.domain.ReservationVO" />
 	</typeAliases>	
 </configuration>

@@ -19,7 +19,8 @@
 	</update>
 	
 	<update id="deleteBoard">
-		delete from theater where ttr_no=#{ttr_no}
+		update theater set status=2
+		where ttr_no=${ttr_no}
 	</update>
 	
 	<select id="selectBoardList" resultType="board">
@@ -30,8 +31,8 @@
 	
 	<select id="selectBoardListByCat" resultType="board">
 		select *
-		from theater
-		where ttr_cat=#{ttr_cat}
+		from theater	
+		where ttr_cat=#{ttr_cat} and status=1
 		order by ttr_no desc
 	</select>
 	
@@ -52,7 +53,7 @@
 	<select id="selectSearchBoardList" resultType="board">
 		select *
 		from theater
-		where ttr_cat=#{ttr_cat}
+		where ttr_cat=#{ttr_cat} and status=1
 		<include refid="search"></include>
 		order by ttr_no desc
 	</select>
@@ -138,31 +139,33 @@
 	</update>
 	
 	<update id="deleteseatbyseat_id">
-		delete seat where seat_id=#{seat_id}
+		update seat set status=2
+		where seat_id=#{seat_id}
 	</update>
 	
 	<update id="deleteseatbyttr_no">
-		delete seat where ttr_no=#{ttr_no}
+		update seat set status=2
+		where ttr_no=#{ttr_no}
 	</update>
 	
 	<select id="selectresbyres_id" resultType="res">
-		select * from reserve where res_id=#{res_id}
+		select * from reserve where res_id=#{res_id} and status=1
 	</select>
 	
 	<select id="selectresbyres_nom" resultType="res">
-		select * from reserve where res_nom=#{res_nom} and seat_id=#{seat_id}
+		select * from reserve where res_nom=#{res_nom} and seat_id=#{seat_id} and status=1
 	</select>
 	
 	<select id="selectresbyseat_id" resultType="res">
-		select * from reserve where seat_id=#{seat_id}
+		select * from reserve where seat_id=#{seat_id} and status=1
 	</select>
 	
 	<select id="selectresbymem_id" resultType="res">
-		select * from reserve where mem_id=#{mem_id}
+		select * from reserve where mem_id=#{mem_id} and status=1
 	</select>
 	
 	<select id="selectresbyttr_no" resultType="res">
-		select * from reserve where ttr_no=#{ttr_no}
+		select * from reserve where ttr_no=#{ttr_no} and status=1
 	</select>
 	
 	<update id="insertres">
@@ -170,20 +173,23 @@
 		values(res_seq.nextval,sysdate,#{res_nom},#{seat_id},#{mem_id},#{ttr_no},#{imp_uid})
 	</update>
 	
-	<update id="deletresbyres_id">
-		delete from reserve where res_id=#{res_id}
+	<update id="deleteresbyres_id">
+		update reserve set status=2
+		where res_id=#{res_id}
 	</update>
 	
-	<update id="deletresbyres_nom">
-		delete from reserve where res_nom=#{res_nom}
+	<update id="deleteresbyres_nom">
+		update reserve set status=2
+		where res_nom=#{res_nom}
 	</update>
 	
-	<update id="deletresbyttr_no">
-		delete from reserve where ttr_no=#{ttr_no}
+	<update id="deleteresbyttr_no">
+		update reserve set status=2
+		where ttr_no=#{ttr_no}
 	</update>
 	
 	<select id="selectmem" resultType="mem">
-		select * from member where mem_id=#{mem_id}
+		select * from member where mem_id=#{mem_id} and status=1
 	</select>
 	
 	<update id="insertzzim">

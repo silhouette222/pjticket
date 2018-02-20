@@ -5,7 +5,7 @@
 			
 			<div>
 				<div>
-					<h3>뮤지컬 글 등록</h3>
+					<h3>콘서트 글 등록</h3>
 				</div>
 				<form id="write" method="post">
 					<div>
@@ -13,7 +13,7 @@
 							<input type="text" name='com_id' value="com">
 						</div>
 						<div>							
-							<input type="text" name='ttr_cat' value="뮤지컬" readonly/>
+							<input type="text" name='ttr_cat' value="콘서트" readonly/>
 						</div>					
 						<label>썸네일</label>
 						<div class="thumb"

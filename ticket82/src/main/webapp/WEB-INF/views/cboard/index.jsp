@@ -3,9 +3,12 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
+<%
+	String cp = request.getContextPath();
+	request.setCharacterEncoding("UTF-8");//쿠키 가져오기
+	Cookie[] ck = request.getCookies();
+%>
   <head>
 
     <meta charset="utf-8">
@@ -13,7 +16,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <title>Ticket82</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<%=request.getContextPath() %>/resources/main/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<%=request.getContextPath() %>/resources/main/css/modern-business.css" rel="stylesheet">
+	
+	<!-- 사이드메뉴 css -->
+	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/collapzion.min.css">
+
+	
+	
+	
 	<style>
+		
+	
 		.card-img-top{
 			width:228px;
 			height:340px;
@@ -21,6 +42,7 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
+		
 		
 		
 		/* 티켓인기작 전체 */
@@ -100,6 +122,7 @@
   			color: #333;
 		}
 		
+			
 				
 		
 	</style>
@@ -107,81 +130,6 @@
 
   <body>
 
-    <!-- Navigation -->
-    <!-- 메뉴바 -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index">Ticket82</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="mclistA">뮤지컬</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">콘서트</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">연극</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">연주회</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">전시회</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="board/etc">기타</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">이벤트</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                고객센터
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="faq.html">공지사항</a>
-                <a class="dropdown-item" href="faq.html">Q&A</a>
-                <a class="dropdown-item" href="faq.html">FAQ</a>
-              </div>
-            </li>
-            
-            <sec:authorize access="! isAuthenticated()">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                로그인
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="/company/login">로그인</a>
-                <a class="dropdown-item" href="/company/regist">회원가입</a>
-              </div>
-            </li>
-            </sec:authorize>
-            <sec:authorize access="hasAuthority('ROLE_MANAGER')">
-            	<li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               	마이페이지
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="#">회원정보</a>
-                <a class="dropdown-item" href="#">예약확인</a>
-				<a class="dropdown-item" href="#">게시글확인</a>
-              </div>
-            </li>
-            </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
-            		<li class="nav-item">
-              			<a class="nav-link" href="#" onclick="javascript:location.href=
-							'<%=request.getContextPath() %>/company/logout'">로그아웃</a>
-            		</li>
-            </sec:authorize>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -226,6 +174,7 @@
         </a>
       </div>
     </header>
+    
     
    	<!-- 인기작 -->
    	<div class="ticketFamous">
@@ -698,7 +647,19 @@
     </div>
     <!-- /.container -->
 
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="<%=request.getContextPath() %>/resources/main/vendor/jquery/jquery.min.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/main/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    
+    
     
   </body>
-
-</html>

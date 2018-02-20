@@ -66,10 +66,10 @@
               <a class="nav-link" href="contact.html">연주회</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/mboard/gal">전시회</a>
+              <a class="nav-link" href="/cboard/gal">전시회</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/mboard/etc">기타</a>
+              <a class="nav-link" href="/cboard/etc">기타</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/event/eventList">이벤트</a>
@@ -95,7 +95,7 @@
               </div>
             </li>
             </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="hasAuthority('ROLE_MANAGER')">
             	<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                	마이페이지

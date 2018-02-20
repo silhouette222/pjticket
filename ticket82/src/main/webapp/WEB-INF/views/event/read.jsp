@@ -33,9 +33,8 @@
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/member/index">Home</a>
+          <a href="/event/eventList">Event</a>
         </li>
-        <li class="breadcrumb-item active">Blog Home 2</li>
       </ol>
 
       <div class="row">

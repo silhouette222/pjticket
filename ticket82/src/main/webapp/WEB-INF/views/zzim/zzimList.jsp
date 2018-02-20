@@ -30,15 +30,13 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Sidebar Page
-        <small>Subheading</small>
+      <h1 class="mt-4 mb-3">${loginUser.mem_name }님의
+        <small>찜목록</small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
-        </li>
-        <li class="breadcrumb-item active">About</li>
+          <a href="/member/index">Home</a>
       </ol>
 
       <!-- Content Row -->
@@ -56,8 +54,6 @@
         
         <!-- 찜목록 -->
         <div class="col-lg-9 mb-4">
-        <h2>Section Heading</h2>
-          
         <h2>찜 확인</h2>
     	<c:choose>
         	<c:when test="${map.count == 0}">
@@ -65,21 +61,33 @@
         	</c:when>
         	<c:otherwise>
         		<%-- <form name="form1" id="form1" method="post" action="${path}/member/zzim/delete"> --%>
-        		<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">LIST PAGING</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10px">BNO</th>
 							<th>공연명</th>
 							<th>등록일</th>
 							<th>취소</th>
 						</tr>
+						<c:forEach var="row" items="${map.list}" varStatus="i">
+                		<tr>
+                    		<td>
+                        		<a href="">${row.ttr_title}</a>
+                    		</td>
+                    		<td>
+                        		<fmt:formatDate pattern="yyyy-MM-dd"
+								value="${row.zzim_date}"/>
+                    		</td>
+                    		<td>
+                        		<a href="/zzim/delete?zzim_no=${row.zzim_no}">삭제</a>
+                        		<input type="hidden" name="ttr_no" value="${row.ttr_no}">
+                    		</td>
+                		</tr>
+                	</c:forEach>
 					</table>
 				</div>
-            	<table border="1">
+            	<%-- <table border="1">
                 	<tr>
                     	<th>상품명</th>
                     	<th>등록일</th>
@@ -101,12 +109,12 @@
                     	</td>
                 	</tr>
                 	</c:forEach>
-            	</table>
+            	</table> --%>
             	<input type="hidden" name="count" value="${map.count}">
         	<!-- </form> -->
         	</c:otherwise>
     	</c:choose>
-    	<button type="button" id="btnList">상품목록</button>
+    	<!-- <button type="button" id="btnList">상품목록</button>
     	<script>
     		$(document).ready(function(){
         		// 리스트 페이지로 이동
@@ -114,7 +122,7 @@
           	  		location.href="/zzim/zzimList";
         		});
     		});
-		</script>      
+		</script>  -->     
       	</div>
       </div>
         

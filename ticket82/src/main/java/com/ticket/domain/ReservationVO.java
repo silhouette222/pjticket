@@ -2,7 +2,7 @@ package com.ticket.domain;
 
 import java.util.Date;
 
-public class ResVO {
+public class ReservationVO {
 	private String res_id;
 	private Date res_date;
 	private int res_nom;
@@ -10,7 +10,6 @@ public class ResVO {
 	private String mem_id;
 	private int ttr_no;
 	private String imp_uid;
-	private int status;
 	public String getRes_id() {
 		return res_id;
 	}
@@ -53,16 +52,9 @@ public class ResVO {
 	public void setImp_uid(String imp_uid) {
 		this.imp_uid = imp_uid;
 	}
-	
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public ResVO(){}
-	public ResVO(String res_id, Date res_date, int res_nom, String seat_id,
-			String mem_id, int ttr_no, String imp_uid, int status) {
+	public ReservationVO(){};
+	public ReservationVO(String res_id, Date res_date, int res_nom, String seat_id,
+			String mem_id, int ttr_no, String imp_uid) {
 		super();
 		this.res_id = res_id;
 		this.res_date = res_date;
@@ -71,13 +63,12 @@ public class ResVO {
 		this.mem_id = mem_id;
 		this.ttr_no = ttr_no;
 		this.imp_uid = imp_uid;
-		this.status = status;
 	}
 	@Override
 	public String toString() {
 		return "ResVO [res_id=" + res_id + ", res_date=" + res_date
 				+ ", res_nom=" + res_nom + ", seat_id=" + seat_id + ", mem_id="
-				+ mem_id + ", ttr_no=" + ttr_no + ", imp_uid=" + imp_uid
-				+ ", status=" + status + "]";
-	};
+				+ mem_id + ", ttr_no=" + ttr_no + ", imp_uid=" + imp_uid + "]";
+	}
+	
 }

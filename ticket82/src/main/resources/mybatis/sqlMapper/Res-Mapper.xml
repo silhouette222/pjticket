@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ResMapper">
+	<update id="insertRes">
+		insert into reserve(res_id,res_nom,seat_id,mem_id,ttr_no,imp_uid)
+		values(res_seq.nextval,#{res_nom},#{seat_id},#{mem_id},#{ttr_no},#{imp_uid})
+	</update>
+	
+	<update id="deleteRes">
+		delete from reserve 
+		where ttr_no=#{ttr_no}
+	</update>
+	<select id="selectresbyres_id" resultType="res">
+		select * from reserve where res_id=#{res_id}
+	</select>
+	<select id="selectresbyres_nom" resultType="res">
+		select * from reserve where res_nom=#{res_nom} and seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectresbyseat_id" resultType="res">
+		select * from reserve where seat_id=#{seat_id}
+	</select>
+	
+	<select id="selectresbymem_id" resultType="res">
+		select * from reserve where mem_id=#{mem_id}
+	</select>
+	
+	<select id="selectresbyttr_no" resultType="res">
+		select * from reserve where ttr_no=#{ttr_no}
+	</select>
+	<update id="deleteresbyres_id">
+		delete from reserve where res_id=#{res_id}
+	</update>
+	
+	<update id="deleteresbyres_nom">
+		delete from reserve where res_nom=#{res_nom}
+	</update>
+	
+	<update id="deleteresbyttr_no">
+		delete from reserve where ttr_no=#{ttr_no}
+	</update>
+	<!-- <select id="selectResList" resultType="Res">
+		<![CDATA[
+			select *
+			from reserve		
+			order by res_date desc
+		]]>
+	</select> -->
+	<select id="selectResList" resultType="Res">
+		select res_id,res_nom,seat_id,mem_id,ttr_no,imp_uid
+		from reserve
+		order by ttr_no desc
+		<!-- order by ttr_no desc -->
+	</select>
+	<select id="selectResByno" resultType="Res">
+		select
+		ttr_no,res_id,res_date,res_nom,seat_id,mem_id
+		from reserve
+		where ttr_no=#{ttr_no}
+	</select>
+	<select id="selectSeatMap" resultType="str">
+		select seatmap_name from seatMap
+		where ttr_no=#{ttr_no}
+	</select>
+	<select id="selectAttach" resultType="str">
+		select file_name from file_tbl
+		where ttr_no=#{ttr_no}
+		order by file_id
+	</select>
+	<select id="selectThumb" resultType="str">
+		select thumb_name from thumb
+		where ttr_no=#{ttr_no}
+	</select>
+	<select id="selectSeatBySeat_id" resultType="seatinfo">
+		select * from seat
+		where seat_id=#{seat_id}
+	</select>
+	<!-- <select id="selectResById" resultType="Res">
+		select
+		ttr_no,res_id,res_date,res_nom,seat_id,mem_id
+		from reserve
+		where res_id=#{res_id}
+	</select> -->
+	
+	
+	<!-- <select id="selectSearchResList" resultType="Res">
+	<![CDATA[ 
+		select *
+		from reserve
+		where ttr_no > 0		
+	]]>
+		
+		order by ttr_no desc
+	</select>
+	<select id="selectSearchResCount" resultType="int">
+		<![CDATA[  
+		  select count(ttr_no) 
+		  from reserve 
+		  where ttr_no > 0 
+		]]>
+			
+	</select> -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

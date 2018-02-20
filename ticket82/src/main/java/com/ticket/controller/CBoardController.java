@@ -188,7 +188,7 @@ public class CBoardController {
 		return url;
 	}
 	
-	@RequestMapping(value="gal/galupdate",method=RequestMethod.GET)
+	@RequestMapping(value="/gal/galupdate",method=RequestMethod.GET)
 	public String galupdate(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
 		String url="cboard/gal/galupdate";
 		BoardVO board=bs.readBoardByNo(ttr_no);
@@ -196,7 +196,7 @@ public class CBoardController {
 		return url;
 	}
 	
-	@RequestMapping(value="gal/galupdate",method=RequestMethod.POST)
+	@RequestMapping(value="/gal/galupdate",method=RequestMethod.POST)
 	public String galupdate(BoardVO board,Model model) throws Exception{
 		String url="redirect:/cboard/gal";
 		try{

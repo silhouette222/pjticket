@@ -52,6 +52,7 @@
 		<option value="mem"<c:out value="${cri.search eq 'mem'?'selected':''}"/>>회원아이디</option>
 		<option value="no"<c:out value="${cri.search eq 'no'?'selected':''}"/>>글번호</option>
 		<option value="imp"<c:out value="${cri.search eq 'imp'?'selected':''}"/>>결제코드</option>
+		<option value="status"<c:out value="${cri.search eq 'status'?'selected':''}"/>>상태</option>
 	</select>
 	<input id="key" type="text" id="keyword">
 	<input id="search" type="button" value="검색">
@@ -71,6 +72,7 @@
 		<th><label id="mem_id">회원아이디</label></th>
 		<th><label id="ttr_no">글번호</label></th>
 		<th><label id="imp_uid">결제코드</label></th>
+		<th><label id="status">상태</label></th>
 	</tr>
 </table>
 <div class="popup back" style="display: none;"></div>
@@ -83,7 +85,7 @@
 var search;
 var keyword;
 var ord;
-var orders=["id_asc","date_asc","nom_asc","seat_asc","mem_asc","no_asc","imp_asc"]
+var orders=["id_asc","date_asc","nom_asc","seat_asc","mem_asc","no_asc","imp_asc","status_asc"]
 var page=1
 var pagenum=10
 var pk;
@@ -108,6 +110,7 @@ function makelist(){
 				"<th><label id='mem_id'>회원아이디</label></th>"+
 				"<th><label id='ttr_no'>글번호</label></th>"+
 				"<th><label id='imp_uid'>결제코드</label></th>"+
+				"<th><label id='status'>상태</label></th>"+
 			"</tr>";
 				var list=data.list
 				for(i in list){
@@ -119,6 +122,7 @@ function makelist(){
 					"<td>"+list[i].mem_id+"</td>"+
 					"<td>"+list[i].ttr_no+"</td>"+
 					"<td>"+list[i].imp_uid+"</td>"+
+					"<td>"+list[i].status+"</td>"+
 					"</tr>"
 				}
 				str+="<tr><td id='pagearea' colspan='7'></td></tr>"
@@ -179,6 +183,7 @@ $(document).ready(function(){
 			"<tr><td><input type='text' value="+data.ttr_no+" name='ttr_no'></th></tr>"+
 			"<tr><td><input type='text' value="+data.seat_id+" name='seat_id'></th></tr>"+
 			"<tr><td><input type='text' value="+data.imp_uid+" name='imp_uid'></th></tr>"+
+			"<tr><td><input type='text' value="+data.status+" name='status' readonly></th></tr>"+
 			"<tr><td><input type='button' id='delete' value='삭제'></th></tr></table>";
 			
 			$('#updateform').html(str);
@@ -208,9 +213,9 @@ $(document).ready(function(){
 		    		imp_uid : uid
 	    		}
 			});
+    		$.getJSON("/aboard/resdel/"+pk)
     	}
 		})
-		$.getJSON("/aboard/delete/res/"+pk)
 		makelist();
 	});
 })

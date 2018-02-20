@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="/com/resources/js/upload.js" ></script>
 <div>
-	<h3>수정페이지</h3>
+	<h3>콘서트 수정페이지</h3>
 </div>
 				
 

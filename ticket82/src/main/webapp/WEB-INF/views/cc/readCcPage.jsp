@@ -8,7 +8,7 @@
 <script src="/com/resources/js/upload.js" ></script>
 <div>
 	<div>
-		<h3>뮤지컬</h3>
+		<h3>콘서트</h3>
 	</div>
 
 <form method="post">
@@ -173,20 +173,16 @@
 					}
 				})	
 			})
-			var zzim_url="/com/my/zzim/${musicalVO.ttr_no}"
-				/* "/com/my/zzim/${loginUser.mem_id}/${musicalVO.ttr_no}" */
+			var zzim_url="/my/zzim/${loginUser.mem_id}/${musicalVO.ttr_no}"
 			$.ajax({
 					type:'get',
-					url:"/com/my/zzim/${musicalVO.ttr_no}",
-					/* "/com/my/zzim/${loginUser.mem_id}/${musicalVO.ttr_no}",*/
+					url:"/my/selzzim/${loginUser.mem_id}/${musicalVO.ttr_no}",
 					success:function(data){
 						if(data=='zzimexist'){
-							zzim_url="/com/my/delzzim/${musicalVO.ttr_no}";
-							/* "/my/delzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/my/delzzim/${loginUser.mem_id}/${musicalVO.ttr_no}";
 							$('#zzim').text('찜취소')
 						}else if(data=='zzimnull'){
-							zzim_url="/com/my/addzzim/${musicalVO.ttr_no}";
-							/* "/my/addzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/my/addzzim/${loginUser.mem_id}/${musicalVO.ttr_no}";
 							$('#zzim').text('찜하기')
 						}
 					}
@@ -197,12 +193,10 @@
 					url:zzim_url,
 					success:function(data){
 						if(data=='addzzim'){
-							zzim_url="/com/my/delzzim/${musicalVO.ttr_no}";
-							/* "/my/delzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/my/delzzim/${loginUser.mem_id}/${musicalVO.ttr_no}";
 							$('#zzim').text('찜취소')
 						}else if(data=='delzzim'){
-							zzim_url="/com/my/addzzim/${musicalVO.ttr_no}";
-							/* "/my/addzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/my/addzzim/${loginUser.mem_id}/${musicalVO.ttr_no}";
 							$('#zzim').text('찜하기')
 						}
 					}

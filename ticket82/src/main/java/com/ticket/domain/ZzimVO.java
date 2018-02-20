@@ -8,6 +8,7 @@ public class ZzimVO {
 	private int ttr_no;
 	private Date zzim_date;
 	private String ttr_title;
+	
 	public int getZzim_no() {
 		return zzim_no;
 	}

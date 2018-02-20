@@ -41,4 +41,6 @@ public interface UserService {
 	MemberVO selectpkmem(String mem_id) throws SQLException;
 	CompanyVO selectpkcom(String com_id) throws SQLException;
 	ResVO selectpkres(String res_id) throws SQLException;
+	
+	void updateboard(BoardVO board) throws SQLException;
 }

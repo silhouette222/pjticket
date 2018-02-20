@@ -10,7 +10,7 @@
 		and t.ttr_no = z.ttr_no
 		and z.mem_id = #{mem_id}
 		order by 
-		z.zzim_no
+		zzim_date desc
 	</select>
 	
 	<update id="insertZzim" parameterType="zzim">

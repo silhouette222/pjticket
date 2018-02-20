@@ -21,7 +21,9 @@ public class ZzimDAOImpl implements ZzimDAO {
 	
 	@Override
 	public List<ZzimVO> listZzim(String mem_id) throws SQLException {
+		System.out.println(session.selectList(NAMESPACE+".listZzim", mem_id));
 		return session.selectList(NAMESPACE+".listZzim", mem_id);
+		
 	}
 
 	@Override

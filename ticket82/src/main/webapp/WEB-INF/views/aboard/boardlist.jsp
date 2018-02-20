@@ -56,6 +56,7 @@
 		<option value="time"<c:out value="${cri.search eq 'time'?'selected':''}"/>>시간정보</option>
 		<option value="alert"<c:out value="${cri.search eq 'alert'?'selected':''}"/>>알림사항</option>
 		<option value="content"<c:out value="${cri.search eq 'content'?'selected':''}"/>>세부내용</option>
+		<option value="status"<c:out value="${cri.search eq 'status'?'selected':''}"/>>상태</option>
 	</select>
 	<input id="key" type="text" id="keyword">
 	<input id="search" type="button" value="검색">
@@ -72,28 +73,23 @@
 		<th><label id="com_id">회사아이디</label></th>
 		<th><label id="ttr_cat">카테고리</label></th>
 		<th><label id="ttr_title">제목</label></th>
-		<th><label id="ttr_date">작성일</label></th>
 		<th><label id="ttr_sdate">시작일</label></th>
 		<th><label id="ttr_edate">종료일</label></th>
+		<th><label id="status">상태</label></th>
 	</tr>
 </table>
-<div class="popup back" style="display: none;"></div>
-	<div id="popup_front" class='popup front' style="display: none;">
-		<form id="updateform">
-		</form>
-	</div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 var search;
 var keyword;
 var ord;
-var orders=["no_asc","id_asc","cat_asc","title_asc","date_asc","sdate_asc","edate_asc","place_asc","time_asc","alert_asc","content_asc"]
+var orders=["no_asc","id_asc","cat_asc","title_asc","date_asc","sdate_asc","edate_asc","place_asc","time_asc","alert_asc","content_asc","status_asc"]
 var page=1
 var pagenum=10
 var pk;
 function date(as){
 	a=new Date(as)
-	console.log(a)
+	console.log(a.getMonth())
 	return a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate()+" "+a.getHours()+":"+a.getMinutes()
 }
 Date.prototype.toDateInputValue = (function() {
@@ -108,9 +104,9 @@ function makelist(){
 					"<th><label id='com_id'>회사아이디</label></th>"+
 					"<th><label id='ttr_cat'>카테고리</label></th>"+
 					"<th><label id='ttr_title'>제목</label></th>"+
-					"<th><label id='ttr_date'>작성일</label></th>"+
 					"<th><label id='ttr_sdate'>시작일</label></th>"+
 					"<th><label id='ttr_edate'>종료일</label></th>"+
+					"<th><label id='status'>상태</label></th>"+
 				"</tr>";
 				var list=data.list
 				for(i in list){
@@ -118,9 +114,10 @@ function makelist(){
 					"<td>"+list[i].com_id+"</td>"+
 					"<td>"+list[i].ttr_cat+"</td>"+
 					"<td>"+list[i].ttr_title+"</td>"+
-					"<td>"+date(list[i].ttr_date)+"</td>"+
-					"<td>"+date(list[i].ttr_sdate)+"</td>"+
-					"<td>"+date(list[i].ttr_edate)+"</td></tr>"
+					"<td>"+new Date(list[i].ttr_sdate).toDateInputValue()+"</td>"+
+					"<td>"+new Date(list[i].ttr_sdate).toDateInputValue()+"</td>"+
+					"<td>"+list[i].status+"</td>"+
+					"</tr>"
 				}
 				str+="<tr><td id='pagearea' colspan='7'></td></tr>"
 				$('#list').html(str);
@@ -168,45 +165,14 @@ $(document).ready(function(){
 		makelist();
 	})
 	makelist()
-	$('#list').on('click','tr',function(event){
+	$('#list').on('click','tr td',function(event){
 		pk=$(this).children('#pk').text()
-		$.getJSON("/aboard/board/"+pk,function(data){
-			data=data.res
-			var str=""
-			str+="<table><tr><td><input type='text' value="+data.ttr_no+" name='ttr_no' readonly></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_id+" name='com_id'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_cat+" name='ttr_cat'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_title+" name='ttr_title'></th></tr>"+
-			"<tr><td><input type='date' value="+new Date(data.ttr_date).toDateInputValue()+" name='ttr_date'></th></tr>"+
-			"<tr><td><input type='date' value="+new Date(data.ttr_sdate).toDateInputValue()+" name='ttr_sdate'></th></tr>"+
-			"<tr><td><input type='date' value="+new Date(data.ttr_edate).toDateInputValue()+" name='ttr_edate'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_place+" name='ttr_place'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_time+" name='ttr_time'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_alert+" name='ttr_alert'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_content+" name='ttr_content'></th></tr>"+
-			"<tr><td><input type='submit' id='update' value='수정'><input type='button' id='delete' value='삭제'></th></tr></table>";
-			
-			$('#updateform').html(str);
-			$('.popup').show();
-		})
+		location.href="/aboard/updateboard?ttr_no="+pk
 	});
-
-	
 	$('.back').on('click',function(){
 		$('.popup').hide();
 	});
-	$('#updateform').submit(function(event){
-		event.preventDefault();
-		that.get(0).submit();
-	});
-	$('#updateform').on('click','table tr td #delete',function(){
-		$.getJSON("/aboard/delete/board/"+pk,function(data){
-			makelist();
-			})
-		})
-	});
-
-
+})
 </script>
 </body>
 </html>

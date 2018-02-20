@@ -116,7 +116,7 @@
 	</select>
 	
 	<update id="updatemem">
-		update member set mem_pw=#{mem_pw},mem_name=#{mem_name},mem_gender=#{mem_gender},mem_birth=#{mem_birth},mem_mail=#{mem_mail},mem_mobile=#{mem_mobile},mem_addr=#{mem_addr},enabled=#{enabled}
+		update member set mem_name=#{mem_name},mem_gender=#{mem_gender},mem_birth=#{mem_birth},mem_mail=#{mem_mail},mem_mobile=#{mem_mobile},mem_addr=#{mem_addr},enabled=#{enabled}
 		where mem_id=#{mem_id}
 	</update>
 	<update id="deletemem">
@@ -228,7 +228,7 @@
 	</select>
 	
 	<update id="updatecom">
-		update company set com_no=#{com_no},com_pw=#{com_pw},com_name=#{com_name},com_dname=#{com_dname},com_mobile=#{com_mobile},com_mail=#{com_mail},com_addr=#{com_addr},enabled=#{enabled}
+		update company set com_no=#{com_no},com_name=#{com_name},com_dname=#{com_dname},com_mobile=#{com_mobile},com_mail=#{com_mail},com_addr=#{com_addr},enabled=#{enabled}
 		where com_id=#{com_id}
 	</update>
 	<update id="deletecom">
@@ -273,6 +273,9 @@
 			</if>
 			<if test="search == 'content'.toString()">
 				and ttr_content like '%'||#{keyword}||'%'
+			</if>
+			<if test="search == 'status'.toString()">
+				and status like '%'||#{keyword}||'%'
 			</if>
 		</if>
 	</sql>
@@ -345,6 +348,12 @@
 			<if test="ord == 'content_desc'.toString()">
 				order by ttr_content desc
 			</if>
+			<if test="ord == 'status_asc'.toString()">
+				order by status
+			</if>
+			<if test="ord == 'status_desc'.toString()">
+				order by status desc
+			</if>
 		</if>
 	</sql>
 	
@@ -357,7 +366,7 @@
 	</select>
 	
 	<update id="updateBoard">
-		update theater set ttr_title=#{ttr_title},ttr_date=sysdate,ttr_sdate=#{ttr_sdate},ttr_edate=#{ttr_edate},ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert},ttr_content=#{ttr_content}
+		update theater set ttr_title=#{ttr_title},ttr_date=sysdate,ttr_sdate=#{ttr_sdate},ttr_edate=#{ttr_edate},ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert},ttr_content=#{ttr_content},status=#{status}
 		where ttr_no=#{ttr_no}
 	</update>
 	
@@ -387,6 +396,9 @@
 			</if>
 			<if test="search == 'imp'.toString()">
 				and imp_uid like '%'||#{keyword}||'%'
+			</if>
+			<if test="search == 'status'.toString()">
+				and status like '%'||#{keyword}||'%'
 			</if>
 		</if>
 	</sql>
@@ -434,6 +446,12 @@
 			</if>
 			<if test="ord == 'imp_desc'.toString()">
 				order by imp_uid desc
+			</if>
+			<if test="ord == 'status_asc'.toString()">
+				order by status
+			</if>
+			<if test="ord == 'status_desc'.toString()">
+				order by status desc
 			</if>
 		</if>
 	</sql>

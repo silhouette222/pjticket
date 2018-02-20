@@ -10,7 +10,7 @@ public class CompanyVO {
 	private String com_pw;
 	private String com_name;
 	private String com_dname;
-	private int com_mobile;
+	private String com_mobile;
 	private String com_mail;
 	private String com_addr;
 	private int enabled;
@@ -18,8 +18,8 @@ public class CompanyVO {
 	
 	public CompanyVO(){}
 	public CompanyVO(int com_no, String com_id, String com_pw, String com_name,
-			String com_dname, int com_mobile, String com_mail, String com_addr,
-			int enabled, Date com_date) {
+			String com_dname, String com_mobile, String com_mail,
+			String com_addr, int enabled, Date com_date) {
 		super();
 		this.com_no = com_no;
 		this.com_id = com_id;
@@ -63,10 +63,10 @@ public class CompanyVO {
 	public void setCom_dname(String com_dname) {
 		this.com_dname = com_dname;
 	}
-	public int getCom_mobile() {
+	public String getCom_mobile() {
 		return com_mobile;
 	}
-	public void setCom_mobile(int com_mobile) {
+	public void setCom_mobile(String com_mobile) {
 		this.com_mobile = com_mobile;
 	}
 	public String getCom_mail() {

@@ -169,4 +169,9 @@ private SqlSession sqlSession;
 		
 	}
 
+	@Override
+	public void updateboard(BoardVO board) throws SQLException {
+		sqlSession.update(NAMESPACE+".updateBoard",board);
+	}
+
 }

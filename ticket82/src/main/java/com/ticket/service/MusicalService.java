@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.ticket.domain.MusicalVO;
 import com.ticket.domain.SearchCriteria;
-
-
+import com.ticket.domain.Seatinfo;
+import com.ticket.domain.ZzimVO;
 
 public interface MusicalService {
 
@@ -21,4 +21,15 @@ public interface MusicalService {
 	
 	List<String> getAttach(int ttr_no)throws SQLException;
 	
+	Seatinfo readseatbyseat_id(String seat_id) throws SQLException;
+	List<Seatinfo> readseatbyttr_no(int ttr_no) throws SQLException;
+	List<Seatinfo> readseat() throws SQLException;
+	
+	List<MusicalVO> searchMusicalList(SearchCriteria cri) throws SQLException;
+	
+	void insertzzim(String mem_id,int ttr_no) throws SQLException;
+	void deletezzim(String mem_id,int ttr_no) throws SQLException;
+	ZzimVO selectzzin(String mem_id,int ttr_no) throws SQLException;
+	
+	Double scoreavg(int ttr_no) throws SQLException;
 }

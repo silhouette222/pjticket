@@ -42,6 +42,19 @@
 }
 </style>
 <h1>회원 목록</h1>
+<button id="mailformbutton">+</button>
+<div id="mailform1">
+<div id="mailform2">
+<form action="mail" method="post" >
+<div id="mailsend"></div>
+	보내는사람 : <input id='from1' type='email' name="from"  placeholder="example@naver.com"/><br/>
+	제목 : <input id='title1' type='text' name='title'/><br/>
+	내용 : <textarea id="content1" rows="25" cols="100" name='content' ></textarea><br/>
+	<input type="submit" value="보내기" />
+</form>
+<button id='mailall'>전체보내기</button>
+</div>
+</div>
 <div>
 	<select id="searchtype">
 		<option value="n"<c:out value="${cri.search == null?'selected':''}"/>>---</option>
@@ -69,26 +82,14 @@
 		<th><label id="mem_id">아이디</label></th>
 		<th><label id="mem_name">이름</label></th>
 		<th><label id="mem_gender">성별</label></th>
-		<th><label id="mem_birth">생일</label></th>
-		<th><label id="mem_mail">메일</label></th>
-		<th><label id="mem_mobile">전화번호</label></th>
-		<th><label id="mem_addr">주소</label></th>
 		<th><label id="mem_date">가입일</label></th>
 		<th><label id="enabled">상태</label></th>
 	</tr>
 </table>
 
-<form action="mail" method="post" >
-<div id="mailsend"></div>
-	보내는사람 : <input id='from1' type='email' name="from"  placeholder="example@naver.com"/><br/>
-	제목 : <input id='title1' type='text' name='title'/><br/>
-	내용 : <textarea id="content1" rows="25" cols="100" name='content' ></textarea><br/>
-	<input type="submit" value="보내기" />
-</form>
-<button id='mailall'>전체보내기</button>
 <div class="popup back" style="display: none;"></div>
 	<div id="popup_front" class='popup front' style="display: none;">
-		<form id="updateform">
+		<form id="updateform" method="post" >
 		</form>
 	</div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -116,25 +117,17 @@ function makelist(){
 				"<th><label id='mem_id'>아이디</label></th>"+
 				"<th><label id='mem_name'>이름</label></th>"+
 				"<th><label id='mem_gender'>성별</label></th>"+
-				"<th><label id='mem_birth'>생일</label></th>"+
-				"<th><label id='mem_mail'>메일</label></th>"+
-				"<th><label id='mem_mobile'>전화번호</label></th>"+
-				"<th><label id='mem_addr'>주소</label></th>"+
 				"<th><label id='mem_date'>가입일</label></th>"+
 				"<th><label id='enavled'>상태</label></th>"+
 				"<th><label>메일추가</label></th>"+
 			"</tr>";
 				var list=data.list
 				for(i in list){
-					str+="<tr><td id='pk'>"+list[i].mem_id+"</td>"+
-					"<td>"+list[i].mem_name+"</td>"+
-					"<td>"+list[i].mem_gender+"</td>"+
-					"<td>"+list[i].mem_birth+"</td>"+
-					"<td>"+list[i].mem_mail+"</td>"+
-					"<td>"+list[i].mem_mobile+"</td>"+
-					"<td>"+list[i].mem_addr+"</td>"+
-					"<td>"+date(list[i].mem_date)+"</td>"+
-					"<td>"+list[i].enabled+"</td>"+
+					str+="<tr><td id='pk' class='mas'>"+list[i].mem_id+"</td>"+
+					"<td class='mas'>"+list[i].mem_name+"</td>"+
+					"<td class='mas'>"+list[i].mem_gender+"</td>"+
+					"<td class='mas'>"+date(list[i].mem_date)+"</td>"+
+					"<td class='mas'>"+list[i].enabled+"</td>"+
 					"<td class='mail'><button class='mailadd' mail='"+list[i].mem_mail+"' mem_id='"+list[i].mem_id+"'>+</button></td>"+
 					"</tr>";
 				}
@@ -200,8 +193,9 @@ $(document).ready(function(){
 		})
 	})
 	makelist()
-	$('#list').on('click','tr',function(event){
-		pk=$(this).children('#pk').text()
+	$('#list').on('click','tr .mas',function(event){
+		that=$(this).parent()
+		pk=that.children('#pk').text()
 		$.getJSON("/aboard/mem/"+pk,function(data){
 			data=data.res
 			var str=""
@@ -209,10 +203,10 @@ $(document).ready(function(){
 			"<tr><td><input type='text' value="+data.mem_name+" name='mem_name'></th></tr>"+
 			"<tr><td><input type='text' value="+data.mem_gender+" name='mem_gender'></th></tr>"+
 			"<tr><td><input type='date' value="+new Date(data.mem_birth).toDateInputValue()+" name='mem_birth'></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_mail+" /></th></tr>"+
+			"<tr><td><input type='text' value="+data.mem_mail+" name='mem_mail'/></th></tr>"+
 			"<tr><td><input type='text' value="+data.mem_mobile+" name='mem_mobile'></th></tr>"+
 			"<tr><td><input type='text' value="+data.mem_addr+" name='mem_addr'></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_date+" name='mem_date'></th></tr>"+
+			"<tr><td><input type='date' value="+new Date(data.mem_date).toDateInputValue()+" name='mem_date'></th></tr>"+
 			"<tr><td><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
 			"<tr><td><input type='submit' id='update' value='수정'><input type='button' id='delete' value='삭제'></th></tr></table>";
 			
@@ -223,10 +217,6 @@ $(document).ready(function(){
 	
 	$('.back').on('click',function(){
 		$('.popup').hide();
-	});
-	$('#updateform').submit(function(event){
-		event.preventDefault();
-		that.get(0).submit();
 	});
 	$('#updateform').on('click','table tr td #delete',function(){
 		$.getJSON("/aboard/delete/mem/"+pk)
@@ -241,6 +231,17 @@ $(document).ready(function(){
 		$('.popup').hide();
 		$('.popup').hide();$('.popup').hide();
 	})
+	var detach=$('#mailform2')
+	$('#mailformbutton').on('click',function(){
+		if($(this).text()=='+'){
+			$('#mailform1').append(detach)
+			$(this).text('-');
+		}else if($(this).text()=='-'){
+			$('#mailform2').detach()
+			$(this).text('+');
+		}
+	})
+	$('#mailform2').detach();
 })
 </script>
 </body>

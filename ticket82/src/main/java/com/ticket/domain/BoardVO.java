@@ -24,6 +24,7 @@ public class BoardVO {
 	private int[] seat_pri;
 	private Date[] seat_date;
 	private Date[] seat_time;
+	private int status;
 	public int getTtr_no() {
 		return ttr_no;
 	}
@@ -145,13 +146,19 @@ public class BoardVO {
 	public void setSeat_id(String[] seat_id) {
 		this.seat_id = seat_id;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public BoardVO(){}
 	public BoardVO(int ttr_no, String com_id, String ttr_cat, String ttr_title,
 			Date ttr_date, Date ttr_sdate, Date ttr_edate, String ttr_place,
 			String ttr_time, String ttr_alert, String ttr_content,
 			String thumb_name, String seatmap_name, String[] files,
 			String[] seat_id, String[] seat_grd, int[] seat_no, int[] seat_pri,
-			Date[] seat_date, Date[] seat_time) {
+			Date[] seat_date, Date[] seat_time, int status) {
 		super();
 		this.ttr_no = ttr_no;
 		this.com_id = com_id;
@@ -173,6 +180,7 @@ public class BoardVO {
 		this.seat_pri = seat_pri;
 		this.seat_date = seat_date;
 		this.seat_time = seat_time;
+		this.status = status;
 	}
 	@Override
 	public String toString() {
@@ -189,7 +197,6 @@ public class BoardVO {
 				+ Arrays.toString(seat_no) + ", seat_pri="
 				+ Arrays.toString(seat_pri) + ", seat_date="
 				+ Arrays.toString(seat_date) + ", seat_time="
-				+ Arrays.toString(seat_time) + "]";
+				+ Arrays.toString(seat_time) + ", status=" + status + "]";
 	}
-	
 }

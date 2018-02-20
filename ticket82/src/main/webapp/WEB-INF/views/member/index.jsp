@@ -130,9 +130,6 @@
 
   <body>
 
-    <!-- Navigation -->
-    <!-- 메뉴바 -->
-    
 
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

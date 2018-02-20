@@ -11,7 +11,7 @@
 <body>
 	<form id="pay">
 		<table>
-			<tr><td><label>공연이름<input name="title" id="title" type="text" value="${boardVO.ttr_title }" readonly></label></td></tr>
+			<tr><td><label>공연이름<input name="title" id="title" type="text" value="${musicalVO.ttr_title }" readonly></label></td></tr>
 			<tr><td><label>결제방식<select name="type" id="type">
     <option value="card" selected>신용카드</option>
     <option value="phone">휴대폰소액결제</option>
@@ -39,9 +39,7 @@
 	<script>
 	var imp_admin="https://admin.iamport.kr/";
 	var imp_api="https://api.iamport.kr/";
-
 	var json = [];
-
 	var IMP=window.IMP;
 	IMP.init('iamport');
 	function pay(type,title,pay,email,name,tel,addr,post){
@@ -56,22 +54,23 @@
 			buyer_tel : tel,
 			buyer_addr : addr,
 			buyer_postcode : post,
-			m_redirect_url : '/mboard/rescomplet'
+			m_redirect_url : '/res/resList'
 			}, function(rsp) {
-				<c:forEach var="resVO" items="${reslist}" varStatus="status">
+				<c:forEach var="reservationVO" items="${reslist}" varStatus="status">
 				json[${status.count-1}]={
 						res_id:"",
 						res_date:"",
-						res_nom:${resVO.res_nom},
-						seat_id:'${resVO.seat_id}',
-						mem_id:'${resVO.mem_id}',
-						ttr_no:${resVO.ttr_no},
+						res_nom:${reservationVO.res_nom},
+						seat_id:'${reservationVO.seat_id}',
+						mem_id:'${reservationVO.mem_id}',
+						ttr_no:${reservationVO.ttr_no},
 						imp_uid:rsp.imp_uid
 											}
 				</c:forEach>
 				if ( rsp.success ) {
+					
 					$.ajax({
-						url : "/mboard/respay",
+						url : "/res/respay",
 						type : "post",
 						dataType : "json",
 						data : {
@@ -81,7 +80,7 @@
 						complete : function(result) {
 							if (result.responseText == 'everythings_fine') {
 								alert("예약이 완료되었습니다");
-								location.href="/member/index";
+								location.href="/res/resList";
 							}else{
 								$.ajax({
 									url : "https://cors-anywhere.herokuapp.com/api.iamport.kr/users/getToken",
@@ -111,7 +110,6 @@
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
-
 			        alert(msg);
 			    }
 			});

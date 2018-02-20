@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ticket.domain.AdminCri;
@@ -37,7 +38,6 @@ import com.ticket.domain.PageMaker;
 import com.ticket.domain.ResVO;
 import com.ticket.service.AdminService;
 import com.ticket.service.BoardService;
-import com.ticket.service.MemberService;
 import com.ticket.service.ResService;
 import com.ticket.service.UserService;
 
@@ -119,7 +119,10 @@ public class ABoardController {
 		binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"ttr_date", new CustomDateEditor(dateFormat, true));
-		binder.registerCustomEditor(Date.class,"mem_birth", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"seat_date", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
+		/*binder.registerCustomEditor(Date.class,"mem_birth", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"mem_date", new CustomDateEditor(dateFormat, true));*/
 		binder.registerCustomEditor(Date.class,"res_date", new CustomDateEditor(dateFormat, true));
 	}
 	
@@ -131,8 +134,10 @@ public class ABoardController {
 		return url;
 	}
 	@RequestMapping(value = "/mem", method = RequestMethod.POST)
-	public void updatemem(MemberVO mem) throws Exception{
+	public String updatemem(MemberVO mem) throws Exception{
+		String url="redirect:/aboard/mem";
 		us.updatemem(mem);
+		return url;
 	}
 	
 	@RequestMapping(value = "/com", method = RequestMethod.GET)
@@ -143,8 +148,10 @@ public class ABoardController {
 		return url;
 	}
 	@RequestMapping(value = "/com", method = RequestMethod.POST)
-	public void updatecom(CompanyVO com) throws Exception{
+	public String updatecom(CompanyVO com) throws Exception{
+		String url="redirect:/aboard/com";
 		us.updatecom(com);
+		return url;
 	}
 	
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
@@ -154,9 +161,23 @@ public class ABoardController {
 		model.addAttribute("list",list);
 		return url;
 	}
-	@RequestMapping(value = "/board", method = RequestMethod.POST)
-	public void updateboard(BoardVO board) throws Exception{
-		bs.updateBoard(board);
+	@RequestMapping(value = "/updateboard", method = RequestMethod.GET)
+	public String updateboard(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="aboard/boardupdate";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		return url;
+	}
+	@RequestMapping(value="/updateboard",method=RequestMethod.POST)
+	public String updateboard(BoardVO board,Model model) throws Exception{
+		String url="redirect:/aboard/board";
+		try{
+			us.updateboard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
+		return url;
 	}
 	
 	@RequestMapping(value = "/res", method = RequestMethod.GET)
@@ -165,6 +186,11 @@ public class ABoardController {
 		List<ResVO> list=us.searchsortres(cri);
 		model.addAttribute("list",list);
 		return url;
+	}
+	
+	@RequestMapping(value = "/resdel/{pk}", method = RequestMethod.GET)
+	public void resdel(@PathVariable("pk")String pk) throws Exception{
+		rs.deleteresbyres_id(pk);
 	}
 	
 	@RequestMapping(value="/{type}/{pk}")

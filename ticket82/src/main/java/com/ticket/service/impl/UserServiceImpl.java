@@ -155,4 +155,9 @@ public class UserServiceImpl implements UserService {
 	public ResVO selectpkres(String res_id) throws SQLException {
 		return userDAO.selectpkres(res_id);
 	}
+
+	@Override
+	public void updateboard(BoardVO board) throws SQLException {
+		userDAO.updateboard(board);
+	}
 }

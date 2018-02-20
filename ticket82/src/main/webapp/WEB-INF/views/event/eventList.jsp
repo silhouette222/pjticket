@@ -16,8 +16,8 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Event
-        <small>ticket82</small>
+      <h1 class="mt-4 mb-3">ticket82
+        <small>Event</small>
       </h1>
       
       <!-- 작성버튼 -->
@@ -28,7 +28,7 @@
         <li class="breadcrumb-item">
           <a href="index.html">Home</a>
         </li>
-        <li class="breadcrumb-item active">Services</li>
+        <li class="breadcrumb-item active">Event</li>
       </ol>
 
       

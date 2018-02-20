@@ -65,19 +65,16 @@
 </div>
 <table border="1px" id="list">
 	<tr>
-		<th><label id="com_no">사업자등록번호</label></th>
 		<th><label id="com_id">회사아이디</label></th>
 		<th><label id="com_name">이름</label></th>
 		<th><label id="com_dname">대표이름</label></th>
 		<th><label id="com_mobile">전화번호</label></th>
-		<th><label id="com_mail">메일</label></th>
-		<th><label id="com_addr">주소</label></th>
 		<th><label id="enabled">상태</label></th>
 	</tr>
 </table>
 <div class="popup back" style="display: none;"></div>
 	<div id="popup_front" class='popup front' style="display: none;">
-		<form id="updateform">
+		<form id="updateform" method="post">
 		</form>
 	</div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -102,25 +99,19 @@ Date.prototype.toDateInputValue = (function() {
 function makelist(){
 		$.getJSON("/aboard/com/"+search+"/"+keyword+"/"+ord+"/"+page+"/"+pagenum,function(data){
 				var str="<tr>"+
-				"<th><label id='com_no'>사업자등록번호</label></th>"+
 				"<th><label id='com_id'>회사아이디</label></th>"+
 				"<th><label id='com_name'>이름</label></th>"+
 				"<th><label id='com_dname'>대표이름</label></th>"+
 				"<th><label id='com_mobile'>전화번호</label></th>"+
-				"<th><label id='com_mail'>메일</label></th>"+
-				"<th><label id='com_addr'>주소</label></th>"+
 				"<th><label id='enabled'>상태</label></th>"+
 			"</tr>";
 				var list=data.list
 				for(i in list){
 					str+="<tr>"+
-					"<td>"+list[i].com_no+"</td>"+
 					"<td id='pk'>"+list[i].com_id+"</td>"+
 					"<td>"+list[i].com_name+"</td>"+
 					"<td>"+list[i].com_dname+"</td>"+
 					"<td>"+list[i].com_mobile+"</td>"+
-					"<td>"+list[i].com_mail+"</td>"+
-					"<td>"+list[i].com_addr+"</td>"+
 					"<td>"+list[i].enabled+"</td>"+
 					"</tr>"
 				}
@@ -181,7 +172,7 @@ $(document).ready(function(){
 			"<tr><td><input type='text' value="+data.com_name+" name='com_name'></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_dname+" name='com_dname'></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_mobile+" name='com_mobile'></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_mail+" name='com_mobile'></th></tr>"+
+			"<tr><td><input type='text' value="+data.com_mail+" name='com_mail'></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_addr+" name='com_addr'></th></tr>"+
 			"<tr><td><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
 			"<tr><td><input type='submit' id='update' value='수정'><input type='button' id='delete' value='삭제'></th></tr></table>";
@@ -193,10 +184,6 @@ $(document).ready(function(){
 	
 	$('.back').on('click',function(){
 		$('.popup').hide();
-	});
-	$('#updateform').submit(function(event){
-		event.preventDefault();
-		that.get(0).submit();
 	});
 	$('#updateform').on('click','table tr td #delete',function(){
 		$.getJSON("/aboard/delete/com/"+pk)
