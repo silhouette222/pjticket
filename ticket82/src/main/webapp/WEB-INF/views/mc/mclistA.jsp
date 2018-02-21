@@ -20,8 +20,8 @@
 									<%-- <td><c:forEach var="fileName" items="${musicalVO.thumb_name}">
 										<img src="/displayFile?fileName=${musicalVO.thumb_name}">
 									</c:forEach></td> --%>
-									<td><img src="/com/displayFile?fileName=${musicalVO.thumb_name}"></td>
-									<td><a href='readMcPage?ttr_no=${musicalVO.ttr_no}'>${musicalVO.ttr_title}</a></td>
+									<td><img src="/displayFile?fileName=${musicalVO.thumb_name}"></td>
+									<td><a href='/mc/readMcPage?ttr_no=${musicalVO.ttr_no}'>${musicalVO.ttr_title}</a></td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${musicalVO.ttr_sdate}" /> ~</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"

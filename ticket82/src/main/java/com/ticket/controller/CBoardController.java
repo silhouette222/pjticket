@@ -118,11 +118,13 @@ public class CBoardController {
 	
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
-		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(dateFormat, true));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+		binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(time, true));
 		binder.registerCustomEditor(Date.class,"ttr_date", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"seat_date", new CustomDateEditor(dateFormat, true));
-		SimpleDateFormat time = new SimpleDateFormat("hh:mm"); binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
+		binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
 	}
 	
 	@RequestMapping(value = "/etc", method = RequestMethod.GET)

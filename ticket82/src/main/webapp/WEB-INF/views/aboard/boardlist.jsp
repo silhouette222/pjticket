@@ -40,44 +40,58 @@
 	margin: 200px auto;
 	overflow: hidden;
 }
+li{
+list-style:none;
+}
+.popup_img{
+	margin:auto;
+}
 </style>
-<h1>게시글 목록</h1>
-<div>
-	<select id="searchtype" name="search">
-		<option value="n"<c:out value="${cri.search == null?'selected':''}"/>>---</option>
-		<option value="no"<c:out value="${cri.search eq 'no'?'selected':''}"/>>글번호</option>
-		<option value="id"<c:out value="${cri.search eq 'id'?'selected':''}"/>>회사아이디</option>
-		<option value="cat"<c:out value="${cri.search eq 'cat'?'selected':''}"/>>카테고리</option>
-		<option value="title"<c:out value="${cri.search eq 'title'?'selected':''}"/>>제목</option>
-		<option value="date"<c:out value="${cri.search eq 'date'?'selected':''}"/>>작성일</option>
-		<option value="sdate"<c:out value="${cri.search eq 'sdate'?'selected':''}"/>>시작일</option>
-		<option value="edate"<c:out value="${cri.search eq 'edate'?'selected':''}"/>>종료일</option>
-		<option value="place"<c:out value="${cri.search eq 'place'?'selected':''}"/>>장소</option>
-		<option value="time"<c:out value="${cri.search eq 'time'?'selected':''}"/>>시간정보</option>
-		<option value="alert"<c:out value="${cri.search eq 'alert'?'selected':''}"/>>알림사항</option>
-		<option value="content"<c:out value="${cri.search eq 'content'?'selected':''}"/>>세부내용</option>
-		<option value="status"<c:out value="${cri.search eq 'status'?'selected':''}"/>>상태</option>
-	</select>
-	<input id="key" type="text" id="keyword">
-	<input id="search" type="button" value="검색">
-	<select id="pagenum">
-		<option value="10"<c:out value="${cri.search eq '10'?'selected':''}"/>>10</option>
-		<option value="30"<c:out value="${cri.search eq '30'?'selected':''}"/>>30</option>
-		<option value="50"<c:out value="${cri.search eq '50'?'selected':''}"/>>50</option>
-		<option value="999999999999999999999999"<c:out value="${cri.search eq '--'?'selected':''}"/>>--</option>
-	</select>
+<div class="container">
+	<div class='box'>
+		<div class="box-header with-border">
+			<h1 style="font-size: 30px" class="box-title"><strong>행사 목록</strong></h1>
+		</div>
+		<div class="box-body text-right">
+			<select id="searchtype" name="search">
+				<option value="n"<c:out value="${cri.search == null?'selected':''}"/>>---</option>
+				<option value="no"<c:out value="${cri.search eq 'no'?'selected':''}"/>>글번호</option>
+				<option value="id"<c:out value="${cri.search eq 'id'?'selected':''}"/>>회사아이디</option>
+				<option value="cat"<c:out value="${cri.search eq 'cat'?'selected':''}"/>>카테고리</option>
+				<option value="title"<c:out value="${cri.search eq 'title'?'selected':''}"/>>제목</option>
+				<option value="date"<c:out value="${cri.search eq 'date'?'selected':''}"/>>작성일</option>
+				<option value="sdate"<c:out value="${cri.search eq 'sdate'?'selected':''}"/>>시작일</option>
+				<option value="edate"<c:out value="${cri.search eq 'edate'?'selected':''}"/>>종료일</option>
+				<option value="place"<c:out value="${cri.search eq 'place'?'selected':''}"/>>장소</option>
+				<option value="time"<c:out value="${cri.search eq 'time'?'selected':''}"/>>시간정보</option>
+				<option value="alert"<c:out value="${cri.search eq 'alert'?'selected':''}"/>>알림사항</option>
+				<option value="content"<c:out value="${cri.search eq 'content'?'selected':''}"/>>세부내용</option>
+				<option value="status"<c:out value="${cri.search eq 'status'?'selected':''}"/>>상태</option>
+			</select>
+			<input id="key" type="text" id="keyword">
+			<input id="search" class="btn btn-primary" type="button" value="검색">
+			<select id="pagenum">
+				<option value="10"<c:out value="${cri.search eq '10'?'selected':''}"/>>10</option>
+				<option value="30"<c:out value="${cri.search eq '30'?'selected':''}"/>>30</option>
+				<option value="50"<c:out value="${cri.search eq '50'?'selected':''}"/>>50</option>
+				<option value="999999999999999999999999"<c:out value="${cri.search eq '--'?'selected':''}"/>>--</option>
+			</select>
+		</div>
+	</div>
+	<div class="box">
+		<table class="table table-striped" id="list">
+			<tr>
+				<th><label id="ttr_no">글번호</label></th>
+				<th><label id="com_id">회사아이디</label></th>
+				<th><label id="ttr_cat">카테고리</label></th>
+				<th><label id="ttr_title">제목</label></th>
+				<th><label id="ttr_sdate">시작일</label></th>
+				<th><label id="ttr_edate">종료일</label></th>
+				<th><label id="status">상태</label></th>
+			</tr>
+		</table>
+	</div>
 </div>
-<table border="1px" id="list">
-	<tr>
-		<th><label id="ttr_no">글번호</label></th>
-		<th><label id="com_id">회사아이디</label></th>
-		<th><label id="ttr_cat">카테고리</label></th>
-		<th><label id="ttr_title">제목</label></th>
-		<th><label id="ttr_sdate">시작일</label></th>
-		<th><label id="ttr_edate">종료일</label></th>
-		<th><label id="status">상태</label></th>
-	</tr>
-</table>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 var search;
@@ -124,15 +138,15 @@ function makelist(){
 				var pageMaker=data.pageMaker;
 				var str="";
 				if(pageMaker.prev){
-					str+="<li><button>"+(pageMaker.startPage-1)
+					str+="<li><button class='btn btn-primary'>"+(pageMaker.startPage-1)
 						  +"'> << </button></li>";
 				};
 				for(var i=pageMaker.startPage,len=pageMaker.endPage;i<=len;i++){
 					var strClass=pageMaker.cri.page==i?'class=active':'';
-					str+="<li "+strClass+"><button class='reppage'>"+i+"</button></li>";
+					str+="<li "+strClass+"><button class='reppage btn btn-primary'>"+i+"</button></li>";
 				};
 				if(pageMaker.next){
-					str+="<li><button>"+(pageMaker.endPage+1)
+					str+="<li><button class='btn btn-primary'>"+(pageMaker.endPage+1)
 					  +"'> >> </button></li>";
 				};
 				$('#pagearea').append(str);
@@ -166,7 +180,7 @@ $(document).ready(function(){
 	})
 	makelist()
 	$('#list').on('click','tr td',function(event){
-		pk=$(this).children('#pk').text()
+		pk=$(this).parent().children('#pk').text()
 		location.href="/aboard/updateboard?ttr_no="+pk
 	});
 	$('.back').on('click',function(){

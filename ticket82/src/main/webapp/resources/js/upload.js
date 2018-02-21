@@ -5,7 +5,9 @@ $(".thumb").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
-
+			if($('.thumb div small').attr('data-src')==null){
+				
+			
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 
@@ -31,7 +33,7 @@ $(".thumb").on(
 				}
 
 			});
-
+			}
 		});
 $(".seatmap").on("dragenter dragover", function(event) {
 	event.preventDefault();
@@ -40,7 +42,7 @@ $(".seatmap").on(
 		"drop",
 		function(event) {
 			event.preventDefault();
-
+			if($('.seatmap div small').attr('data-src')==null){
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 
@@ -67,7 +69,7 @@ $(".seatmap").on(
 				}
 
 			});
-
+			}
 		});
 $(".file").on("dragenter dragover", function(event) {
 	event.preventDefault();
@@ -125,8 +127,8 @@ function getImageLink(fileName) {
 
 	return front + end;
 }
-$('.file,.seatmap,.thumb').on('click', 'small ', function(event) {
-	event.preventDefault()
+$('.thumb,.seatmap,.file').on('click', 'small ', function(event) {
+	event.preventDefault();
 	var that = $(this);
 
 	$.ajax({
@@ -183,3 +185,15 @@ function getThumb(fullName){
 	return imgsrc;
 	
 }
+$('#addseat').on('click',function(event){
+	if($('.seat_info').length<11){
+		
+	
+	var str="<tr class='seat_info'><input type='hidden' name='seat_id'><td><input type='text' name='seat_grd'></td><td><input type='number' name='seat_no'></td><td><input type='number' name='seat_pri'></td><td><input type='date' name='seat_date'></td><td><input type='time' name='seat_time'></td><td><input type='button' class='delseat btn btn-primary' value='-'></tr>";
+	$('#seat_table').append(str);
+	}
+})
+$('#seat_table').on('click','.delseat',function(){
+	$(this).parent('td').parent('tr').remove();
+})
+//asdasd

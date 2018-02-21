@@ -39,112 +39,201 @@
 	margin: 200px auto;
 	overflow: hidden;
 }
+li{
+list-style:none;
+}
+.popup_img{
+	margin:auto;
+}
 </style>
-<a href="/mboard/gal"><button>목록</button></a>
-<a href="/mboard/reserve?ttr_no=${boardVO.ttr_no }"><button>예약</button></a>
-<button id="zzim">찜하기</button>
-<label>평점 :</label><label id="scoreavg"></label>
-	<form id="write" method="post">
-		<input type="hidden" name="ttr_cat" value="${boardVO.ttr_cat}">
-		<input type="hidden" name="com_id" value="${boardVO.com_id}">
-		<label>썸네일</label>
-		<div class="thumb"
-			style="width: 200px; height: 200px; background-color: blue;"></div>
-		<label>좌석배치도</label>
-		<div class="seatmap"
-			style="width: 200px; height: 200px; background-color: blue;"></div>
-		<div>
-			<label>제목</label> <input type="text" name="ttr_title"
-				value="${boardVO.ttr_title}" readonly>
+<div class="container">
+
+	<div class='box'>
+		<div class="box-header">
+			<h1 style="font-size: 50px" class="box-title"><strong>${boardVO.ttr_title}</strong></h1>
+			<div>
+				<label>평점 : </label><label id="scoreavg"></label>
+			</div>
 		</div>
-		<div>
-			<label>시작일</label>
-			<input type="date" value="<fmt:formatDate pattern='yyyy-MM-dd'
-				value='${boardVO.ttr_sdate}' />" readonly>
+		<div class="box-body text-right">
+			<a href="/mboard/gal"><button class="btn btn-primary">목록</button></a>
+			<a id="resbtn" href="/mboard/reserve?ttr_no=${boardVO.ttr_no }"><button class="btn btn-primary">예약</button></a>
+			<button id="zzim" class="btn btn-primary">찜하기</button>
 		</div>
-		<div>
-			<label>종료일</label>
-			<input type="date" value="<fmt:formatDate pattern='yyyy-MM-dd'
-				value='${boardVO.ttr_edate}' />" readonly>
-		</div>
-		<div>
-			<label>장소</label> <input type="text" name="ttr_place"
-				value="${boardVO.ttr_place}" readonly>
-		</div>
-		<div>
-			<label>시간</label> <input type="text" name="ttr_time"
-				value="${boardVO.ttr_time}" readonly>
-		</div>
-		<div>
-			<label>알림</label> <input type="text" name="ttr_alert"
-				value="${boardVO.ttr_alert}" readonly>
-		</div>
-		<div>
-			<label>세부내용</label> <input type="text" name="ttr_content"
-				value="${boardVO.ttr_content}" readonly>
-		</div>
-		<div><label>좌석정보</label>
-			<table id="seat_table">
-				<tr>
-					<td>등급</td>
-					<td>좌석수</td>
-					<td>가격</td>
-					<td>날짜</td>
-					<td>시간</td>
-				</tr>
-			</table>
-		</div>
-		<label>사진자료</label>
-		<div class="file"
-			style="width: 800px; height: 200px; background-color: blue;"></div>
-	</form>
-	
-	<div id="replyarea">
-		<table id="replylist">
-		</table>
-		<table id="replywrite">
-			<tr>
-				<td>평점</td>
-				<td class="scorein">
-					<input class="1" type="checkbox" value="1">
-					<input class="2" type="checkbox" value="2">
-					<input class="3" type="checkbox" value="3">
-					<input class="4" type="checkbox" value="4">
-					<input class="5" type="checkbox" value="5">
-				</td>
-				<td>
-					<label class="scoreshow">&nbsp;&nbsp;</label>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3"><textarea id="reply_text" style="width: 600px; height: 200px;"></textarea></td>
-			</tr>
-		</table>
-		<input id="rep_sub" type="button" value="답글 작성">
 	</div>
 	
+	<div class="box">
+		<form id="write" method="post">
+			<input type="hidden" name="ttr_cat" value="${boardVO.ttr_cat}">
+			<input type="hidden" name="com_id" value="${boardVO.com_id}">
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-3">
+					<div class="alert alert-info">
+					<label>썸네일</label>
+					<div class="thumb"></div>
+					</div>
+				</div>
+				<div class="col-7">
+					<div class="alert alert-info">
+						<label>예매시작시간</label>
+						<label><fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.ttr_sdate}' /></label>
+						&nbsp;&nbsp;&nbsp;
+						<label><fmt:formatDate pattern='HH:mm' value='${boardVO.ttr_edate}' /></label>
+					</div>
+					<div class="alert alert-info">
+						<label>장소</label>
+						<label>${boardVO.ttr_place}</label>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="alert alert-info">
+						<p><label>시간 정보</label><p>
+						<label>${boardVO.ttr_time}</label>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="alert alert-info">
+						<p><label>알림 사항</label><p>
+						<label>${boardVO.ttr_alert}</label>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="alert alert-info">
+						<p><label>세부 내용</label><p>
+						<label>${boardVO.ttr_content}</label>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="alert alert-info">
+						<label>좌석배치도</label>
+						<div class="seatmap"></div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="alert alert-info">
+						<div>
+							<label>좌석정보</label>
+							<table id="seat_table" class="table table-striped">
+								<tr>
+									<td>등급</td>
+									<td>좌석수</td>
+									<td>가격</td>
+									<td>날짜</td>
+									<td>시간</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="alert alert-info">
+						<label>사진자료</label>
+						<div class="file"></div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+		</form>
+	</div>
+	
+	<div id="replyarea" class="box">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="alert alert-info">
+					<div>
+						<label>평점</label>
+						<table id="replylist" class="table table-striped">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="alert alert-info">
+					<div>
+						<label>평점 작성</label>
+						<table id="replywrite" class="table table-striped">
+							<tr>
+								<td>평점</td>
+								<td class="">
+									<div class="btn-group scorein">
+										<button class="1 btn btn-primary" value="1">★</button>
+										<button class="2 btn btn-primary" value="2">★</button>
+										<button class="3 btn btn-primary" value="3">★</button>
+										<button class="4 btn btn-primary" value="4">★</button>
+										<button class="5 btn btn-primary" value="5">★</button>
+									</div>
+								</td>
+								<td>
+									<label class="scoreshow">&nbsp;&nbsp;</label>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3"><textarea id="reply_text" style="width: 600px; height: 200px;"></textarea></td>
+							</tr>
+						</table>
+						<input id="rep_sub" type="button" class="btn btn-primary" value="작성">
+					</div>
+				</div>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+</div>
 	<div class="popup back" style="display: none;"></div>
-	<div id="popup_front" class='popup front' style="display: none;">
+	<div id="popup_front" class='popup front text-center' style="display: none;">
 		<img id="popup_img" />
 	</div>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
-	<script>
+<script>
+	var ttr_no=${boardVO.ttr_no};
 	var sdate=new Date('${boardVO.ttr_sdate}');
+	var now=new Date();
+	var start=new Date();
 	$(document).ready(function(){
+		reserve()
 		var seats=null;
 		var str=""
 		<c:forEach var="seat" items="${boardVO.seat_grd}" varStatus="status">
 			str+="<tr>"+
-			"<td id='seat_info'><input type='text' name='seat_grd' value='${boardVO.seat_grd[status.count-1]}' readonly></td>"+
-			"<td><input type='int' name='seat_no' value='${boardVO.seat_no[status.count-1]}' readonly></td>"+
-			"<td><input type='int' name='seat_pri' value='${boardVO.seat_pri[status.count-1]}' readonly></td>"+
-			"<td><input type='date' name='seat_date' value='<fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.seat_date[status.count-1]}' />' readonly></td>"+
-			"<td><input type='time' name='seat_time' value='<fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' />' readonly></td>"+
+			"<td id='seat_info'>${boardVO.seat_grd[status.count-1]}</td>"+
+			"<td>${boardVO.seat_no[status.count-1]}</td>"+
+			"<td>${boardVO.seat_pri[status.count-1]}</td>"+
+			"<td><fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.seat_date[status.count-1]}' /></td>"+
+			"<td><fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' /></td>"+
 		"</tr>"
 		</c:forEach>
 		$('#seat_table').append(str);
-			var ttr_no=${boardVO.ttr_no};
 			var thumb_name="${boardVO.thumb_name}"
 			var thumb="<div class='min'><img src='"+getThumb(thumb_name)+"'><ori data_src='"+getOri(thumb_name)+"'></div>"
 			var seatmap_name="${boardVO.seatmap_name}"
@@ -165,64 +254,61 @@
 					
 					var imgTag=$('#popup_img');
 					imgTag.attr('src',fileLink);
-					
-					//console.log(imgTag.attr('src'));
-					
-					$('.popup').show('slow');
+					$('.popup').show('fast');
 					imgTag.addClass('show');
 				}
 			});
 			
 			$('#popup_img').on('click',function(){
-				$('.popup').hide('slow');
+				$('.popup').hide('fast');
 			});
-			$('.scorein').children('input').on('click',function(index){
+			$('.scorein').children('button').on('click',function(index){
 				var score=$(this).val()
 				$('.scoreshow').text(score)
-				$('.scorein').children('input').each(function(index){
+				$('.scorein').children('button').each(function(index){
 					if($(this).val()<=score){
-						$(this).prop('checked', true);
+						$(this).css('color','yellow')
 					}else{
-						$(this).prop('checked',false)
+						$(this).css('color','black')
 					}
 				})	
 			})
 			var zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}"
-				$.ajax({
-						type:'get',
-						url:"/mboard/selzzim/${loginUser.mem_id}/${boardVO.ttr_no}",
-						success:function(data){
-							if(data=='zzimexist'){
-								zzim_url="/mboard/delzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
-								$('#zzim').text('찜취소')
-							}else if(data=='zzimnull'){
-								zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
-								$('#zzim').text('찜하기')
-							}
-						}
-					});
-				$('#zzim').on('click',function(){
-					$.ajax({
-						type:'get',
-						url:zzim_url,
-						success:function(data){
-							if(data=='addzzim'){
-								zzim_url="/mboard/delzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
-								$('#zzim').text('찜취소')
-							}else if(data=='delzzim'){
-								zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
-								$('#zzim').text('찜하기')
-							}
-						}
-					});
-				})
-				$.ajax({
+			$.ajax({
 					type:'get',
-					url:"/mboard/scoreavg/${boardVO.ttr_no}",
+					url:"/mboard/selzzim/${loginUser.mem_id}/${boardVO.ttr_no}",
 					success:function(data){
-						$('#scoreavg').text(data)
+						if(data=='zzimexist'){
+							zzim_url="/mboard/delzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
+							$('#zzim').text('찜취소')
+						}else if(data=='zzimnull'){
+							zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
+							$('#zzim').text('찜하기')
+						}
 					}
 				});
+			$('#zzim').on('click',function(){
+				$.ajax({
+					type:'get',
+					url:zzim_url,
+					success:function(data){
+						if(data=='addzzim'){
+							zzim_url="/mboard/delzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
+							$('#zzim').text('찜취소')
+						}else if(data=='delzzim'){
+							zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
+							$('#zzim').text('찜하기')
+						}
+					}
+				});
+			})
+			$.ajax({
+				type:'get',
+				url:"/mboard/scoreavg/${boardVO.ttr_no}",
+				success:function(data){
+					$('#scoreavg').text(data)
+				}
+			});
 		})
 </script>
 <script>
@@ -270,25 +356,25 @@
 			str+="<tr><td class='mem_id'>"+rep[i].mem_id+"</td><td class='ttr_score'>"+rep[i].ttr_score+"</td><td class='ttr_content' style='width: 600px;'>"+rep[i].tr_content+"</td><td class='tr_date'>"+date(rep[i].tr_date)+"</td>"+
 			"<td rno="+rep[i].tr_rno+">";
 			if(rep[i].mem_id=='${loginUser.mem_id}'){
-				str+="<button class='updaterepform'>수정</button><button class='deleterep'>삭제</button>";
+				str+="<button class='updaterepform btn btn-primary'>수정</button><button class='deleterep btn btn-primary'>삭제</button>";
 			}
 			str+="</td></tr>"
 			}
-			str+="<tr><td id='pagearea' colspan='4'></td></tr>"
+			str+="<tr><td colspan='4'><div id='pagearea' class='btn-group'></div></td></tr>"
 			$('#replylist').html(str);
 			
 			var pageMaker=data.pageMaker;
 			var str="";
 			if(pageMaker.prev){
-				str+="<li><button>"+(pageMaker.startPage-1)
+				str+="<li><button class='btn btn-primary'>"+(pageMaker.startPage-1)
 					  +"'> << </button></li>";
 			};
 			for(var i=pageMaker.startPage,len=pageMaker.endPage;i<=len;i++){
 				var strClass=pageMaker.cri.page==i?'class=active':'';
-				str+="<li "+strClass+"><button class='reppage'>"+i+"</button></li>";
+				str+="<li "+strClass+"><button class='reppage btn btn-primary'>"+i+"</button></li>";
 			};
 			if(pageMaker.next){
-				str+="<li><button>"+(pageMaker.endPage+1)
+				str+="<li><button class='btn btn-primary'>"+(pageMaker.endPage+1)
 				  +"'> >> </button></li>";
 			};
 			$('#pagearea').append(str);
@@ -303,15 +389,15 @@
 		uptr_rno=$(this).parent().attr('rno');
 		uptr_content=$(this).parent().parent().children('.ttr_content').text()
 		uptr_score=$(this).parent().parent().children('.ttr_score').text()
-		var str="<td class='upscore' colspan='2'>"+
-				"<input class='1' type='checkbox' value='1'>"+
-				"<input class='2' type='checkbox' value='2'>"+
-				"<input class='3' type='checkbox' value='3'>"+
-				"<input class='4' type='checkbox' value='4'>"+
-				"<input class='5' type='checkbox' value='5'>"+
+		var str="<td class='upscore btn-group' colspan='2'>"+
+				"<button class='1 btn btn-primary' value='1'>★</button>"+
+				"<button class='2 btn btn-primary' value='2'>★</button>"+
+				"<button class='3 btn btn-primary' value='3'>★</button>"+
+				"<button class='4 btn btn-primary' value='4'>★</button>"+
+				"<button class='5 btn btn-primary' value='5'>★</button>"+
 				"</td>"+
-				"<td colspan='2'><textarea name='uptext' style='width: 600px; height: 50px;'>"+uptr_content+"</textarea></td>"+
-				"<td><button class='repupdate'>수정</button><button class='updatecan'>취소</button></td>"
+				"<td colspan='2'><textarea name='uptext' style='width: 500px; height: 50px;'>"+uptr_content+"</textarea></td>"+
+				"<td><button class='repupdate btn btn-primary'>수정</button><button class='updatecan btn btn-primary'>취소</button></td>"
 		$(this).parent().parent().html(str)
 	})
 	$('#replylist').on('click','tr td .updatecan',function(index){
@@ -353,16 +439,26 @@
 			}
 		});
 	})
-	$('#replylist').on('click','tr .upscore input',function(index){
+	$('#replylist').on('click','tr .upscore button',function(index){
 		upttr_score=$(this).val()
-		$(this).parent().children('input').each(function(index){
+		$(this).parent().children('button').each(function(index){
 			if($(this).val()<=upttr_score){
-				$(this).prop('checked', true);
+				$(this).css('color','yellow')
 			}else{
-				$(this).prop('checked',false)
+				$(this).css('color','black')
 			}
 		})	
 	})
+	function reserve(){
+			start.setFullYear(<fmt:formatDate pattern='yyyy' value='${boardVO.ttr_sdate}' />)
+			start.setMonth(<fmt:formatDate pattern='MM' value='${boardVO.ttr_sdate}' />-1)
+			start.setDate(<fmt:formatDate pattern='dd' value='${boardVO.ttr_sdate}' />)
+			start.setHours(<fmt:formatDate pattern='HH' value='${boardVO.ttr_edate}' />);
+			start.setMinutes(<fmt:formatDate pattern='mm' value='${boardVO.ttr_edate}' />);
+			if(now<start){
+				$('#resbtn').detach();
+			}
+		}
 </script>
 </body>
 </html>

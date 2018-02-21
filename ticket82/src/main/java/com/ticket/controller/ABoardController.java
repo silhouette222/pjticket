@@ -117,7 +117,7 @@ public class ABoardController {
 		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 		SimpleDateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
-		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(time, true));
 		binder.registerCustomEditor(Date.class,"ttr_date", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"seat_date", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));

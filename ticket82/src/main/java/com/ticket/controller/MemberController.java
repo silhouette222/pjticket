@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ticket.domain.BoardVO;
+import com.ticket.domain.EventVO;
 import com.ticket.domain.MemberVO;
 import com.ticket.domain.PageMaker;
 import com.ticket.domain.SearchCriteria;
+import com.ticket.service.BoardService;
+import com.ticket.service.EventService;
 import com.ticket.service.MemberService;
 
 @Controller
@@ -28,6 +32,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private BoardService bs;
+	
+	@Autowired
+	private EventService es;
+	
 	//메인화면
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public void index(HttpSession session)throws Exception{
@@ -35,6 +45,18 @@ public class MemberController {
 		session.setAttribute("loginUser",memberService.getMemberById((String)session.getAttribute("loginUser2")));
 		}
 	}
+	
+	@RequestMapping(value="/indexModify",method=RequestMethod.GET)
+	public void indexm(HttpSession session,Model model)throws Exception{
+		if(session.getAttribute("loginUser2")!=null){
+		session.setAttribute("loginUser",memberService.getMemberById((String)session.getAttribute("loginUser2")));
+		}
+		List<BoardVO> boardList=bs.readBoardList();
+		model.addAttribute("list",boardList);
+		List<EventVO> eventList=es.readEventList();
+		model.addAttribute("elist",eventList);
+	}
+	
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public void listpage(@ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{

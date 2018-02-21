@@ -40,44 +40,98 @@
 </style>
 </head>
 <body>
-<a href="/mboard/etc">목록보기</a>
-<form id="write" method="post">
-		<input type="hidden" name="ttr_cat" value="${boardVO.ttr_no}">
+<div class="container">
+	<div class='box'>
+		<div class="box-header">
+			<h1 style="font-size: 50px" class="box-title"><strong>${boardVO.ttr_title}</strong></h1>
+		</div>
+		<div class="box-body">
+			<a href="javascript:history.go(-1)"><button class="btn btn-primary">목록</button></a>
+		</div>
+	</div>
+	<div class='box'>
+	<form id="write" method="post">
+		<input type="hidden" name="ttr_no" value="${boardVO.ttr_no}">
 		<input type="hidden" name="ttr_cat" value="${boardVO.ttr_cat}">
+		<input type="hidden" name="ttr_title" value="${boardVO.ttr_title}">
 		<input type="hidden" name="com_id" value="${boardVO.com_id}">
-		<label>썸네일</label>
-		<div class="thumb"
-			style="width: 200px; height: 200px; background-color: blue;"></div>
-		<label>좌석배치도</label>
-		<div class="seatmap"
-			style="width: 200px; height: 200px; background-color: blue;"></div>
-		<div>
-			<label>제목</label> <input type="text" name="ttr_title"
-				value="${boardVO.ttr_title}" readonly>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-3">
+				<div class="alert alert-info">
+					<label>썸네일</label>
+					<div class="thumb"></div>
+				</div>
+			</div>
+			<div class="col-8"></div>
 		</div>
-		<div>
-			<label>알림</label> <input type="text" name="ttr_alert"
-				value="${boardVO.ttr_alert}" readonly>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="alert alert-info">
+					<p><label>시간 정보</label><p>
+					<label>${boardVO.ttr_time}</label>
+				</div>
+			</div>
+			<div class="col-1"></div>
 		</div>
-		<div>
-			<label>세부내용</label> <input type="text" name="ttr_content"
-				value="${boardVO.ttr_content}" readonly>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="alert alert-info">
+					<p><label>알림 사항</label><p>
+					<label>${boardVO.ttr_alert}</label>
+				</div>
+			</div>
+			<div class="col-1"></div>
 		</div>
-		<div><label>좌석정보</label>
-			<table id="seat_table">
-				<tr>
-					<td>등급</td>
-					<td>좌석수</td>
-					<td>가격</td>
-					<td>날짜</td>
-					<td>시간</td>
-				</tr>
-			</table>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="alert alert-info">
+					<p><label>세부 내용</label><p>
+					<label>${boardVO.ttr_content}</label>
+				</div>
+			</div>
+			<div class="col-1"></div>
 		</div>
-		<input type="submit" value="예약">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-3">
+				<div class="alert alert-info">
+					<label>좌석배치도</label>
+					<div class="seatmap"></div>
+				</div>
+			</div>
+			<div class="col-8"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="alert alert-info">
+					<div>
+						<label>좌석정보</label>
+						<table id="seat_table" class="table table-striped">
+							<tr>
+								<td>등급</td>
+								<td>좌석수</td>
+								<td>가격</td>
+								<td>날짜</td>
+								<td>시간</td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				</div>
+			<div class="col-1"></div>
+		</div>
+		<input type="submit" class="btn btn-primary" value="예약하기">
 	</form>
+	</div>
+</div>
 		<div class="popup back" style="display: none;"></div>
-	<div id="popup_front" class='popup front' style="display: none;">
+	<div id="popup_front" class='popup front text-center' style="display: none;">
 		<img id="popup_img" />
 	</div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -90,17 +144,17 @@ $(document).ready(function(){
 	var cnt=null;
 	<c:forEach var="seat" items="${boardVO.seat_grd}" varStatus="status">
 		cnt='${boardVO.seat_no[status.count-1]}'-'${seat_cnt[status.count-1]}'
-		str+="<tr seat_no='${boardVO.seat_no[status.count-1]}' seat_id='${boardVO.seat_id[status.count-1]}'>"+
-		"<td id='seat_info'><input type='text' name='seat_grd' value='${boardVO.seat_grd[status.count-1]}' readonly></td>"+
-		"<td><input type='int' name='seat_no' value='"+cnt+"' readonly></td>"+
-		"<td><input type='int' name='seat_pri' value='${boardVO.seat_pri[status.count-1]}' readonly></td>"+
-		"<td><input type='date' name='seat_date' value='<fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.seat_date[status.count-1]}' />' readonly></td>"+
-		"<td><input type='time' name='seat_time' value='<fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' />' readonly></td>"+
-		"<td><input type='button' class='seat_btn' value='좌석보기'></td>"+
+		str+="<tr seat_no='${boardVO.seat_no[status.count-1]}' seat_id='${boardVO.seat_id[status.count-1]}'>"+	
+		"<td id='seat_info'>${boardVO.seat_grd[status.count-1]}</td>"+
+		"<td>"+cnt+"</td>"+
+		"<td>${boardVO.seat_pri[status.count-1]}</td>"+
+		"<td><fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.seat_date[status.count-1]}' /></td>"+
+		"<td><fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' /></td>"+
+		"<td><input type='button' class='seat_btn btn btn-primary' value='좌석보기'></td>"+
 	"</tr>"
 	</c:forEach>
 	$('#seat_table').append(str);
-var ttr_no=${boardVO.ttr_no};
+		var ttr_no=${boardVO.ttr_no};
 			var thumb_name="${boardVO.thumb_name}"
 			var thumb="<div class='min'><img src='"+getThumb(thumb_name)+"'><ori data_src='"+getOri(thumb_name)+"'></div>"
 			var seatmap_name="${boardVO.seatmap_name}"
@@ -115,12 +169,12 @@ var ttr_no=${boardVO.ttr_no};
 					var imgTag=$('#popup_img');
 					imgTag.attr('src',fileLink);
 					
-					$('.popup').show('slow');
+					$('.popup').show('fast');
 					imgTag.addClass('show');
 				}
 			});
 			$('#popup_img').on('click',function(){
-				$('.popup').hide('slow');
+				$('.popup').hide('fast');
 			});
 	$('#seat_table').on('click','tr td .seat_btn',function(event){
 		var str="<tr><td colspan='6'><div style='width:500px;'>";
@@ -130,15 +184,15 @@ var ttr_no=${boardVO.ttr_no};
 		for(var i=1;i<seat_no;i++){
 			str+="<label>"+i+"<input name='rescheck' value='"+seat_id+"_"+i+"' type='checkbox'></label>";
 		}
-		str+="<input seat_no="+seat_no+" seat_id="+seat_id+" class='refresh' type='button' value='새로고침'></div></td></tr>";
+		str+="<div><input seat_no="+seat_no+" seat_id="+seat_id+" class='refresh btn btn-primary' type='button' value='새로고침'></div></div></td></tr>";
 		$(this).parent('td').parent('tr').after(str);
 		$('.refresh').trigger('click');
 	})
 	var reserved = [];
-	$('#seat_table').on('click','tr td div .refresh',function(event){
+	$('#seat_table').on('click','tr td div div .refresh',function(event){
 		event.preventDefault();
-		$(this).parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('checked', false);
-		$(this).parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('disabled', false);
+		$(this).parent('div').parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('checked', false);
+		$(this).parent('div').parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('disabled', false);
 		var seat_id=$(this).attr('seat_id');
 		$.getJSON("/mboard/reserve/"+seat_id,function(res){
 			for(var i=0;i<res.length;i++){
@@ -146,16 +200,11 @@ var ttr_no=${boardVO.ttr_no};
 			}
 		})
 		for(var i=0;i<reserved.length;i++){
-			console.log('input[name='+reserved[i]+']');
-			$(this).parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('checked', true);
-			$(this).parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('disabled', true);
+			$(this).parent('div').parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('checked', true);
+			$(this).parent('div').parent('div').children('label').children("input[value='"+reserved[i]+"']").prop('disabled', true);
 		}
 		})
 	})
-		
-		
-	
-	
 </script>
 </body>
 </html>

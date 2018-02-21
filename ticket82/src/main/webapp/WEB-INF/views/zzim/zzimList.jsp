@@ -73,7 +73,7 @@
 						<c:forEach var="row" items="${map.list}" varStatus="i">
                 		<tr>
                     		<td>
-                        		<a href="">${row.ttr_title}</a>
+                        		<a href="/mboard/etc/etcdetail?ttr_no=${row.ttr_no}">${row.ttr_title}</a>
                     		</td>
                     		<td>
                         		<fmt:formatDate pattern="yyyy-MM-dd"

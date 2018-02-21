@@ -122,7 +122,6 @@
     <!-- 찜목록(사이드바) -->
     <sec:authorize access="isAuthenticated()">
     	<div id="btncollapzion" class=" btn_collapzion">
-    	
     	</div>
 	</sec:authorize>
 	

@@ -9,25 +9,33 @@
 <title></title>
 </head>
 <body>
+<div class="container">
+	<div class="box text-center">
 	<form id="pay">
-		<table>
+		<table class="table table-striped">
 			<tr><td><label>공연이름<input name="title" id="title" type="text" value="${boardVO.ttr_title }" readonly></label></td></tr>
-			<tr><td><label>결제방식<select name="type" id="type">
-    <option value="card" selected>신용카드</option>
-    <option value="phone">휴대폰소액결제</option>
-    <option value="samsung">삼성페이</option>
-    <option value="kpay">kPay</option>
-    <option value="cultureland">문화상품권</option>
-    <option value="smartculture">스마트문상</option>
-    <option value="happymoney">해피머니</option>
-</select></label></td></tr>
+			<tr><td>
+				<label>결제방식
+					<select name="type" id="type">
+    					<option value="card" selected>신용카드</option>
+    					<option value="phone">휴대폰소액결제</option>
+    					<option value="samsung">삼성페이</option>
+    					<option value="kpay">kPay</option>
+    					<option value="cultureland">문화상품권</option>
+    					<option value="smartculture">스마트문상</option>
+    					<option value="happymoney">해피머니</option>
+					</select>
+				</label>
+			</td></tr>
 			<tr><td><label>이름<input name="name" id="name" type="text" value="${pay.name }"></label></td></tr>
 			<tr><td><label>이메일<input name="email" id="email" type="text" value="${pay.email }"></label></td></tr>
 			<tr><td><label>휴대폰번호<input name="tel" id="tel" type="text" value="${pay.tel }"></label></td></tr>
 			<tr><td><label>주소<input name="addr" id="addr" type="text" value="${pay.addr }"></label></td></tr>
-			<tr><td><input type="submit" value="결제"></td></tr>
+			<tr><td><input type="submit" class="btn btn-primary" value="결제"></td></tr>
 		</table>
 	</form>
+	</div>
+</div>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script>

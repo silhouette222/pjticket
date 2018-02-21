@@ -42,7 +42,7 @@
 </style>
 <div class="container">
 	<div class='box'>
-		<a href="/cboard/etc"><button class="btn btn-primary">목록</button></a>
+		<a href="javascript:history.go(-1)"><button class="btn btn-primary">목록</button></a>
 	</div>
 	<div class='box'>
 	<form id="write" method="post">
@@ -61,6 +61,30 @@
 				<div class="alert alert-info">
 					<label>제목</label>
 					<div><input class="col-12" type="text" name="ttr_title" value="${boardVO.ttr_title}"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-info">
+					<label>상태</label>
+					<div><input class="col-12" type="text" name="status" value="${boardVO.status}"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-info">
+					<label>카테고리</label>
+					<div><input class="col-12" type="text" name="ttr_cat" value="${boardVO.ttr_cat}"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="alert alert-info">
+					<label>등록 회사</label>
+					<div><input class="col-12" type="text" name="com_id" value="${boardVO.com_id}" readonly></div>
 				</div>
 			</div>
 		</div>
@@ -140,12 +164,12 @@
 				</div>
 			</div>
 		</div>
-		<input class="btn btn-primary" type="submit" value="작성">
+		<input class="btn btn-primary" type="submit" value="수정">
 	</form>
 	</div>
 </div>
 	<div class="popup back" style="display: none;"></div>
-	<div id="popup_front" class='popup front text-center' style="display: none;">
+	<div id="popup_front" class='popup front' style="display: none;">
 		<img id="popup_img" />
 	</div>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -194,13 +218,16 @@
 					
 					var imgTag=$('#popup_img');
 					imgTag.attr('src',fileLink);
-					$('.popup').show('fast');
+					
+					//console.log(imgTag.attr('src'));
+					
+					$('.popup').show('slow');
 					imgTag.addClass('show');
 				}
 			});
 			
 			$('#popup_img').on('click',function(){
-				$('.popup').hide('fast');
+				$('.popup').hide('slow');
 			});
 		})
 </script>

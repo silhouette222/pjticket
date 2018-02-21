@@ -36,7 +36,7 @@
       <!-- Marketing Icons Section -->
       <!-- 이벤트 리스트 -->
       <div class="row">
-      <c:forEach items="${list}" var="eventVO">
+      <c:forEach items="${list}" var="eventVO" end="3">
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
             <h4 class="card-header">${eventVO.et_title}</h4>
@@ -44,7 +44,7 @@
               <p class="card-text">${eventVO.et_content}</p>
             </div>
             <div class="card-footer">
-              <a href="/event/read?et_no=${eventVO.et_no}" class="btn btn-primary">상세보기</a>
+              <a href="/event/read?et_no=${eventVO.et_no}" class="btn btn-danger">상세보기</a>
             </div>
           </div>
         </div>

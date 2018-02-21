@@ -3,9 +3,12 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 
+<%
+	String cp = request.getContextPath();
+	request.setCharacterEncoding("UTF-8");//쿠키 가져오기
+	Cookie[] ck = request.getCookies();
+%>
   <head>
 
     <meta charset="utf-8">
@@ -21,7 +24,17 @@
     <!-- Custom styles for this template -->
     <link href="<%=request.getContextPath() %>/resources/main/css/modern-business.css" rel="stylesheet">
 	
+	<!-- 사이드메뉴 css -->
+	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/collapzion.min.css">
+
+	
+	
+	
 	<style>
+		
+	
 		.card-img-top{
 			width:228px;
 			height:340px;
@@ -30,11 +43,7 @@
 			margin-right: auto;
 		}
 		
-		/* 드롭다운 호버 */
 		
-		.dropdown:hover .dropdown-menu-right {
-    		display: block;
-		}
 		
 		/* 티켓인기작 전체 */
 		.ticketFamous{
@@ -113,6 +122,7 @@
   			color: #333;
 		}
 		
+			
 				
 		
 	</style>
@@ -130,26 +140,23 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('http://ticketimage.interpark.com/TCMS4/Main/201711/MainVisual_1c401414-3954-43b2-ba2c-ac03d9689870.png')">
+          <div class="carousel-item active" style="background-image: url('/displayFile?fileName=${mainVO.main_name}')">
             <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
-              <p>This is a description for the first slide.</p>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://ticketimage.interpark.com/TCMS4/Main/201711/MainVisual_b0550fca-e259-45d8-85c9-44e87068c780.png')">
+          <div class="carousel-item" style="background-image: url('/displayFile?fileName=${mainVO.main_name}')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Second Slide</h3>
-              <p>This is a description for the second slide.</p>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://ticketimage.interpark.com/TCMS4/Main/201712/MainVisual_48de0005-e8cc-4b0f-a728-fc7be310f73b.jpg')">
+          <div class="carousel-item" style="background-image: url('/displayFile?fileName=${mainVO.main_name}')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Third Slide</h3>
-              <p>This is a description for the third slide.</p>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
@@ -165,9 +172,10 @@
       </div>
     </header>
     
+    
    	<!-- 인기작 -->
    	<div class="ticketFamous">
-   		<!-- 뮤지컬 인기작 -->
+   		<!-- 뮤지컬 -->
    		<div class="ticketFamousBanner">
    			<h2>Musical</h2>
    			<div class="ticketFamousCube">
@@ -177,8 +185,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -189,8 +197,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201801/TicketTodayNew_TicketTodayMusical_eb869746-8d0c-41c2-8616-be46e4f3a117.jpg">
+   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -201,8 +209,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/Play/image/large/17/17011875_p.gif">
+   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -213,8 +221,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/Play/image/large/17/17017348_p.gif">
+   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -229,8 +237,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -241,8 +249,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -253,8 +261,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -265,8 +273,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -282,7 +290,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -294,7 +302,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -306,7 +314,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -318,7 +326,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -334,7 +342,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -346,7 +354,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -358,7 +366,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -370,7 +378,7 @@
    						</a>
    					</div>
    					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -385,8 +393,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -397,8 +405,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -409,8 +417,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -421,8 +429,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -437,8 +445,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -449,8 +457,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -461,8 +469,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -473,8 +481,8 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
+   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
    					</a>
    				</div>
    			</div>
@@ -528,131 +536,24 @@
 
       <!-- Portfolio Section -->
       <h2>이벤트</h2>
-
-      <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+	  <div class="row">
+      <c:forEach items="${elist}" var="eventVO" end="3">
+        <div class="col-lg-4 mb-4">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://ticketimage.interpark.com/TCMS4/Main/201801/TicketTodayNew_TicketTodayMusical_eb869746-8d0c-41c2-8616-be46e4f3a117.jpg" alt=""></a>
+            <h4 class="card-header">${eventVO.et_title}</h4>
             <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">뮤지컬</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+              <p class="card-text">${eventVO.et_content}</p>
+            </div>
+            <div class="card-footer">
+              <a href="/event/read?et_no=${eventVO.et_no}" class="btn btn-danger">상세보기</a>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" style="width:228px, height:340px;" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Two</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-            </div>
-          </div>
-        </div>
+      </c:forEach>
       </div>
+      
       <!-- /.row -->
-
-      <!-- Features Section -->
-      <div class="row">
-        <div class="col-lg-6">
-          <h2>Modern Business Features</h2>
-          <p>The Modern Business template by Start Bootstrap includes:</p>
-          <ul>
-            <li>
-              <strong>Bootstrap v4</strong>
-            </li>
-            <li>jQuery</li>
-            <li>Font Awesome</li>
-            <li>Working contact form with validation</li>
-            <li>Unstyled page elements for easy customization</li>
-          </ul>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-        </div>
-        <div class="col-lg-6">
-          <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Call to Action Section -->
-      <div class="row mb-4">
-        <div class="col-md-8">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-        </div>
-        <div class="col-md-4">
-          <a class="btn btn-lg btn-danger btn-block" href="#">Call to Action</a>
-        </div>
-      </div>
-
     </div>
     <!-- /.container -->
-
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="<%=request.getContextPath() %>/resources/main/vendor/jquery/jquery.min.js"></script>
-    <script src="<%=request.getContextPath() %>/resources/main/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<style>
-		.nav-item{
-			border-left:1px solid #dc6565;
-		}
-	</style>
+    
   </body>
-
-</html>

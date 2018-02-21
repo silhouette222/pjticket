@@ -132,8 +132,13 @@
 			class="com.ticket.service.impl.ReservationServiceImpl"
 			p:reservationDAO-ref="ReservationDAO"/>      
 	
+	<bean 	id="mainDAO"
+			class="com.ticket.dao.impl.MainDAOImpl"
+			p:sqlSession-ref="sqlSession"/>
 			
-			
+	<bean	id="mainService"
+			class="com.ticket.service.impl.MainServiceImpl"
+			p:mainDAO-ref="mainDAO"/>		
 			
 	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="javaMailProperties">

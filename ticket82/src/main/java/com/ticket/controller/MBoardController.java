@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
@@ -24,17 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ticket.domain.SearchCriteria;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.MemberVO;
 import com.ticket.domain.PayVO;
 import com.ticket.domain.ResVO;
+import com.ticket.domain.SearchCriteria;
 import com.ticket.domain.Seatinfo;
 import com.ticket.service.BoardService;
 import com.ticket.service.ResService;
 import com.ticket.service.UserService;
-
-import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/mboard")
@@ -51,20 +51,25 @@ public class MBoardController {
 	
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
-		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(dateFormat, true));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+		binder.registerCustomEditor(Date.class,"ttr_sdate", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class,"ttr_edate", new CustomDateEditor(time, true));
 		binder.registerCustomEditor(Date.class,"ttr_date", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class,"seat_date", new CustomDateEditor(dateFormat, true));
-		SimpleDateFormat time = new SimpleDateFormat("hh:mm"); binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
+		binder.registerCustomEditor(Date.class,"seat_time", new CustomDateEditor(time, true));
 	}
 	
 	@RequestMapping(value = "/etc", method = RequestMethod.GET)
 	public String readetc(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
-		//테스트용
-		System.out.println(session.getAttribute("loginUser"));
 		String url="mboard/etc";
 		cri.setTtr_cat("etc");
 		List<BoardVO> boardList=bs.searchBoardList(cri);
+		for(BoardVO b:boardList){
+			if(b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(0, 30));
+			}
+		}
 		model.addAttribute("list",boardList);
 		return url;
 	}
@@ -79,12 +84,14 @@ public class MBoardController {
 	
 	@RequestMapping(value = "/gal", method = RequestMethod.GET)
 	public String readgal(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
-		//테스트용
-		session.getAttribute("loginUser");
-		System.out.println(session.getAttribute("loginUser"));
 		String url="mboard/gal";
 		cri.setTtr_cat("gal");
 		List<BoardVO> boardList=bs.searchBoardList(cri);
+		for(BoardVO b:boardList){
+			if(b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(0, 30));
+			}
+		}
 		model.addAttribute("list",boardList);
 		return url;
 	}
@@ -113,7 +120,7 @@ public class MBoardController {
 
 	
 	@RequestMapping(value="/reserve",method=RequestMethod.POST)
-	public String reserve(@RequestParam("rescheck")String[] rescheck,HttpSession session,BoardVO board,Model model) throws Exception{
+	public String reserve(@RequestParam("rescheck")String[] rescheck,BoardVO board,HttpSession session,Model model) throws Exception{
 		String url="mboard/respay";
 		String[] seat_id=new String[rescheck.length];
 		int[] res_nom=new int[rescheck.length];

@@ -40,40 +40,54 @@
 	margin: 200px auto;
 	overflow: hidden;
 }
+li{
+list-style:none;
+}
+.popup_img{
+	margin:auto;
+}
 </style>
-<h1>회사 목록</h1>
-<div>
-	<select id="searchtype">
-		<option value="n"<c:out value="${cri.search == null?'selected':''}"/>>---</option>
-		<option value="no"<c:out value="${cri.search eq 'no'?'selected':''}"/>>사업자등록번호</option>
-		<option value="id"<c:out value="${cri.search eq 'id'?'selected':''}"/>>회사아이디</option>
-		<option value="name"<c:out value="${cri.search eq 'name'?'selected':''}"/>>이름</option>
-		<option value="dname"<c:out value="${cri.search eq 'dname'?'selected':''}"/>>대표이름</option>
-		<option value="mobile"<c:out value="${cri.search eq 'mobile'?'selected':''}"/>>전화번호</option>
-		<option value="mail"<c:out value="${cri.search eq 'mail'?'selected':''}"/>>메일</option>
-		<option value="addr"<c:out value="${cri.search eq 'addr'?'selected':''}"/>>주소</option>
-		<option value="enabled"<c:out value="${cri.search eq 'enabled'?'selected':''}"/>>상태</option>
-	</select>
-	<input id="key" type="text" id="keyword">
-	<input id="search" type="button" value="검색">
-	<select id="pagenum">
-		<option value="10"<c:out value="${cri.search eq '10'?'selected':''}"/>>10</option>
-		<option value="30"<c:out value="${cri.search eq '30'?'selected':''}"/>>30</option>
-		<option value="50"<c:out value="${cri.search eq '50'?'selected':''}"/>>50</option>
-		<option value="999999999999999999999999"<c:out value="${cri.search eq '--'?'selected':''}"/>>--</option>
-	</select>
+<div class="container">
+	<div class='box'>
+		<div class="box-header with-border">
+			<h1 style="font-size: 30px" class="box-title"><strong>회사 목록</strong></h1>
+		</div>
+		<div class="box-body text-right">
+			<select id="searchtype">
+				<option value="n"<c:out value="${cri.search == null?'selected':''}"/>>---</option>
+				<option value="no"<c:out value="${cri.search eq 'no'?'selected':''}"/>>사업자등록번호</option>
+				<option value="id"<c:out value="${cri.search eq 'id'?'selected':''}"/>>회사아이디</option>
+				<option value="name"<c:out value="${cri.search eq 'name'?'selected':''}"/>>이름</option>
+				<option value="dname"<c:out value="${cri.search eq 'dname'?'selected':''}"/>>대표이름</option>
+				<option value="mobile"<c:out value="${cri.search eq 'mobile'?'selected':''}"/>>전화번호</option>
+				<option value="mail"<c:out value="${cri.search eq 'mail'?'selected':''}"/>>메일</option>
+				<option value="addr"<c:out value="${cri.search eq 'addr'?'selected':''}"/>>주소</option>
+				<option value="enabled"<c:out value="${cri.search eq 'enabled'?'selected':''}"/>>상태</option>
+			</select>
+			<input id="key" type="text" id="keyword">
+			<input id="search" class="btn btn-primary" type="button" value="검색">
+			<select id="pagenum">
+				<option value="10"<c:out value="${cri.search eq '10'?'selected':''}"/>>10</option>
+				<option value="30"<c:out value="${cri.search eq '30'?'selected':''}"/>>30</option>
+				<option value="50"<c:out value="${cri.search eq '50'?'selected':''}"/>>50</option>
+				<option value="999999999999999999999999"<c:out value="${cri.search eq '--'?'selected':''}"/>>--</option>
+			</select>
+		</div>
+	</div>
+	<div class="box">
+		<table class="table table-striped" id="list">
+			<tr>
+				<th><label id="com_id">회사아이디</label></th>
+				<th><label id="com_name">이름</label></th>
+				<th><label id="com_dname">대표이름</label></th>
+				<th><label id="com_mobile">전화번호</label></th>
+				<th><label id="enabled">상태</label></th>
+			</tr>
+		</table>
+	</div>
 </div>
-<table border="1px" id="list">
-	<tr>
-		<th><label id="com_id">회사아이디</label></th>
-		<th><label id="com_name">이름</label></th>
-		<th><label id="com_dname">대표이름</label></th>
-		<th><label id="com_mobile">전화번호</label></th>
-		<th><label id="enabled">상태</label></th>
-	</tr>
-</table>
 <div class="popup back" style="display: none;"></div>
-	<div id="popup_front" class='popup front' style="display: none;">
+	<div id="popup_front" class='popup front text-center' style="display: none;">
 		<form id="updateform" method="post">
 		</form>
 	</div>
@@ -120,16 +134,16 @@ function makelist(){
 				var pageMaker=data.pageMaker;
 				var str="";
 				if(pageMaker.prev){
-					str+="<li><button>"+(pageMaker.startPage-1)
+					str+="<li><button class='btn btn-primary'>"+(pageMaker.startPage-1)
 						  +"'> << </button></li>";
 				};
 				for(var i=pageMaker.startPage,len=pageMaker.endPage;i<=len;i++){
 					var strClass=pageMaker.cri.page==i?'class=active':'';
-					str+="<li "+strClass+"><button class='reppage'>"+i+"</button></li>";
+					str+="<li "+strClass+"><button class='reppage btn btn-primary'>"+i+"</button></li>";
 				};
 				if(pageMaker.next){
 					str+="<li><button>"+(pageMaker.endPage+1)
-					  +"'> >> </button></li>";
+					  +"'> >> </button class='btn btn-primary'></li>";
 				};
 				$('#pagearea').append(str);
 	});
@@ -167,7 +181,7 @@ $(document).ready(function(){
 		$.getJSON("/aboard/com/"+pk,function(data){
 			data=data.res
 			var str=""
-			str+="<table><tr><td><input type='text' value="+data.com_no+" name='com_no' readonly></th></tr>"+
+			str+="<table class='table table-striped'><tr><td><input type='text' value="+data.com_no+" name='com_no' readonly></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_id+" name='com_id'></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_name+" name='com_name'></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_dname+" name='com_dname'></th></tr>"+
@@ -175,7 +189,8 @@ $(document).ready(function(){
 			"<tr><td><input type='text' value="+data.com_mail+" name='com_mail'></th></tr>"+
 			"<tr><td><input type='text' value="+data.com_addr+" name='com_addr'></th></tr>"+
 			"<tr><td><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
-			"<tr><td><input type='submit' id='update' value='수정'><input type='button' id='delete' value='삭제'></th></tr></table>";
+			"<tr><td><input type='submit' class='btn btn-primary' id='update' value='수정'>"+
+			"<input type='button' id='delete' class='btn btn-primary' value='삭제'></th></tr></table>";
 			
 			$('#updateform').html(str);
 			$('.popup').show();
