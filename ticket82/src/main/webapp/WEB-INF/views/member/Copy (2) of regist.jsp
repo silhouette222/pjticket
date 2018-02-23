@@ -66,16 +66,9 @@
             </div>
             <div class="form-group">
               <label for="InputEmail">인증번호</label>
-              <div class="input-group">
-                <input type="text" class="form-control" id="user_authNum" name="user_authNum">
-              	<input type="hidden" name="authNum" id="authNum">
-                <span class="input-group-btn">
-                  <button class="btn btn-success" id="numbtn">번호확인</button>
-                </span>
-              </div>
-                <div id="lab1"></div>
+              <input type="text" class="form-control" id="user_authNum" name="user_authNum"><div id="lab1"></div>
+              <input type="hidden" name="authNum" id="authNum">
             </div>
-            
             <div class="form-group">
               <label for="addr">휴대폰 번호</label>
               <input type="tel" class="form-control" id="mobile" name="mem_mobile" placeholder="- 없이 입력해 주세요">
@@ -83,8 +76,8 @@
             <div class="form-group">
               <label for="gender">성별</label>
               <div>
-              <input type="radio" name='mem_gender'  value="남자" checked>남자
-			  <input type="radio" name="mem_gender"  value="여자">여자
+              <input type="radio" name='mem_gender'  value="남" checked>남자
+			  <input type="radio" name="mem_gender"  value="여">여자
 			  </div>
             </div>
             <div class="form-group">
@@ -107,8 +100,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=request.getContextPath() %>/resources/bootstrap/js/bootstrap.min.js"></script>
-	<!-- jQuery 2.1.4 -->
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- <!-- jQuery 2.1.4 -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			$('#checkbtn').on('click',function(event){
@@ -142,30 +135,25 @@
             		url : "/emailAuth.do",
             		data : data,
             		success : function (data) {
+                		authNum = data;
                 		alert("인증번호 전송완료.");
-                		document.formm.authNum.value= data;
+                		chk = checkNum(authNum);
+                		if( chk > 0){
+                    		alert("인증완료");
+                    		chk = 1;
+                    		$("#lab1").html("<label>인증완료</label>");
+                		}else{
+                    		alert("인증실패");
+                    		$("#lab1").html("<label>인증실패</label>");
+                		}
             		}
         		});
     			}
-    		});
-    		
-    		$("#numbtn").click(function(event){
-    			event.preventDefault();
-    			authNum = document.formm.authNum.value;
-    			chk = checkNum(authNum);
-        		if( chk > 0){
-            		alert("인증완료");
-            		chk = 1;
-            		$("#lab1").html("<label>인증완료</label>");
-        		}else{
-            		alert("인증실패");
-            		$("#lab1").html("<label>인증실패</label>");
-        		}
-    		});
-    		// 이메일 인증 버튼 end
+    		});// 이메일 인증 버튼 end
 		});
 	
 			function go_save(){
+	
 				if(document.formm.mem_id.value==""){
 					alert("아이디를 입력해 주세요");
 					document.formm.mem_id.focus();
@@ -176,7 +164,7 @@
 					alert("패스워드를 입력해 주세요");
 					document.formm.mem_pw.focus();
 				}else if ((document.formm.mem_pw.value !=document.formm.pwdCheck.value)){
-					alert("패스워드가 일치하지 않습니다");
+					alert("패스워드가 일치하지 않습니다.");
 					document.formm.mem_pwd.focus();
 					return;
 				}else if (document.formm.mem_name.value==""){
@@ -185,9 +173,9 @@
 				}else if (document.formm.mem_mail.value==""){
 					alert("이메일을 입력해 주세요");
 					document.formm.mem_mail.focus();
-				}else if ((document.formm.user_authNum.value !=document.formm.authNum.value)){
-					alert("인증번호가 일치하지 않습니다");
-					document.formm.user_authNum.focus();
+				}else if (document.formm.mem_addr.value==""){
+					alert("주소를 입력해 주세요");
+					document.formm.mem_addr.focus();
 				}else if (document.formm.mem_mobile.value==""){
 					alert("휴대폰 번호를 입력해 주세요");
 					document.formm.mem_mobile.focus();
@@ -195,9 +183,15 @@
 					alert("생년월일을 입력해 주세요");
 					document.formm.mem_birth.focus();
 				}else{
-					alert("회원가입이 완료되었습니다");
 					document.formm.submit();
 				}
+		
+				if( chk > 0  ){
+        			return true;
+    			}else{
+        			alert("이메일 인증을 완료하여 주세요.");
+        			return false;
+    			}
 
 			}
 		
@@ -205,7 +199,7 @@
 	<script type="text/javascript">
 			function checkNum(authNum) {
 	        	var chk = 0;
-	        	var user_authNum = document.formm.user_authNum.value;
+	        	var user_authNum = prompt("인증번호를 입력하세요.");
 	        	// 인증번호 비교
 	        	if (authNum == user_authNum) {
 	            	chk = 1;

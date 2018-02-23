@@ -42,7 +42,7 @@
 </style>
 <div class="container">
 	<div class='box'>
-		<a href="/cboard/etc"><button class="btn btn-primary">목록</button></a>
+		<a href="/cboard/gal"><button class="btn btn-primary">목록</button></a>
 	</div>
 	<div class='box'>
 	<form id="write" method="post">
@@ -163,7 +163,7 @@
 			"<td><input type='int' name='seat_no' value='${boardVO.seat_no[status.count-1]}'></td>"+
 			"<td><input type='int' name='seat_pri' value='${boardVO.seat_pri[status.count-1]}'></td>"+
 			"<td><input type='date' name='seat_date' value='<fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.seat_date[status.count-1]}' />'></td>"+
-			"<td><input type='time' name='seat_time' value='<fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' />'></td><td><input type='button' class='delseat btn btn-primary' value='-'></td>"+
+			"<td><input type='time' name='seat_time' value='<fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' />'></td><td><input type='button' class='delseat' value='-'></td>"+
 		"</tr>"
 		</c:forEach>
 		$('#seat_table').append(str);

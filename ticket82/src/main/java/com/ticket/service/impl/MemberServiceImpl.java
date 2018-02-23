@@ -78,7 +78,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void insertMemberAuthority(MemberVO member) throws SQLException {
-		memberDAO.insertMemberAutority(member);
+		memberDAO.insertMemberAuthority(member);
 	}
 
 	@Override
@@ -89,6 +89,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 			
 		return member;
+	}
+
+	@Override
+	public void deleteMemberAuthority(String mem_id) throws SQLException {
+		memberDAO.deleteMemberAuthority(mem_id);
 	}
 
 

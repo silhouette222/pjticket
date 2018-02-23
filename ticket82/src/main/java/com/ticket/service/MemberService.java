@@ -18,6 +18,7 @@ public interface MemberService {
 	void deleteMember(String mem_id)throws SQLException;
 	int checkId(String mem_id)throws SQLException;
 	void insertMemberAuthority(MemberVO member)throws SQLException;
+	void deleteMemberAuthority(String mem_id)throws SQLException;
 	
 	List<MemberVO> readMemberListCriteria(Criteria cri)throws SQLException;
 	List<MemberVO> readSearchMemberList(SearchCriteria cri)throws SQLException;

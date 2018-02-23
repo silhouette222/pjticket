@@ -17,7 +17,8 @@ public interface MemberDAO {
 	void updateMember(MemberVO member)throws SQLException;
 	void deleteMember(String mem_id)throws SQLException;
 	int registerCheck(String mem_id)throws SQLException;
-	void insertMemberAutority(MemberVO member)throws SQLException;
+	void insertMemberAuthority(MemberVO member)throws SQLException;
+	void deleteMemberAuthority(String mem_id)throws SQLException;
 	
 	List<MemberVO> selectMemberListCriteria(Criteria cri)throws SQLException;
 	List<MemberVO> selectSearchList(SearchCriteria cri)throws SQLException;

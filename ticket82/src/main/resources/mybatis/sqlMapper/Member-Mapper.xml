@@ -19,20 +19,25 @@
 	
 	<update id="insertMember" parameterType="member">
 		insert into member(mem_id,mem_pw,mem_name,mem_gender,
-		mem_birth,mem_mail,mem_mobile,mem_addr)
+		mem_birth,mem_mail,mem_mobile)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_gender},
-		#{mem_birth},#{mem_mail},#{mem_mobile},#{mem_addr})
+		#{mem_birth},#{mem_mail},#{mem_mobile})
 	</update>
 	
-	<update id="insertMemberAuthority">
+	<update id="insertMemberAuthority" parameterType="member">
 		insert into mem_authorities (mem_id, authority)
 		values(#{mem_id}, 'ROLE_USER')
+	</update>
+	
+	<update id="deleteMemberAuthority" parameterType="str">
+		delete mem_authorities
+		where mem_id=#{mem_id}
 	</update>
 	
 	<update id="updateMember" parameterType="member">
 		update member set
 		mem_id=#{mem_id},mem_pw=#{mem_pw},mem_name=#{mem_name},mem_gender=#{mem_gender},
-		mem_birth=#{mem_birth},mem_mail=#{mem_mail},mem_mobile=#{mem_mobile},mem_addr=#{mem_addr}
+		mem_birth=#{mem_birth},mem_mail=#{mem_mail},mem_mobile=#{mem_mobile},mem_addr=#{mem_addr},enabled=#{enabled}
 		where mem_id=#{mem_id}
 	</update>
 	

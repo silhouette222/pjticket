@@ -138,7 +138,7 @@
 			+ "'><input type='hidden' name='seatmap_name' value='"+seatmap_name+"'><button type='button'>X</button></small></div>" */
 			$(".thumb").append(thumb);
 			$(".seatmap").append(seatmap);
-			$.getJSON("/com/getFiles/"+ttr_no,function(list){
+			$.getJSON("/getFiles/"+ttr_no,function(list){
 				$(list).each(function(){
 					var file;
 					file="<img src='"+getOri(this)+"'>";

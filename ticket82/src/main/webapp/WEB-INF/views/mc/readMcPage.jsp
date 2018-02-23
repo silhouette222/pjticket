@@ -105,10 +105,10 @@
 		<img id="popup_img" />
 	</div>
 <!-- /.box-body -->
-<a href="/com/res/createRes?ttr_no=${musicalVO.ttr_no }"><button>예약</button></a>
-<a href="/com/mclistA"><button>목록</button></a>
-<a href="/com/removeMusical?ttr_no=${musicalVO.ttr_no }"><button>삭제</button></a>
-<a href="/com/modifyPageForm?ttr_no=${musicalVO.ttr_no } "><button>수정</button></a>
+<a href="/res/createRes?ttr_no=${musicalVO.ttr_no }"><button>예약</button></a>
+<a href="/mclistA"><button>목록</button></a>
+<a href="/removeMusical?ttr_no=${musicalVO.ttr_no }"><button>삭제</button></a>
+<a href="/modifyPageForm?ttr_no=${musicalVO.ttr_no } "><button>수정</button></a>
 <button id="zzim">찜</button>
 
 
@@ -173,20 +173,17 @@
 					}
 				})	
 			})
-			var zzim_url="/com/my/zzim/${musicalVO.ttr_no}"
-				/* "/com/my/zzim/${loginUser.mem_id}/${musicalVO.ttr_no}" */
+			var zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}"
 			$.ajax({
 					type:'get',
 					url:"/com/my/zzim/${musicalVO.ttr_no}",
 					/* "/com/my/zzim/${loginUser.mem_id}/${musicalVO.ttr_no}",*/
 					success:function(data){
+						zzim_url="/mboard/delzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
 						if(data=='zzimexist'){
-							zzim_url="/com/my/delzzim/${musicalVO.ttr_no}";
-							/* "/my/delzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
 							$('#zzim').text('찜취소')
 						}else if(data=='zzimnull'){
-							zzim_url="/com/my/addzzim/${musicalVO.ttr_no}";
-							/* "/my/addzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
 							$('#zzim').text('찜하기')
 						}
 					}
@@ -197,12 +194,10 @@
 					url:zzim_url,
 					success:function(data){
 						if(data=='addzzim'){
-							zzim_url="/com/my/delzzim/${musicalVO.ttr_no}";
-							/* "/my/delzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/mboard/delzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
 							$('#zzim').text('찜취소')
 						}else if(data=='delzzim'){
-							zzim_url="/com/my/addzzim/${musicalVO.ttr_no}";
-							/* "/my/addzzim/${loginUser.mem_id}/${musicalVO.ttr_no}"; */
+							zzim_url="/mboard/addzzim/${loginUser.mem_id}/${boardVO.ttr_no}";
 							$('#zzim').text('찜하기')
 						}
 					}
@@ -210,7 +205,7 @@
 			}) 
 			$.ajax({
 				type:'get',
-				url:"/com/scoreavg/${musicalVO.ttr_no}",
+				url:"/scoreavg/${musicalVO.ttr_no}",
 				success:function(data){
 					$('#scoreavg').text(data)
 				}
@@ -229,7 +224,7 @@
 		var ttr_score=$('.scoreshow').text();
 		$.ajax({
 			type:'post',
-			url:'/com/replies',
+			url:'/replies',
 			headers:{
 				"Content-Type":"application/json",
 				"X-HTTP-Method-Override":"post"
@@ -291,7 +286,7 @@
 		reppage=$(this).text();
 		getPage("/replies/"+ttr_no+"/"+reppage)
 	})
-	getPage("/com/replies/"+ttr_no+"/1");
+	getPage("/replies/"+ttr_no+"/1");
 	$('#replylist').on('click','tr td .updaterepform',function(index){
 		uptr_rno=$(this).parent().attr('tr_rno');
 		uptr_content=$(this).parent().parent().children('.ttr_content').text()

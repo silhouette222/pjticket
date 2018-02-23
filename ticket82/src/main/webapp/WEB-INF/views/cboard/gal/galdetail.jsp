@@ -56,10 +56,10 @@ list-style:none;
 			</div>
 		</div>
 		<div class="box-body text-right">
-			<a href="/cboard/etc"><button class="btn btn-primary">목록</button></a>
+			<a href="/cboard/gal"><button class="btn btn-primary">목록</button></a>
 			<c:if test="${boardVO.com_id eq loginUser.com_id }">
-				<a href="/cboard/etc/etcupdate?ttr_no=${boardVO.ttr_no }"><button class="btn btn-primary">수정</button></a>
-				<a href="/cboard/etc/delete?ttr_no=${boardVO.ttr_no }"><button class="btn btn-primary">삭제</button></a>						
+				<a href="/cboard/gal/galupdate?ttr_no=${boardVO.ttr_no }"><button class="btn btn-primary">수정</button></a>
+				<a href="/cboard/gal/delete?ttr_no=${boardVO.ttr_no }"><button class="btn btn-primary">삭제</button></a>						
 			</c:if>
 		</div>
 	</div>

@@ -5,25 +5,25 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.EventVO;
 import com.ticket.domain.MemberVO;
-import com.ticket.domain.PageMaker;
-import com.ticket.domain.SearchCriteria;
+import com.ticket.domain.ResVO;
 import com.ticket.service.BoardService;
 import com.ticket.service.EventService;
 import com.ticket.service.MemberService;
+import com.ticket.service.ResService;
 
 @Controller
 @RequestMapping("/member")
@@ -37,6 +37,11 @@ public class MemberController {
 	
 	@Autowired
 	private EventService es;
+	
+	@Autowired
+	private ResService rs;
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	//메인화면
 	@RequestMapping(value="/index",method=RequestMethod.GET)
@@ -57,19 +62,52 @@ public class MemberController {
 		model.addAttribute("elist",eventList);
 	}
 	
-	
-	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public void listpage(@ModelAttribute("cri")SearchCriteria cri, Model model)throws Exception{
-		List<MemberVO> memberList=memberService.readSearchMemberList(cri);
+	@RequestMapping(value="/my/info",method=RequestMethod.GET)
+	public String myinfo(HttpSession session,Model model)throws Exception{
+		MemberVO mem=(MemberVO) session.getAttribute("loginUser");
+		String mem_id =mem.getMem_id();
+		MemberVO member = memberService.getMemberById(mem_id);
 		
-		PageMaker pageMaker=new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(memberService.readSearchMemberListCount(cri));
+		model.addAttribute(member);
 		
-		model.addAttribute("list", memberList);
-		model.addAttribute("pageMaker", pageMaker);
+		return "/member/my/info";
 	}
 	
+	@RequestMapping(value="/my/infoMody",method=RequestMethod.GET)
+	public String myinfoMody(HttpSession session,Model model)throws Exception{
+		MemberVO mem=(MemberVO) session.getAttribute("loginUser");
+		String mem_id =mem.getMem_id();
+		MemberVO member = memberService.getMemberById(mem_id);
+		
+		model.addAttribute(member);
+		
+		return "/member/my/infoMody";
+	}
+	
+	@RequestMapping(value="/my/infoMody",method=RequestMethod.POST)
+	public String infoMody(MemberVO member)throws Exception{
+		
+		memberService.updateMember(member);
+		
+		return "redirect:/member/my/info";
+	}
+	
+	@RequestMapping(value="/my/delinfo",method=RequestMethod.POST)
+	public String delinfo(MemberVO member)throws Exception{
+		member.setEnabled(0);
+		System.out.println("1");
+		memberService.updateMember(member);
+		memberService.deleteMemberAuthority(member.getMem_id());
+		return "redirect:/member/my/info";
+	}
+	
+	@RequestMapping(value="/my/reslist",method=RequestMethod.GET)
+	public void reslist(Model model,HttpSession session)throws Exception{
+		MemberVO mem=(MemberVO) session.getAttribute("loginUser");
+		String mem_id =mem.getMem_id();
+		List<ResVO> list= rs.selectresbymem_id(mem_id);
+		
+	}
 	
 	@RequestMapping(value="/regist",method=RequestMethod.GET)
 	public void registMember()throws Exception{
@@ -80,43 +118,6 @@ public class MemberController {
 		memberService.insertMember(member);
 		memberService.insertMemberAuthority(member);
 		return "redirect:/member/login";
-	}
-	
-	@RequestMapping(value="/readPage",method=RequestMethod.GET)
-	public void readMember(@ModelAttribute("cri")SearchCriteria cri, @RequestParam("mem_id")String mem_id,Model model)throws Exception{
-		model.addAttribute(memberService.getMemberById(mem_id));
-	}
-	
-	@RequestMapping(value="/modifyPageForm",method=RequestMethod.GET)
-	public String modifyMember (@ModelAttribute("cri")SearchCriteria cri, String mem_id,Model model)throws Exception{
-		model.addAttribute(memberService.getMemberById(mem_id));
-		return "/member/modifyPage";
-	}
-	
-	@RequestMapping(value="/modifyPage",method=RequestMethod.POST)
-	public String modifyMember(MemberVO member, SearchCriteria cri, RedirectAttributes rttr)throws Exception{
-		System.out.println(member);
-		
-		memberService.updateMember(member);
-		
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/member/list";
-	}
-	
-	@RequestMapping(value="/removeMember",method=RequestMethod.POST)
-	public String removeMember(@RequestParam("mem_id")String mem_id, SearchCriteria cri, RedirectAttributes rttr)throws Exception{
-		memberService.deleteMember(mem_id);
-		
-		rttr.addAttribute("page",cri.getPage());
-		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-		rttr.addAttribute("searchType",cri.getSearchType());
-		rttr.addAttribute("keyword",cri.getKeyword());
-		
-		return "redirect:/member/list";
 	}
 	
 	@ResponseBody

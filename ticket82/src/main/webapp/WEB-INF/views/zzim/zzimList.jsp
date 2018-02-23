@@ -6,19 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>마이페이지</title>
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="/resources/main/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-
-    <!-- Custom styles for this template -->
-    <link href="/resources/main/css/modern-business.css" rel="stylesheet">
+  	<title>회원정보</title>
+  	<!-- Bootstrap -->
+    <link href="<%=request.getContextPath() %>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <!-- Custom style -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/css/style.css" media="screen" title="no title" charset="utf-8">
 
   </head>
 
@@ -46,7 +40,6 @@
           <div class="list-group">
             <a href="index.html" class="list-group-item">예약확인</a>
             <a href="about.html" class="list-group-item">회원정보</a>
-            <a href="contact.html" class="list-group-item">최근목록</a>
             <a href="/zzim/zzimList" class="list-group-item active">찜목록</a>
           </div>
         </div>

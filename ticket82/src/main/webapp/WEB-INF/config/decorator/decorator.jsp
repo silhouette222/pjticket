@@ -102,8 +102,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
                 <a class="dropdown-item" href="/sidebar.html">예약확인</a>
-                <a class="dropdown-item" href="#">회원정보</a>
-                <a class="dropdown-item" href="#">최근목록</a>
+                <a class="dropdown-item" href="/member/my/info">회원정보</a>
                 <a class="dropdown-item" href="/zzim/zzimList">찜목록</a>
               </div>
             </li>
@@ -119,12 +118,12 @@
       </div>
     </nav>
     
-    <!-- 찜목록(사이드바) -->
+    <%-- <!-- 사이드바 -->
     <sec:authorize access="isAuthenticated()">
     	<div id="btncollapzion" class=" btn_collapzion">
     	</div>
 	</sec:authorize>
-	
+	 --%>
 	<!-- 바디시작 -->
     <decorator:body />
     
@@ -165,7 +164,7 @@
               	},
               	{
 	              'label':'내정보',
-	              'url':'#',
+	              'url':'/member/my/info',
 	              'icon':'&#xE7FD;'
               	},
           	],

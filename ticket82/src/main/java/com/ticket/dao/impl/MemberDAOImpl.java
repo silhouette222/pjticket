@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.ticket.controller.MemberController;
 import com.ticket.dao.MemberDAO;
 import com.ticket.domain.Criteria;
 import com.ticket.domain.MemberVO;
@@ -84,7 +87,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void insertMemberAutority(MemberVO member) throws SQLException {
+	public void insertMemberAuthority(MemberVO member) throws SQLException {
 		sqlSession.insert(NAMESPACE+".insertMemberAuthority", member);
 	}
 
@@ -93,5 +96,11 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberVO member=(MemberVO)sqlSession.selectOne(NAMESPACE+".selectMemberByEmail",mem_mail);
 		return member;
 	}
+
+	@Override
+	public void deleteMemberAuthority(String mem_id) throws SQLException {
+		sqlSession.update(NAMESPACE+".deleteMemberAuthority",mem_id);
+	}
+	
 
 }

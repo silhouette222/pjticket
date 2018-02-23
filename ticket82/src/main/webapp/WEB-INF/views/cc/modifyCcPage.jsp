@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="/com/resources/js/upload.js" ></script>
+<script src="/resources/js/upload.js" ></script>
 <div>
 	<h3>콘서트 수정페이지</h3>
 </div>
@@ -138,7 +138,7 @@
 			+ "'><input type='hidden' name='seatmap_name' value='"+seatmap_name+"'><button type='button'>X</button></small></div>" */
 			$(".thumb").append(thumb);
 			$(".seatmap").append(seatmap);
-			$.getJSON("/com/getFiles/"+ttr_no,function(list){
+			$.getJSON("/getFiles/"+ttr_no,function(list){
 				$(list).each(function(){
 					var file;
 					file="<img src='"+getOri(this)+"'>";
