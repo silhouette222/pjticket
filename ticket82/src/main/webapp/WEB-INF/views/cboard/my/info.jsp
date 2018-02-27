@@ -19,12 +19,11 @@
 
     <!-- Custom styles for this template -->
     <link href="/resources/main/css/modern-business.css" rel="stylesheet">
-    <style type="text/css">
+	<style type="text/css">
     	#mtable{
     		width: 75%;
     	}
     </style>
-
   </head>
 
   <body>
@@ -33,13 +32,13 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">${loginUser.mem_name}님의
+      <h1 class="mt-4 mb-3">${loginUser.com_id}님의
         <small>마이페이지</small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/member/index">Home</a>
+          <a href="/cboard/index">Home</a>
       </ol>
 
       <!-- Content Row -->
@@ -49,7 +48,7 @@
           <div class="list-group">
             <a href="reslist" class="list-group-item">예약확인</a>
             <a href="info" class="list-group-item active">회원정보</a>
-            <a href="/zzim/zzimList" class="list-group-item">찜목록</a>
+            <a href="#" class="list-group-item">게시판목록</a>
           </div>
         </div>
         <!-- Content Column -->
@@ -63,43 +62,43 @@
                     <table class="table table-striped">
                       	<tr>
                         	<td>아이디</td>
-                        	<td>${memberVO.mem_id}</td>
-                        	<input type="hidden" value="${memberVO.mem_id}" name="mem_id" id="mem_id">
+                        	<td>${companyVO.com_id}</td>
+                        	<input type="hidden" value="${companyVO.com_id}" name="com_id" id="com_id">
                       	</tr>
                        
                       	<tr>
-                        	<td>이름</td>
-                        	<td>${memberVO.mem_name}</td>
+                        	<td>기업명</td>
+                        	<td>${companyVO.com_name}</td>
                       	</tr>
                        
                       	<tr>
-                        	<td>휴대폰번호</td>
-                        	<td>${memberVO.mem_id}</td>
+                        	<td>사업자번호</td>
+                        	<td>${companyVO.com_no}</td>
                       	</tr>
                        
                       	<tr>
-                        	<td>이메일</td>
-                        	<td>${memberVO.mem_mail}</td>
+                        	<td>대표자</td>
+                        	<td>${companyVO.com_dname}</td>
                       	</tr>
                        
                       	<tr>
-                        	<td>주소</td>
-                        	<td>${memberVO.mem_addr}</td>
+                        	<td>기업주소</td>
+                        	<td>${companyVO.com_addr}</td>
                       	</tr>
                        
                      	<tr>
-                        	<td>생년월일</td>
-                        	<td>${memberVO.mem_birth}</td>
+                        	<td>기업전화번호</td>
+                        	<td>${companyVO.com_mobile}</td>
                       	</tr>
                        
                       	<tr>
-                        	<td>성별</td>
-                        	<td>${memberVO.mem_gender}</td>
+                        	<td>기업메일</td>
+                        	<td>${companyVO.com_mail}</td>
                       	</tr>
                       	
                       	<tr>
                         	<td>가입일</td>
-                        	<td>${memberVO.mem_date}</td>
+                        	<td>${companyVO.com_date}</td>
                       	</tr>
                        
                     	<tr>

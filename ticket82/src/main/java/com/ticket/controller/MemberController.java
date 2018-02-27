@@ -105,7 +105,6 @@ public class MemberController {
 	@RequestMapping(value="/my/delinfo",method=RequestMethod.POST)
 	public String delinfo(MemberVO member, HttpSession session)throws Exception{
 		member.setEnabled(0);
-		System.out.println("1");
 		memberService.updateMember(member);
 		memberService.deleteMemberAuthority(member.getMem_id());
 		session.invalidate();

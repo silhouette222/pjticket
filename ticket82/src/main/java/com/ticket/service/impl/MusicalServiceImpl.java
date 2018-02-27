@@ -230,6 +230,12 @@ public class MusicalServiceImpl implements MusicalService{
 		;
 		return mcList;
 	}
+
+	@Override
+	public List<MusicalVO> readMcListbyComId(String com_id) throws SQLException {
+		List<MusicalVO> mcList=musicalDAO.selectMusicalList(com_id);
+		return mcList;
+	}
 	
 	
 	

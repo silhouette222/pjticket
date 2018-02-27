@@ -13,6 +13,11 @@
 		where ttr_no=#{ttr_no}
 	</select>
 	
+	<select id="selectBoardListByComId" resultType="board">
+		select * from theater
+		where com_id=#{com_id}
+	</select>
+	
 	<update id="updateBoard">
 		update theater set ttr_title=#{ttr_title},ttr_date=sysdate,ttr_sdate=#{ttr_sdate},ttr_edate=#{ttr_edate},ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert},ttr_content=#{ttr_content}
 		where ttr_no=#{ttr_no}

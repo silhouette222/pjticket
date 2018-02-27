@@ -54,10 +54,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="mclistA">뮤지컬</a>
+              <a class="nav-link" href="/mclistA">뮤지컬</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="zzim/theaterList">콘서트</a>
+              <a class="nav-link" href="/cclistA">콘서트</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="services.html">연극</a>
@@ -101,9 +101,9 @@
                	마이페이지
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="#">회원정보</a>
-                <a class="dropdown-item" href="#">예약확인</a>
-				<a class="dropdown-item" href="#">게시글확인</a>
+                <a class="dropdown-item" href="/cboard/my/info">회원정보</a>
+                <a class="dropdown-item" href="/cboard/my/reslist">예약확인</a>
+				<a class="dropdown-item" href="/cboard/my/board">게시글확인</a>
               </div>
             </li>
             </sec:authorize>

@@ -19,7 +19,11 @@
 
     <!-- Custom styles for this template -->
     <link href="/resources/main/css/modern-business.css" rel="stylesheet">
-
+	<style type="text/css">
+    	#mtable{
+    		width: 75%;
+    	}
+    </style>
   </head>
 
   <body>
@@ -52,7 +56,7 @@
         <!-- Content Column -->
         
         	<!-- 내정보 -->
-    		<div class="row">
+    		<div class="row" id="mtable">
         		<div class="col-sm-12">
             		<div class="col-sm-2"></div>
                 	<div class="col-sm-9">

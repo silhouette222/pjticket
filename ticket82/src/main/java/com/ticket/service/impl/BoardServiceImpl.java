@@ -258,4 +258,18 @@ public class BoardServiceImpl implements BoardService {
 		double avg=boardDAO.scoreavg(ttr_no);
 		return avg;
 	}
+
+	@Override
+	public List<BoardVO> readBoardListByComId(String com_id)
+			throws SQLException {
+		List<BoardVO> boardList = boardDAO.selectBoardListByComId(com_id);
+		for (int i = 0; i < boardList.size(); i++) {
+			BoardVO bef = boardList.get(i);
+			String thumb = boardDAO.selectThumb(bef.getTtr_no());
+			bef.setThumb_name(thumb);
+			boardList.set(i, bef);
+		}
+		;
+		return boardList;
+	}
 }

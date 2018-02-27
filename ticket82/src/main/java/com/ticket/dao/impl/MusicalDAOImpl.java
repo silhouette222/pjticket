@@ -219,6 +219,12 @@ public class MusicalDAOImpl implements MusicalDAO{
 		return mclist;
 	}
 
+	@Override
+	public List<MusicalVO> selectMusicalList(String com_id) throws SQLException {
+		List<MusicalVO> mclist=sqlSession.selectList(NAMESPACE+".selectMusicalByCom_id", com_id);
+		return mclist;
+	}
+
 	
 
 }

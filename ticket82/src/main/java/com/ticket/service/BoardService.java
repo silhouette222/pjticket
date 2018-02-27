@@ -29,4 +29,6 @@ public interface BoardService {
 	ZzimVO selectzzin(String mem_id,int ttr_no) throws SQLException;
 	
 	Double scoreavg(int ttr_no) throws SQLException;
+	
+	List<BoardVO> readBoardListByComId(String com_id) throws SQLException;
 }

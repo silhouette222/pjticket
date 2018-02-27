@@ -209,4 +209,11 @@ public class BoardDAOImpl implements BoardDAO {
 		double avg=(double) sqlSession.selectOne(NAMESPACE+".scoreavg",ttr_no);
 		return avg;
 	}
+
+	@Override
+	public List<BoardVO> selectBoardListByComId(String com_id)
+			throws SQLException {
+		List<BoardVO> boardList=sqlSession.selectList(NAMESPACE+".selectBoardListByComId",com_id);
+		return boardList;
+	}
 }

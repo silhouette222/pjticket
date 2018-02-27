@@ -53,4 +53,5 @@ public interface MusicalDAO {
 	Double scoreavg(int ttr_no) throws SQLException;
 
 	List<MusicalVO> selectsearchmusicallist(SearchCriteria cri) throws SQLException;
+	List<MusicalVO> selectMusicalList(String com_id) throws SQLException;
 }

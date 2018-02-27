@@ -32,4 +32,6 @@ public interface MusicalService {
 	ZzimVO selectzzin(String mem_id,int ttr_no) throws SQLException;
 	
 	Double scoreavg(int ttr_no) throws SQLException;
+	
+	List<MusicalVO> readMcListbyComId(String com_id)throws SQLException;
 }

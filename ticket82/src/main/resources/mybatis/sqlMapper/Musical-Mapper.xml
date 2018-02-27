@@ -20,6 +20,11 @@
 		ttr_place=#{ttr_place},ttr_time=#{ttr_time},ttr_alert=#{ttr_alert}
 		where ttr_no = #{ttr_no}
 	</update>
+	
+	<select id="selectMusicalByCom_id">
+		select * from theater
+		where com_id=#{com_id}
+	</select>
 
 	<update id="deleteMc">
 		delete from theater where ttr_no = #{ttr_no}

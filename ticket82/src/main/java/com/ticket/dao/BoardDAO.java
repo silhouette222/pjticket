@@ -51,4 +51,6 @@ public interface BoardDAO {
 	ZzimVO selectzzin(String mem_id,int ttr_no) throws SQLException;
 	
 	Double scoreavg(int ttr_no) throws SQLException;
+	
+	List<BoardVO> selectBoardListByComId(String com_id) throws SQLException;
 }
