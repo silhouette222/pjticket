@@ -89,7 +89,7 @@
 						complete : function(result) {
 							if (result.responseText == 'everythings_fine') {
 								alert("예약이 완료되었습니다");
-								location.href="/member/index";
+								location.href="/member/my/reslist";
 							}else{
 								$.ajax({
 									url : "https://cors-anywhere.herokuapp.com/api.iamport.kr/users/getToken",
@@ -109,7 +109,7 @@
 					    		    		imp_uid : rsp.imp_uid
 					    	    		}
 									});
-				    	    		location.href=history.go(-1);
+				    	    		location.href="/member/index";
 				    	    	}
 								})
 								

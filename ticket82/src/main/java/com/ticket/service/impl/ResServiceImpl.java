@@ -81,4 +81,10 @@ public class ResServiceImpl implements ResService {
 	public void deleteresbyttr_no(int ttr_no) throws SQLException {
 		resDAO.deleteresbyttr_no(ttr_no);
 	}
+
+
+	@Override
+	public void updateres(ResVO res) throws SQLException {
+		resDAO.updateres(res);
+	}
 }

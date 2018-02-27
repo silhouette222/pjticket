@@ -181,14 +181,14 @@ $(document).ready(function(){
 		$.getJSON("/aboard/com/"+pk,function(data){
 			data=data.res
 			var str=""
-			str+="<table class='table table-striped'><tr><td><input type='text' value="+data.com_no+" name='com_no' readonly></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_id+" name='com_id'></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_name+" name='com_name'></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_dname+" name='com_dname'></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_mobile+" name='com_mobile'></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_mail+" name='com_mail'></th></tr>"+
-			"<tr><td><input type='text' value="+data.com_addr+" name='com_addr'></th></tr>"+
-			"<tr><td><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
+			str+="<table class='table table-striped'><tr><td><label>사업자등록번호</label><input type='text' value="+data.com_no+" name='com_no' readonly></th></tr>"+
+			"<tr><td><label>아이디</label><input type='text' value="+data.com_id+" name='com_id'></th></tr>"+
+			"<tr><td><label>회사명</label><input type='text' value="+data.com_name+" name='com_name'></th></tr>"+
+			"<tr><td><label>대표이름</label><input type='text' value="+data.com_dname+" name='com_dname'></th></tr>"+
+			"<tr><td><label>전화번호</label><input type='text' value="+data.com_mobile+" name='com_mobile'></th></tr>"+
+			"<tr><td><label>이메일</label><input type='text' value="+data.com_mail+" name='com_mail'></th></tr>"+
+			"<tr><td><label>주소</label><input type='text' value="+data.com_addr+" name='com_addr'></th></tr>"+
+			"<tr><td><label>상태</label><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
 			"<tr><td><input type='submit' class='btn btn-primary' id='update' value='수정'>"+
 			"<input type='button' id='delete' class='btn btn-primary' value='삭제'></th></tr></table>";
 			

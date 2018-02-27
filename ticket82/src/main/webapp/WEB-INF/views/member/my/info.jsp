@@ -42,8 +42,8 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item">예약확인</a>
-            <a href="about.html" class="list-group-item active">회원정보</a>
+            <a href="reslist" class="list-group-item">예약확인</a>
+            <a href="info" class="list-group-item active">회원정보</a>
             <a href="/zzim/zzimList" class="list-group-item">찜목록</a>
           </div>
         </div>
@@ -55,7 +55,6 @@
             		<div class="col-sm-2"></div>
                 	<div class="col-sm-9">
                     <h2 class="text-center">회원 정보 보기</h2>
-                    <form method="post">
                     <table class="table table-striped">
                       	<tr>
                         	<td>아이디</td>
@@ -105,7 +104,6 @@
                          	</td>    
                     	</tr> 
                     </table>
-                    </form>
                 </div>
         	</div> <!-- col-sm-12 -->
     	</div><!-- row -->
@@ -129,16 +127,13 @@
 
 		console.log(formObj);
 
-		$(".btn-success").on("click", function(event){
-			formObj.attr("action", "/member/my/infoMody");
-			formObj.attr("method", "get");
-			formObj.submit();
+		$(".btn-success").on("click", function(){
+			self.location = "infoMody";
 		});
 
 		$(".btn-danger").on("click", function(event) {
-			event.preventDefault();
-			formObj.attr("action", "/my/delinfo");
-			formObj.submit();
+			self.location = "delinfo";
+			alert("탈퇴되었습니다");
 		});
 
 	});

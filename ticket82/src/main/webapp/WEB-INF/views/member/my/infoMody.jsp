@@ -44,8 +44,8 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item">예약확인</a>
-            <a href="about.html" class="list-group-item active">회원정보</a>
+            <a href="reslist" class="list-group-item">예약확인</a>
+            <a href="info" class="list-group-item active">회원정보</a>
             <a href="/zzim/zzimList" class="list-group-item">찜목록</a>
           </div>
         </div>
@@ -146,13 +146,15 @@
 
 		console.log(formObj);
 
-		/* $(".btn-success").on("click", function(){
+		$(".btn-success").on("click", function(){
 			formObj.attr("action", "/my/infoMody");
+			alert("수정 되었습니다");
 			formObj.submit();
 		});
- */
-		$(".btn-danger").on("click", function(){
+		
+		$(".btn-danger").on("click", function(event){
 			formObj.attr("action", "/my/delinfo");
+			alert("탈퇴 되었습니다");
 			formObj.submit();
 		});
 

@@ -77,4 +77,9 @@ private SqlSession sqlSession;
 	public void deleteresbyttr_no(int ttr_no) throws SQLException {
 		sqlSession.update(NAMESPACE+".deleteresbyttr_no",ttr_no);
 	}
+
+	@Override
+	public void updateres(ResVO res) throws SQLException {
+		sqlSession.update("ResMapper.updateRes",res);
+	}
 }

@@ -2,11 +2,13 @@ package com.ticket.controller;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,11 +35,13 @@ import com.ticket.domain.AdminVO;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.CompanyVO;
 import com.ticket.domain.MailRequest;
+import com.ticket.domain.MainVO;
 import com.ticket.domain.MemberVO;
 import com.ticket.domain.PageMaker;
 import com.ticket.domain.ResVO;
 import com.ticket.service.AdminService;
 import com.ticket.service.BoardService;
+import com.ticket.service.MainService;
 import com.ticket.service.ResService;
 import com.ticket.service.UserService;
 
@@ -59,6 +63,9 @@ public class ABoardController {
 	
 	@Autowired
 	private AdminService as;
+	
+	@Autowired
+	private MainService ms;
 	
 	//메인화면
 	@RequestMapping(value="/index",method=RequestMethod.GET)
@@ -107,10 +114,7 @@ public class ABoardController {
 		
 		return "redirect:/admin/index";
 	}
-	
-	@RequestMapping(value="/main")
-	public void main(){};
-	
+
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -307,5 +311,34 @@ public class ABoardController {
 			message.setTo(mailReq.getTo()[i]);
 			sender.send(message);
 		}
+	}
+	@Resource(name = "uploadPath")
+	private String uploadPath;
+	
+	@RequestMapping(value="/main")
+	public void main(Model model){
+		List<MainVO> list=new ArrayList<MainVO>();
+		try {
+			list = ms.selectMainList();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("list",list);
+	}
+	
+	@RequestMapping("/main2/{main_id}/{ttr_no}")
+	@ResponseBody
+	public void main2(@PathVariable("main_id")String main_id,@PathVariable("ttr_no") int ttr_no) throws Exception{
+		MainVO main=new MainVO(main_id,ttr_no,"");
+		ms.updateMain2(main);
+	}
+	
+	@RequestMapping("/main3/{main_id}/{ttr_no}")
+	@ResponseBody
+	public void main1(@PathVariable("main_id")String main_id,@PathVariable("ttr_no") int ttr_no,@RequestParam("main_path")String main_path) throws Exception{
+		String asd1=new String(main_path.getBytes("8859_1"),"utf-8");
+		MainVO main=new MainVO(main_id,ttr_no,asd1);
+		ms.updateMain(main);
 	}
 }

@@ -101,7 +101,7 @@
                	<b>${loginUser.mem_name }</b>님의 마이페이지
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="/sidebar.html">예약확인</a>
+                <a class="dropdown-item" href="/member/my/reslist">예약확인</a>
                 <a class="dropdown-item" href="/member/my/info">회원정보</a>
                 <a class="dropdown-item" href="/zzim/zzimList">찜목록</a>
               </div>

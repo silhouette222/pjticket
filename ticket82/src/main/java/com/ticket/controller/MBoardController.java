@@ -26,6 +26,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PlacesApi;
+import com.google.maps.model.PlacesSearchResult;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.MemberVO;
 import com.ticket.domain.PayVO;
@@ -79,6 +84,15 @@ public class MBoardController {
 		String url="mboard/etc/etcdetail";
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
+		
+		String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);
 		return url;
 	}
 	
@@ -101,6 +115,15 @@ public class MBoardController {
 		String url="mboard/gal/galdetail";
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
+		
+		String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);
 		return url;
 	}
 	
@@ -121,6 +144,7 @@ public class MBoardController {
 	
 	@RequestMapping(value="/reserve",method=RequestMethod.POST)
 	public String reserve(@RequestParam("rescheck")String[] rescheck,BoardVO board,HttpSession session,Model model) throws Exception{
+		System.out.println("asd");
 		String url="mboard/respay";
 		String[] seat_id=new String[rescheck.length];
 		int[] res_nom=new int[rescheck.length];
@@ -157,7 +181,10 @@ public class MBoardController {
 		for(Map<String, Object> map:maplist){
 			ResVO res=new ResVO(null,null,(int)map.get("res_nom"),(String)map.get("seat_id"),(String)map.get("mem_id"),(int)map.get("ttr_no"),(String)map.get("imp_uid"),1);
 			ResVO rescheck=rs.selectresbyres_nom((int)map.get("res_nom"),(String)map.get("seat_id"));
-			if(rescheck.getStatus()==1){
+			System.out.println(rescheck);
+			if(rescheck==null){
+				rs.insertres(res);
+			}else if(rescheck.getStatus()==1){
 				return "already reserved";
 			}else{
 				rs.insertres(res);
@@ -234,5 +261,79 @@ public class MBoardController {
 			e.printStackTrace();
 		}
 		return entity;
+	}
+	
+	@RequestMapping(value="resch",method=RequestMethod.GET)
+	public void resa(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		List<ResVO> rl=rs.selectresbyttr_no(ttr_no);
+		List<MemberVO> ml= new ArrayList<MemberVO>();
+		List<Seatinfo> sl=bs.readseatbyttr_no(ttr_no);
+		if(rl.size()!=0){
+		for(ResVO res:rl){
+			ml.add(us.selectmembyid(res.getMem_id()));
+		}
+		
+		int seatall=0;
+		int seatend=0;
+		int man=0;
+		int woman=0;
+		int age10=0;
+		int age20=0;
+		int age30=0;
+		int age40=0;
+		int age50=0;
+		int age60=0;
+		
+		Date d=new Date();
+		int dy=d.getYear()+1900;
+		for(Seatinfo seat:sl){
+			seatall+=seat.getSeat_no();
+		}
+		seatend=rl.size();
+		for(MemberVO m:ml){
+			if(m.getMem_gender().equals("남자")){
+				man++;
+			}
+			if(m.getMem_gender().equals("여자")){
+				woman++;
+			}
+			if(dy-(m.getMem_birth().getYear()+1900)<20){
+				age10++;
+			}
+			if(dy-(m.getMem_birth().getYear()+1900)>=20&&dy-(m.getMem_birth().getYear()+1900)<30){
+				age20++;
+			}
+			if(dy-(m.getMem_birth().getYear()+1900)>=30&&dy-(m.getMem_birth().getYear()+1900)<40){
+				age30++;
+			}
+			if(dy-(m.getMem_birth().getYear()+1900)>=40&&dy-(m.getMem_birth().getYear()+1900)<50){
+				age40++;
+			}
+			if(dy-(m.getMem_birth().getYear()+1900)>=50&&dy-(m.getMem_birth().getYear()+1900)<60){
+				age50++;
+			}
+			if(dy-(m.getMem_birth().getYear()+1900)>=60){
+				age60++;
+			}
+		}
+		int seat=seatend*100/seatall;
+		model.addAttribute("seat",seat);
+		int man1=man*100/(man+woman);
+		model.addAttribute("man",man1);
+		int woman1=woman*100/(man+woman);
+		model.addAttribute("woman",woman1);
+		int age101=age10*100/seatall;
+		model.addAttribute("age10",age101);
+		int age201=age20*100/seatall;
+		model.addAttribute("age20",age201);
+		int age301=age30*100/seatall;
+		model.addAttribute("age30",age301);
+		int age401=age40*100/seatall;
+		model.addAttribute("age40",age401);
+		int age501=age50*100/seatall;
+		model.addAttribute("age50",age501);
+		int age601=age60*100/seatall;
+		model.addAttribute("age60",age601);
+		}
 	}
 }

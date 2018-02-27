@@ -1,12 +1,13 @@
 package com.ticket.controller;
 
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.EventVO;
+import com.ticket.domain.MainVO;
 import com.ticket.domain.MemberVO;
 import com.ticket.domain.ResVO;
 import com.ticket.service.BoardService;
 import com.ticket.service.EventService;
+import com.ticket.service.MainService;
 import com.ticket.service.MemberService;
 import com.ticket.service.ResService;
 
@@ -41,7 +44,8 @@ public class MemberController {
 	@Autowired
 	private ResService rs;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	@Autowired
+	private MainService ms;
 	
 	//메인화면
 	@RequestMapping(value="/index",method=RequestMethod.GET)
@@ -60,8 +64,11 @@ public class MemberController {
 		model.addAttribute("list",boardList);
 		List<EventVO> eventList=es.readEventList();
 		model.addAttribute("elist",eventList);
+		List<MainVO> mlist=ms.selectMainList();
+		model.addAttribute("mlist",mlist);
 	}
 	
+	//회원정보
 	@RequestMapping(value="/my/info",method=RequestMethod.GET)
 	public String myinfo(HttpSession session,Model model)throws Exception{
 		MemberVO mem=(MemberVO) session.getAttribute("loginUser");
@@ -73,6 +80,7 @@ public class MemberController {
 		return "/member/my/info";
 	}
 	
+	//회원정보 수정form
 	@RequestMapping(value="/my/infoMody",method=RequestMethod.GET)
 	public String myinfoMody(HttpSession session,Model model)throws Exception{
 		MemberVO mem=(MemberVO) session.getAttribute("loginUser");
@@ -84,6 +92,7 @@ public class MemberController {
 		return "/member/my/infoMody";
 	}
 	
+	//회원수정
 	@RequestMapping(value="/my/infoMody",method=RequestMethod.POST)
 	public String infoMody(MemberVO member)throws Exception{
 		
@@ -92,23 +101,53 @@ public class MemberController {
 		return "redirect:/member/my/info";
 	}
 	
+	//회원탈퇴
 	@RequestMapping(value="/my/delinfo",method=RequestMethod.POST)
-	public String delinfo(MemberVO member)throws Exception{
+	public String delinfo(MemberVO member, HttpSession session)throws Exception{
 		member.setEnabled(0);
 		System.out.println("1");
 		memberService.updateMember(member);
 		memberService.deleteMemberAuthority(member.getMem_id());
-		return "redirect:/member/my/info";
+		session.invalidate();
+		return "redirect:/member/index";
 	}
 	
+	//예약확인
 	@RequestMapping(value="/my/reslist",method=RequestMethod.GET)
 	public void reslist(Model model,HttpSession session)throws Exception{
 		MemberVO mem=(MemberVO) session.getAttribute("loginUser");
 		String mem_id =mem.getMem_id();
 		List<ResVO> list= rs.selectresbymem_id(mem_id);
+		List<Object> reslist=new ArrayList();
+		for(ResVO a:list){
+			Reservation res= new Reservation();
+			String title=bs.readBoardByNo(a.getTtr_no()).getTtr_title();
+			Date date=bs.readseatbyseat_id(a.getSeat_id()).getSeat_date();
+			Date time=bs.readseatbyseat_id(a.getSeat_id()).getSeat_time();
+			String place=bs.readBoardByNo(a.getTtr_no()).getTtr_place();
+			int seat=a.getRes_nom();
+			int status=a.getStatus();
+			String res_id=a.getRes_id();
+			String imp_uid=a.getImp_uid();
+			
+			res.setTitle(title);
+			res.setDate(date);
+			res.setTime(time);
+			res.setPlace(place);
+			res.setStatus(status);
+			res.setSeat(seat);
+			res.setRes_id(res_id);
+			res.setImp_uid(imp_uid);
+			
+			reslist.add(res);
+		}
 		
+		model.addAttribute("list", list);
+		model.addAttribute("reslist", reslist);
 	}
 	
+
+	//회원가입
 	@RequestMapping(value="/regist",method=RequestMethod.GET)
 	public void registMember()throws Exception{
 	}

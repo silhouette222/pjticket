@@ -7,6 +7,12 @@
 		values(res_seq.nextval,#{res_nom},#{seat_id},#{mem_id},#{ttr_no},#{imp_uid})
 	</update>
 	
+	<update id="updateRes">
+		update reserve set res_nom=#{res_nom}, seat_id=#{seat_id}, mem_id=#{mem_id},
+		ttr_no=#{ttr_no}, imp_uid=#{imp_uid}, status=#{status}
+		where res_id=#{res_id}
+	</update>
+	
 	<update id="deleteRes">
 		delete from reserve 
 		where ttr_no=#{ttr_no}

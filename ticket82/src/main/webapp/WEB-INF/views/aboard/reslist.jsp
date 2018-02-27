@@ -190,14 +190,14 @@ $(document).ready(function(){
 		$.getJSON("/aboard/res/"+pk,function(data){
 			data=data.res
 			var str=""
-			str+="<table class='table table-striped'><tr><td><input type='text' value="+data.res_nom+" name='res_nom' readonly></th></tr>"+
-			"<tr><td><input type='text' value="+data.res_id+" name='res_id'></th></tr>"+
-			"<tr><td><input type='date' value="+new Date(data.res_date).toDateInputValue()+" name='res_date'></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_id+" name='mem_id'></th></tr>"+
-			"<tr><td><input type='text' value="+data.ttr_no+" name='ttr_no'></th></tr>"+
-			"<tr><td><input type='text' value="+data.seat_id+" name='seat_id'></th></tr>"+
-			"<tr><td><input type='text' value="+data.imp_uid+" name='imp_uid'></th></tr>"+
-			"<tr><td><input type='text' value="+data.status+" name='status' readonly></th></tr>"+
+			str+="<table class='table table-striped'><tr><td><label>좌석번호</label><input type='text' value="+data.res_nom+" name='res_nom' readonly></th></tr>"+
+			"<tr><td><label>아이디</label><input type='text' value="+data.res_id+" name='res_id'></th></tr>"+
+			"<tr><td><label>예약일</label><input type='date' value="+new Date(data.res_date).toDateInputValue()+" name='res_date'></th></tr>"+
+			"<tr><td><label>회원아이디</label><input type='text' value="+data.mem_id+" name='mem_id'></th></tr>"+
+			"<tr><td><label>글 번호</label><input type='text' value="+data.ttr_no+" name='ttr_no'></th></tr>"+
+			"<tr><td><label>좌석아이디</label><input type='text' value="+data.seat_id+" name='seat_id'></th></tr>"+
+			"<tr><td><label>결제아이디</label><input type='text' value="+data.imp_uid+" name='imp_uid'></th></tr>"+
+			"<tr><td><label>상태</label><input type='text' value="+data.status+" name='status' readonly></th></tr>"+
 			"<tr><td><input type='button' id='delete' value='삭제'></th></tr></table>";
 			
 			$('#updateform').html(str);

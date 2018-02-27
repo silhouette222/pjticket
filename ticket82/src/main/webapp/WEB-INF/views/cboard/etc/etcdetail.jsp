@@ -45,6 +45,14 @@ list-style:none;
 .popup_img{
 	margin:auto;
 }
+#map{
+	height: 100%;
+}
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
 </style>
 <div class="container">
 
@@ -83,9 +91,16 @@ list-style:none;
 						&nbsp;&nbsp;&nbsp;
 						<label><fmt:formatDate pattern='HH:mm' value='${boardVO.ttr_edate}' /></label>
 					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
 					<div class="alert alert-info">
 						<label>장소</label>
 						<label>${boardVO.ttr_place}</label>
+						<div id="map" style="width:850px;height:400px;"></div>
 					</div>
 				</div>
 				<div class="col-1"></div>
@@ -217,6 +232,8 @@ list-style:none;
 	</div>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
+	<script src="/resources/js/map.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEUizQMxkLRFbx6bcg5-NyEQ3qZTVGCaw&libraries=places&callback=initMap" async defer></script>
 	<script>
 	var ttr_no=${boardVO.ttr_no};
 	var sdate=new Date('${boardVO.ttr_sdate}');

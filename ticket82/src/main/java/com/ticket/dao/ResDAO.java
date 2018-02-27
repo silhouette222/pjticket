@@ -14,6 +14,7 @@ public interface ResDAO {
 	List<ResVO> selectresbyttr_no(int ttr_no) throws SQLException;
 	
 	void insertres(ResVO res) throws SQLException;
+	void updateres(ResVO res) throws SQLException;
 	void deleteresbyres_id(String res_id) throws SQLException;
 	void deleteresbyres_nom(String res_nom) throws SQLException;
 	void deleteresbyttr_no(int ttr_no) throws SQLException;

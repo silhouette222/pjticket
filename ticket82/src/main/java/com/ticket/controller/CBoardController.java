@@ -23,6 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PlacesApi;
+import com.google.maps.model.PlacesSearchResult;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.CompanyVO;
 import com.ticket.domain.SearchCriteria;
@@ -53,6 +58,17 @@ public class CBoardController {
 		if(session.getAttribute("loginUser2")!=null){
 		session.setAttribute("loginUser",cs.getCompanyById((String)session.getAttribute("loginUser2")));
 		}
+	}
+	
+	//회원정보
+	@RequestMapping(value="/my/info",method=RequestMethod.GET)
+	public String myinfo(HttpSession session,Model model)throws Exception{
+		
+		CompanyVO com=(CompanyVO) session.getAttribute("loginUser");
+		String com_id=com.getCom_id();
+		CompanyVO company = us.selectcombyid(com_id);
+		
+		return "/cboard/my/info";
 	}
 	
 	//로그인
@@ -142,6 +158,15 @@ public class CBoardController {
 		String url="cboard/etc/etcdetail";
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
+		
+		String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);
 		return url;
 	}
 	
@@ -187,6 +212,15 @@ public class CBoardController {
 		String url="cboard/gal/galdetail";
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
+		
+		String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);
 		return url;
 	}
 	

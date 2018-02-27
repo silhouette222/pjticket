@@ -181,8 +181,15 @@ $(document).ready(function(){
 		var seat_no=$(this).parent('td').parent('tr').attr('seat_no');
 		seat_no++
 		var seat_id=$(this).parent('td').parent('tr').attr('seat_id');
-		for(var i=1;i<seat_no;i++){
-			str+="<label>"+i+"<input name='rescheck' value='"+seat_id+"_"+i+"' type='checkbox'></label>";
+		console.log(seat_no)
+		if(seat_no!=1){
+			for(var i=1;i<seat_no;i++){
+				str+="<label>"+i+"<input name='rescheck' value='"+seat_id+"_"+i+"' type='checkbox'></label>";
+			}
+		}else{
+			var result = Math.floor(Math.random() * 100000000000) + 1;
+			console.log(result)
+			str+="<label>지정좌석없음<input name='rescheck' value='"+seat_id+"_"+result+"' type='checkbox'></label>";
 		}
 		str+="<div><input seat_no="+seat_no+" seat_id="+seat_id+" class='refresh btn btn-primary' type='button' value='새로고침'></div></div></td></tr>";
 		$(this).parent('td').parent('tr').after(str);

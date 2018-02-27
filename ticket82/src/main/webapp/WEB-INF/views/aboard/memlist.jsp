@@ -217,15 +217,15 @@ $(document).ready(function(){
 		$.getJSON("/aboard/mem/"+pk,function(data){
 			data=data.res
 			var str=""
-			str+="<table class='table table-striped'><tr><td><input type='text' value="+data.mem_id+" name='mem_id' readonly></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_name+" name='mem_name'></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_gender+" name='mem_gender'></th></tr>"+
-			"<tr><td><input type='date' value="+new Date(data.mem_birth).toDateInputValue()+" name='mem_birth'></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_mail+" name='mem_mail'/></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_mobile+" name='mem_mobile'></th></tr>"+
-			"<tr><td><input type='text' value="+data.mem_addr+" name='mem_addr'></th></tr>"+
-			"<tr><td><input type='date' value="+new Date(data.mem_date).toDateInputValue()+" name='mem_date'></th></tr>"+
-			"<tr><td><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
+			str+="<table class='table table-striped'><tr><td><label>아이디</label><input type='text' value="+data.mem_id+" name='mem_id' readonly></th></tr>"+
+			"<tr><td><label>이름</label><input type='text' value="+data.mem_name+" name='mem_name'></th></tr>"+
+			"<tr><td><label>성별</label><input type='text' value="+data.mem_gender+" name='mem_gender'></th></tr>"+
+			"<tr><td><label>생년월일</label><input type='date' value="+new Date(data.mem_birth).toDateInputValue()+" name='mem_birth'></th></tr>"+
+			"<tr><td><label>메일</label><input type='text' value="+data.mem_mail+" name='mem_mail'/></th></tr>"+
+			"<tr><td><label>전화번호</label><input type='text' value="+data.mem_mobile+" name='mem_mobile'></th></tr>"+
+			"<tr><td><label>주소</label><input type='text' value="+data.mem_addr+" name='mem_addr'></th></tr>"+
+			"<tr><td><label>가입일</label><input type='date' value="+new Date(data.mem_date).toDateInputValue()+" name='mem_date'></th></tr>"+
+			"<tr><td><label>상태</label><input type='text' value="+data.enabled+" name='enabled'></th></tr>"+
 			"<tr><td><input type='submit' id='update' class='btn btn-primary' value='수정'>"+
 			"<input type='button' class='btn btn-primary' id='delete' value='삭제'></th></tr></table>";
 			

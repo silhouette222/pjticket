@@ -42,74 +42,64 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item">예약확인</a>
-            <a href="about.html" class="list-group-item active">회원정보</a>
+            <a href="reslist" class="list-group-item active">예약확인</a>
+            <a href="info" class="list-group-item">회원정보</a>
             <a href="/zzim/zzimList" class="list-group-item">찜목록</a>
           </div>
         </div>
         <!-- Content Column -->
         
-        <!-- 내정보 -->
-    		<div class="row">
-        		<div class="col-sm-12">
-            		<div class="col-sm-2"></div>
-                	<div class="col-sm-9">
-                    <h2 class="text-center">회원 정보 보기</h2>
-                    <form method="post">
-                    <table class="table table-striped">
-                      	<tr>
-                        	<td>아이디</td>
-                        	<td>${memberVO.mem_id}</td>
-                        	<input type="hidden" value="${memberVO.mem_id}" name="mem_id" id="mem_id">
-                      	</tr>
-                       
-                      	<tr>
-                        	<td>이름</td>
-                        	<td>${memberVO.mem_name}</td>
-                      	</tr>
-                       
-                      	<tr>
-                        	<td>휴대폰번호</td>
-                        	<td>${memberVO.mem_id}</td>
-                      	</tr>
-                       
-                      	<tr>
-                        	<td>이메일</td>
-                        	<td>${memberVO.mem_mail}</td>
-                      	</tr>
-                       
-                      	<tr>
-                        	<td>주소</td>
-                        	<td>${memberVO.mem_addr}</td>
-                      	</tr>
-                       
-                     	<tr>
-                        	<td>생년월일</td>
-                        	<td>${memberVO.mem_birth}</td>
-                      	</tr>
-                       
-                      	<tr>
-                        	<td>성별</td>
-                        	<td>${memberVO.mem_gender}</td>
-                      	</tr>
-                      	
-                      	<tr>
-                        	<td>가입일</td>
-                        	<td>${memberVO.mem_date}</td>
-                      	</tr>
-                       
-                    	<tr>
-                         	<td class="text-center" colspan="2">
-								<button class="btn btn-success">회원수정</button>
-								<button class="btn btn-danger">회원탈퇴</button>
-                         	</td>    
-                    	</tr> 
-                    </table>
-                    </form>
-                </div>
-        	</div> <!-- col-sm-12 -->
-    	</div><!-- row -->
-	</div> <!-- container end-->
+        <!-- 예약정보 -->
+    	<div class="box">
+			<div class="box-header with-border">
+				<h3 class="box-title">예약정보</h3>
+			</div>
+			<div class="box-body">
+				<table class="table table-bordered">
+					<tr>
+						<th>제목</th>
+						<th>좌석</th>
+						<th>날짜</th>
+						<th>시간</th>
+						<th>장소</th>
+						<th>예약상태</th>
+						<th>예약취소</th>
+					</tr>
+
+					<c:forEach items="${reslist}" var="reslist">
+
+						<tr>
+							<td>${reslist.title }</td>
+							<td>${reslist.seat}</td>
+							<td>
+								<fmt:formatDate pattern="yyyy-MM-dd"
+								value="${reslist.date}" />
+							</td>
+							<td>
+								<fmt:formatDate pattern="HH:mm"
+								value="${reslist.time}" />
+							</td>
+							<td>${reslist.place}</td>
+							<td>
+								<c:choose>
+									<c:when test="${reslist.status==1}">예약완료</c:when>
+									<c:otherwise>예약취소</c:otherwise>
+								</c:choose>
+							</td>									
+							<td>
+								<button class="resdel" pk="${reslist.res_id }" uid="${reslist.imp_uid }">예약취소</button>
+							</td>
+						</tr>
+
+					</c:forEach>
+
+				</table>
+			</div>
+        	<!-- col-sm-12 -->
+    	</div>
+    	<!-- row -->
+	</div>
+	<!-- container end-->
         
       <!-- /.row -->
 
@@ -123,25 +113,33 @@
     <script src="<%=request.getContextPath() %>/resources/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script>
-	$(document).ready(function() {
-
-		var formObj = $("form[role='form']");
-
-		console.log(formObj);
-
-		$(".btn-success").on("click", function(event){
-			formObj.attr("action", "/member/my/infoMody");
-			formObj.attr("method", "get");
-			formObj.submit();
-		});
-
-		$(".btn-danger").on("click", function(event) {
-			event.preventDefault();
-			formObj.attr("action", "/my/delinfo");
-			formObj.submit();
-		});
-
-	});
+	$('.resdel').on('click',function(){
+		var pk=$(this).attr('pk')
+		var uid=$(this).attr('uid')
+		$.ajax({
+			url : "https://cors-anywhere.herokuapp.com/api.iamport.kr/users/getToken",
+			type : "post",
+			dataType : 'json',
+			data: {
+	    		imp_key:"imp_apikey",
+	    		imp_secret:"ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f"
+    		},
+    	complete:function(result){
+    		var token=result.responseJSON.response.access_token
+    		$.ajax({
+				url : "https://cors-anywhere.herokuapp.com/api.iamport.kr/payments/cancel?_token="+token,
+				type : "post",
+				dataType : 'json',
+				data: {
+		    		imp_uid : uid
+	    		}
+			});
+    		$.getJSON("/aboard/resdel/"+pk)
+    		alert("예약이 취소되었습니다");
+    		location.href="/member/my/reslist";
+    	}
+		})
+	})
 </script>
   </body>
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%
@@ -137,26 +137,51 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('/displayFile?fileName=${mainVO.main_name}')">
+          <div class="carousel-item active"
+          		<c:forEach items="${mlist}" var="mainVO">
+						<c:if test="${mainVO.main_id eq 'main1' }">
+							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+						</c:if>
+					</c:forEach>>
             <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('/displayFile?fileName=${mainVO.main_name}')">
+          <div class="carousel-item"<c:forEach items="${mlist}" var="mainVO">
+						<c:if test="${mainVO.main_id eq 'main2' }">
+							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+						</c:if>
+					</c:forEach>>
             <div class="carousel-caption d-none d-md-block">
               <h3>Second Slide</h3>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('/displayFile?fileName=${mainVO.main_name}')">
+          <div class="carousel-item" <c:forEach items="${mlist}" var="mainVO">
+						<c:if test="${mainVO.main_id eq 'main3' }">
+							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+						</c:if>
+					</c:forEach>>
             <div class="carousel-caption d-none d-md-block">
               <h3>Third Slide</h3>
+              <button class="btn btn-danger">상세보기</button>
+            </div>
+          </div>
+           <!-- Slide Two - Set the background image for this slide in the line below -->
+          <div class="carousel-item"<c:forEach items="${mlist}" var="mainVO">
+						<c:if test="${mainVO.main_id eq 'main4' }">
+							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+						</c:if>
+					</c:forEach>>
+            <div class="carousel-caption d-none d-md-block">
+              <h3>asas</h3>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
@@ -178,6 +203,8 @@
    		<!-- 뮤지컬 -->
    		<div class="ticketFamousBanner">
    			<h2>Musical</h2>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'musical1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -185,11 +212,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'musical2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -197,11 +228,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'musical3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -209,11 +244,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'musical4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -221,15 +260,19 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mc/readMcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
    		</div>
    		<!-- 콘서트 -->
    		<div class="ticketFamousBanner">
    			<h2>Concert</h2>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'concert1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -237,11 +280,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'concert2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -249,11 +296,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'concert3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -261,11 +312,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'concert4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -273,15 +328,19 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/cc/readCcPage?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
    		</div>
    		<!-- 연극 -->
    		<div class="ticketFamousBanner">
    			<h2>Play</h2>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'play1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -289,11 +348,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'play2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -301,11 +364,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'play3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -313,11 +380,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'play4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -325,15 +396,19 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
    		</div>
    		<!-- Classic -->
    		<div class="ticketFamousBanner">
    			<h2>Classic</h2>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'classic1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -341,11 +416,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'classic2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -353,11 +432,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'classic3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -365,11 +448,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'classic4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -377,15 +464,19 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="#">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
    		</div>
    		<!-- 전시회 -->
    		<div class="ticketFamousBanner">
-   			<h2>Exhibition</h2>
+   			<h2>Gallery</h2>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'gal1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -393,11 +484,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'gal2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -405,11 +500,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'gal3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -417,11 +516,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'gal4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -429,15 +532,19 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/gal/galdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
    		</div>
    		<!-- 기타 -->
    		<div class="ticketFamousBanner">
-   			<h2>The Others</h2>
+   			<h2>Etc</h2>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'etc1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -445,11 +552,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'etc2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -457,11 +568,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'etc3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -469,11 +584,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
+   			<c:forEach items="${mlist}" var="mainVO">
+			<c:if test="${mainVO.main_id eq 'etc4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -481,11 +600,13 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-   					<a href="/mboard/etc/etcdetail?ttr_no=${boardVO.ttr_no}">
-   						<img src="/displayFile?fileName=${boardVO.thumb_name}">
-   					</a>
+					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
+						<img src="/displayFile?fileName=${mainVO.main_path}">
+					</a>
    				</div>
    			</div>
+   			</c:if>
+			</c:forEach>
    		</div>
 
    	</div>
@@ -550,6 +671,17 @@
           </div>
         </div>
       </c:forEach>
+      <script>
+      var asd=document.getElementsByClassName('carousel-item')
+      for(var i=0;i<asd.length;i++){
+    	  var a=asd[i].getAttribute('style')
+    	  var aa=a.split("_");
+    	  var aaa=aa[0].substr(0,57)
+    	  console.log(a)
+    	  console.log(aaa+aa[1]+aa[2])
+    	  asd[i].setAttribute('style',aaa+aa[1]+"_"+aa[2])
+      }
+      </script>
       </div>
       
       <!-- /.row -->

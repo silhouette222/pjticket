@@ -53,7 +53,6 @@
             	찜목록이 비어있습니다.
         	</c:when>
         	<c:otherwise>
-        		<%-- <form name="form1" id="form1" method="post" action="${path}/member/zzim/delete"> --%>
 				<div class="box-header with-border">
 				</div>
 				<div class="box-body">
@@ -80,42 +79,10 @@
                 	</c:forEach>
 					</table>
 				</div>
-            	<%-- <table border="1">
-                	<tr>
-                    	<th>상품명</th>
-                    	<th>등록일</th>
-                    	<th>취소</th>
-                	</tr>
-                	<!-- <script>console.log(${map.list })</script> -->
-                	<c:forEach var="row" items="${map.list}" varStatus="i">
-                	<tr>
-                    	<td>
-                        	<a href="">${row.ttr_title}</a>
-                    	</td>
-                    	<td>
-                        	<fmt:formatDate pattern="yyyy-MM-dd"
-							value="${row.zzim_date}"/>
-                    	</td>
-                    	<td>
-                        	<a href="${path}/member/zzim/delete?zzim_no=${row.zzim_no}">삭제</a>
-                        	<input type="hidden" name="ttr_no" value="${row.ttr_no}">
-                    	</td>
-                	</tr>
-                	</c:forEach>
-            	</table> --%>
             	<input type="hidden" name="count" value="${map.count}">
-        	<!-- </form> -->
         	</c:otherwise>
     	</c:choose>
-    	<!-- <button type="button" id="btnList">상품목록</button>
-    	<script>
-    		$(document).ready(function(){
-        		// 리스트 페이지로 이동
-        		$("#btnList").click(function(){
-          	  		location.href="/zzim/zzimList";
-        		});
-    		});
-		</script>  -->     
+    	   
       	</div>
       </div>
         
