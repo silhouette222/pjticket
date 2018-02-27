@@ -84,11 +84,25 @@
         		</div>
         	</div>
         	<div class="form-group">
-          		<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-        		<div class="col-sm-6">
-          			<input class="form-control" id="inputEmail" name="com_mail" type="email" placeholder="이메일">
-        		</div>
-        	</div>
+              <label for="InputEmail">이메일</label>
+              <div class="input-group">
+                <input type="email" class="form-control" name="com_mail" id="email" placeholder="이메일 주소">
+                <span class="input-group-btn">
+                  <button class="btn btn-success" id="authbtn">인증하기</button>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="InputEmail">인증번호</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="user_authNum" name="user_authNum">
+              	<input type="hidden" name="authNum" id="authNum">
+                <span class="input-group-btn">
+                  <button class="btn btn-success" id="numbtn">번호확인</button>
+                </span>
+              </div>
+                <div id="lab1"></div>
+            </div>
         	<div class="form-group">
           		<label class="col-sm-3 control-label" for="inputNumber">회사 전화번호</label>
         		<div class="col-sm-6">
@@ -140,6 +154,42 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	var chk = -1;
+    
+	$("#authbtn").click(function (event) {
+		event.preventDefault();
+		if (document.formm.com_mail.value==""){
+			alert("이메일을 입력해 주세요");
+			document.formm.com_mail.focus();
+		}else{
+		var data = {"email": $("#email").val()};
+		var authNum = "";
+		$.ajax({
+    		url : "/emailAuth.do",
+    		data : data,
+    		success : function (data) {
+        		alert("인증번호 전송완료.");
+        		document.formm.authNum.value= data;
+    		}
+		});
+		}
+	});
+	
+	$("#numbtn").click(function(event){
+		event.preventDefault();
+		authNum = document.formm.authNum.value;
+		chk = checkNum(authNum);
+		if( chk > 0){
+    		alert("인증완료");
+    		chk = 1;
+    		$("#lab1").html("<label>인증완료</label>");
+		}else{
+    		alert("인증실패");
+    		$("#lab1").html("<label>인증실패</label>");
+		}
+	});
+	// 이메일 인증 버튼 end
 });
 	
 function go_save(){
@@ -171,6 +221,9 @@ function go_save(){
 	}else if (document.formm.com_mail.value==""){
 		alert("이메일을 입력해 주세요");
 		document.formm.com_mail.focus();
+	}else if ((document.formm.user_authNum.value !=document.formm.authNum.value)){
+		alert("인증번호가 일치하지 않습니다");
+		document.formm.user_authNum.focus();
 	}else if (document.formm.com_mobile.value==""){
 		alert("회사 전화번호를 입력해 주세요");
 		document.formm.com_mobile.focus();
@@ -181,6 +234,20 @@ function go_save(){
 }
 
 </script>
+<script type="text/javascript">
+			function checkNum(authNum) {
+	        	var chk = 0;
+	        	var user_authNum = document.formm.user_authNum.value;
+	        	// 인증번호 비교
+	        	if (authNum == user_authNum) {
+	            	chk = 1;
+	            	$("#user_authNum").val(user_authNum);
+	        	} else {
+	            	chk = -1;
+	        	}
+	        	return chk;
+	    	};
+	</script>
     
   </body>
 </html>
