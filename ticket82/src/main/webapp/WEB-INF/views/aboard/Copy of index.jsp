@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%
@@ -130,6 +130,9 @@
 
   <body>
 
+    <!-- Navigation -->
+    <!-- 메뉴바 -->
+    
 
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -137,51 +140,29 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="0"  class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active"
-          		<c:forEach items="${mlist}" var="mainVO">
-						<c:if test="${mainVO.main_id eq 'main1' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
-						</c:if>
-					</c:forEach>>
+          <div class="carousel-item active" style="background-image: url('http://ticketimage.interpark.com/TCMS4/Main/201711/MainVisual_1c401414-3954-43b2-ba2c-ac03d9689870.png')">
             <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
+              <p>This is a description for the first slide.</p>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item"<c:forEach items="${mlist}" var="mainVO">
-						<c:if test="${mainVO.main_id eq 'main2' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
-						</c:if>
-					</c:forEach>>
+          <div class="carousel-item" style="background-image: url('http://ticketimage.interpark.com/TCMS4/Main/201711/MainVisual_b0550fca-e259-45d8-85c9-44e87068c780.png')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Second Slide</h3>
+              <p>This is a description for the second slide.</p>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" <c:forEach items="${mlist}" var="mainVO">
-						<c:if test="${mainVO.main_id eq 'main3' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
-						</c:if>
-					</c:forEach>>
+          <div class="carousel-item" style="background-image: url('http://ticketimage.interpark.com/TCMS4/Main/201712/MainVisual_48de0005-e8cc-4b0f-a728-fc7be310f73b.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Third Slide</h3>
-              <button class="btn btn-danger">상세보기</button>
-            </div>
-          </div>
-           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item"<c:forEach items="${mlist}" var="mainVO">
-						<c:if test="${mainVO.main_id eq 'main4' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
-						</c:if>
-					</c:forEach>>
-            <div class="carousel-caption d-none d-md-block">
-              <h3>asas</h3>
+              <p>This is a description for the third slide.</p>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
@@ -200,11 +181,9 @@
     
    	<!-- 인기작 -->
    	<div class="ticketFamous">
-   		<!-- 뮤지컬 -->
+   		<!-- 뮤지컬 인기작 -->
    		<div class="ticketFamousBanner">
    			<h2>Musical</h2>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'musical1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -212,15 +191,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'musical2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -228,15 +203,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201801/TicketTodayNew_TicketTodayMusical_eb869746-8d0c-41c2-8616-be46e4f3a117.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'musical3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -244,15 +215,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/Play/image/large/17/17011875_p.gif">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'musical4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -260,19 +227,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/Play/image/large/17/17017348_p.gif">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
    		</div>
    		<!-- 콘서트 -->
    		<div class="ticketFamousBanner">
    			<h2>Concert</h2>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'concert1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -280,15 +243,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'concert2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -296,15 +255,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'concert3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -312,15 +267,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'concert4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -328,19 +279,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
    		</div>
    		<!-- 연극 -->
    		<div class="ticketFamousBanner">
    			<h2>Play</h2>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'play1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -348,15 +295,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'play2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -364,15 +307,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'play3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -380,15 +319,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'play4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -396,19 +331,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
    		</div>
    		<!-- Classic -->
    		<div class="ticketFamousBanner">
    			<h2>Classic</h2>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'classic1' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -416,15 +347,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'classic2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -432,15 +359,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'classic3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -448,15 +371,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'classic4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -464,19 +383,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
    		</div>
    		<!-- 전시회 -->
    		<div class="ticketFamousBanner">
-   			<h2>Gallery</h2>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'gal1' }">
+   			<h2>Exhibition</h2>
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -484,15 +399,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'gal2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -500,15 +411,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'gal3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -516,15 +423,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'gal4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -532,19 +435,15 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/gal/galdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
    		</div>
    		<!-- 기타 -->
    		<div class="ticketFamousBanner">
-   			<h2>Etc</h2>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'etc1' }">
+   			<h2>The Others</h2>
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -552,15 +451,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'etc2' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -568,15 +463,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'etc3' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -584,15 +475,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
-   			<c:forEach items="${mlist}" var="mainVO">
-			<c:if test="${mainVO.main_id eq 'etc4' }">
    			<div class="ticketFamousCube">
    				<div class="item">
    					<div class="contents">
@@ -600,13 +487,11 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mboard/etc/etcdetail?ttr_no=${mainVO.ttr_no}">
-						<img src="/displayFile?fileName=${mainVO.main_path}">
-					</a>
+   					<a href="#">
+   						<img src="http://ticketimage.interpark.com/TCMS4/Main/201711/TicketTodayNew_TicketTodayMusical_79ab4aa1-1d7a-48c2-aef9-05a6db645923.jpg">
+   					</a>
    				</div>
    			</div>
-   			</c:if>
-			</c:forEach>
    		</div>
 
    	</div>
@@ -657,35 +542,127 @@
 
       <!-- Portfolio Section -->
       <h2>이벤트</h2>
-	  <div class="row">
-      <c:forEach items="${elist}" var="eventVO" end="3">
-        <div class="col-lg-4 mb-4">
+
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <h4 class="card-header">${eventVO.et_title}</h4>
+            <a href="#"><img class="card-img-top" src="http://ticketimage.interpark.com/TCMS4/Main/201801/TicketTodayNew_TicketTodayMusical_eb869746-8d0c-41c2-8616-be46e4f3a117.jpg" alt=""></a>
             <div class="card-body">
-              <p class="card-text">${eventVO.et_content}</p>
-            </div>
-            <div class="card-footer">
-              <a href="/event/read?et_no=${eventVO.et_no}" class="btn btn-danger">상세보기</a>
+              <h4 class="card-title">
+                <a href="#">뮤지컬</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
             </div>
           </div>
         </div>
-      </c:forEach>
-      <script>
-      var asd=document.getElementsByClassName('carousel-item')
-      for(var i=0;i<asd.length;i++){
-    	  var a=asd[i].getAttribute('style')
-    	  var aa=a.split("_");
-    	  var aaa=aa[0].substr(0,57)
-    	  console.log(a)
-    	  console.log(aaa+aa[1]+aa[2])
-    	  asd[i].setAttribute('style',aaa+aa[1]+"_"+aa[2])
-      }
-      </script>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" style="width:228px, height:340px;" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Two</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Three</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Four</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Five</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Project Six</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      
       <!-- /.row -->
+
+      <!-- Features Section -->
+      <div class="row">
+        <div class="col-lg-6">
+          <h2>Modern Business Features</h2>
+          <p>The Modern Business template by Start Bootstrap includes:</p>
+          <ul>
+            <li>
+              <strong>Bootstrap v4</strong>
+            </li>
+            <li>jQuery</li>
+            <li>Font Awesome</li>
+            <li>Working contact form with validation</li>
+            <li>Unstyled page elements for easy customization</li>
+          </ul>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <hr>
+
+      <!-- Call to Action Section -->
+      <div class="row mb-4">
+        <div class="col-md-8">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-lg btn-danger btn-block" href="#">Call to Action</a>
+        </div>
+      </div>
+
     </div>
     <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="<%=request.getContextPath() %>/resources/main/vendor/jquery/jquery.min.js"></script>
+    <script src="<%=request.getContextPath() %>/resources/main/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    
+    
     
   </body>

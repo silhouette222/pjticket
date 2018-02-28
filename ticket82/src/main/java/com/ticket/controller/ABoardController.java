@@ -34,6 +34,7 @@ import com.ticket.domain.AdminCri;
 import com.ticket.domain.AdminVO;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.CompanyVO;
+import com.ticket.domain.EventVO;
 import com.ticket.domain.MailRequest;
 import com.ticket.domain.MainVO;
 import com.ticket.domain.MemberVO;
@@ -41,6 +42,7 @@ import com.ticket.domain.PageMaker;
 import com.ticket.domain.ResVO;
 import com.ticket.service.AdminService;
 import com.ticket.service.BoardService;
+import com.ticket.service.EventService;
 import com.ticket.service.MainService;
 import com.ticket.service.ResService;
 import com.ticket.service.UserService;
@@ -67,12 +69,27 @@ public class ABoardController {
 	@Autowired
 	private MainService ms;
 	
-	//메인화면
+	@Autowired
+	private EventService es;
+	
+	/*//메인화면
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public void index(HttpSession session)throws Exception{
 		if(session.getAttribute("loginUser2")!=null){
 		session.setAttribute("loginUser",as.getAdminById((String)session.getAttribute("loginUser2")));
 		}
+	}*/
+	@RequestMapping(value="/index",method=RequestMethod.GET)
+	public void indexm(HttpSession session,Model model)throws Exception{
+		if(session.getAttribute("loginUser2")!=null){
+			session.setAttribute("loginUser",as.getAdminById((String)session.getAttribute("loginUser2")));
+		}
+		List<BoardVO> boardList=bs.readBoardList();
+		model.addAttribute("list",boardList);
+		List<EventVO> eventList=es.readEventList();
+		model.addAttribute("elist",eventList);
+		List<MainVO> mlist=ms.selectMainList();
+		model.addAttribute("mlist",mlist);
 	}
 	
 	//로그인

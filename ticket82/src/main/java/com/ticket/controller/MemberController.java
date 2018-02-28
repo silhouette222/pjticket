@@ -48,14 +48,14 @@ public class MemberController {
 	private MainService ms;
 	
 	//메인화면
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	/*@RequestMapping(value="/index",method=RequestMethod.GET)
 	public void index(HttpSession session)throws Exception{
 		if(session.getAttribute("loginUser2")!=null){
 		session.setAttribute("loginUser",memberService.getMemberById((String)session.getAttribute("loginUser2")));
 		}
-	}
+	}*/
 	
-	@RequestMapping(value="/indexModify",method=RequestMethod.GET)
+	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public void indexm(HttpSession session,Model model)throws Exception{
 		if(session.getAttribute("loginUser2")!=null){
 		session.setAttribute("loginUser",memberService.getMemberById((String)session.getAttribute("loginUser2")));

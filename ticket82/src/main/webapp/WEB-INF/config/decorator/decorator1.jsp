@@ -53,24 +53,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+          	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
             <li class="nav-item">
-              <a class="nav-link" href="/mclistA">뮤지컬</a>
+              <a class="nav-link" href="/aboard/res">예약관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cclistA">콘서트</a>
+              <a class="nav-link" href="/aboard/mem">일반회원관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">연극</a>
+              <a class="nav-link" href="/aboard/com">기업회원관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">연주회</a>
+              <a class="nav-link" href="/aboard/board">게시글 관리</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/aboard/gal">전시회</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/aboard/etc">기타</a>
-            </li>
+            </sec:authorize>
             <li class="nav-item">
               <a class="nav-link" href="/event/eventList">이벤트</a>
             </li>
@@ -90,7 +86,7 @@
             </li>
             
             </sec:authorize>
-            <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+            <%-- <sec:authorize access="hasAuthority('ROLE_ADMIN')">
             	<li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                	마이페이지
@@ -102,7 +98,7 @@
                 <a class="dropdown-item" href="/aboard/board">게시글 관리</a>
               </div>
             </li>
-            </sec:authorize>
+            </sec:authorize> --%>
             <sec:authorize access="isAuthenticated()">
             		<li class="nav-item">
               			<a class="nav-link" href="#" onclick="javascript:location.href=

@@ -47,7 +47,7 @@
 	<div class='box'>
 	<form id="write" method="post">
 		<input type="hidden" name="ttr_cat" value="${ttr_cat }"> 
-		<input type="hidden" name="com_id" value="${loginUser.com_id }">
+		<input type="hidden" name="am_id" value="${loginUser.am_id }">
 		<div class="row">
 			<div class="col-4">
 				<div class="thumb alert alert-info">

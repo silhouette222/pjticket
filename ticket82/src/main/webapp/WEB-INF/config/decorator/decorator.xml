@@ -4,6 +4,7 @@
 	
 	<decorator name="admin" page="decorator1.jsp">
 		<pattern>/aboard/**</pattern>
+		<pattern>/event/**</pattern>
 	</decorator>
 	
 	<decorator name="company" page="decorator2.jsp">

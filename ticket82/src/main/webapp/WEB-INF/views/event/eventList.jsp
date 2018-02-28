@@ -22,11 +22,11 @@
       
       <!-- 작성버튼 -->
       <sec:authorize access="hasAuthority('ROLE_ADMIN')">
-      <button id="btnReg" type="button" class="btn btn-warning" onclick="javascript:history.back(-1)">작성<i class="fa fa-times spaceLeft"></i></button>
+      <button id="btnReg" type="button" class="btn btn-warning">작성<i class="fa fa-times spaceLeft"></i></button>
 	  </sec:authorize>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
+          <a href="/aboard/index">Home</a>
         </li>
         <li class="breadcrumb-item active">Event</li>
       </ol>
@@ -54,11 +54,18 @@
     </div>
     <!-- /.container -->
     
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<%=request.getContextPath() %>/resources/bootstrap/js/bootstrap.min.js"></script>
+	
     <script>
-   		$('#btnReg').on("click", function(evt) {
+    $(document).ready(function() {
+   		$('.btn-warning').on("click", function(){
 		self.location = "/event/regist";
 
-	});
+		});
+    });
     </script>
 </body>
 </html>

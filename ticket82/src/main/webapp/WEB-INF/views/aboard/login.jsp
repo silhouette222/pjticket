@@ -127,7 +127,7 @@ body {
 <body>
 
 	<div class="login-card">
-		<h1>관리자 로그인</h1>
+		<h1>로그인</h1>
 		<br>
 		<form action="/aboard/loginPost" method="post">
 			<input type="hidden" name="returl" value="${param.returl }" />

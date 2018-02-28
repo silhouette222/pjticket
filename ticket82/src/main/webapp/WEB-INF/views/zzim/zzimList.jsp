@@ -7,19 +7,16 @@
 <html>
   <head>
   	<title>회원정보</title>
-  	<!-- Bootstrap -->
+  	<%-- <!-- Bootstrap -->
     <link href="<%=request.getContextPath() %>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <!-- Custom style -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/css/style.css" media="screen" title="no title" charset="utf-8">
-
+ --%>
   </head>
 
   <body>
-
-    
-
     <!-- Page Content -->
     <div class="container">
 
@@ -38,8 +35,8 @@
         <!-- Sidebar Column -->
         <div class="col-lg-3 mb-4">
           <div class="list-group">
-            <a href="index.html" class="list-group-item">예약확인</a>
-            <a href="about.html" class="list-group-item">회원정보</a>
+            <a href="/member/my/reslist" class="list-group-item">예약확인</a>
+            <a href="/member/my/info" class="list-group-item">회원정보</a>
             <a href="/zzim/zzimList" class="list-group-item active">찜목록</a>
           </div>
         </div>
