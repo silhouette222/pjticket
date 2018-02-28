@@ -187,7 +187,7 @@ $(document).ready(function(){
 				str+="<label>"+i+"<input name='rescheck' value='"+seat_id+"_"+i+"' type='checkbox'></label>";
 			}
 		}else{
-			var result = Math.floor(Math.random() * 100000000000) + 1;
+			var result = Math.floor(Math.random() * 100000) + 1;
 			console.log(result)
 			str+="<label>지정좌석없음<input name='rescheck' value='"+seat_id+"_"+result+"' type='checkbox'></label>";
 		}

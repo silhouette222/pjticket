@@ -71,8 +71,8 @@ public class MBoardController {
 		cri.setTtr_cat("etc");
 		List<BoardVO> boardList=bs.searchBoardList(cri);
 		for(BoardVO b:boardList){
-			if(b.getTtr_content().length()>30){
-				b.setTtr_content(b.getTtr_content().substring(0, 30));
+			if(b.getTtr_content()!=null&&b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(1, 25));
 			}
 		}
 		model.addAttribute("list",boardList);
@@ -85,14 +85,14 @@ public class MBoardController {
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
 		
-		String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
 		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
 		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String lat=gson.toJson(res2[0].geometry.location.lat);
 		String lng=gson.toJson(res2[0].geometry.location.lng);
 		model.addAttribute("lat", lat);
-		model.addAttribute("lng", lng);
+		model.addAttribute("lng", lng);*/
 		return url;
 	}
 	
@@ -102,8 +102,8 @@ public class MBoardController {
 		cri.setTtr_cat("gal");
 		List<BoardVO> boardList=bs.searchBoardList(cri);
 		for(BoardVO b:boardList){
-			if(b.getTtr_content().length()>30){
-				b.setTtr_content(b.getTtr_content().substring(0, 30));
+			if(b.getTtr_content()!=null&&b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(1, 25));
 			}
 		}
 		model.addAttribute("list",boardList);
@@ -116,14 +116,14 @@ public class MBoardController {
 		BoardVO board=bs.readBoardByNo(ttr_no);
 		model.addAttribute(board);
 		
-		String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
 		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
 		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String lat=gson.toJson(res2[0].geometry.location.lat);
 		String lng=gson.toJson(res2[0].geometry.location.lng);
 		model.addAttribute("lat", lat);
-		model.addAttribute("lng", lng);
+		model.addAttribute("lng", lng);*/
 		return url;
 	}
 	

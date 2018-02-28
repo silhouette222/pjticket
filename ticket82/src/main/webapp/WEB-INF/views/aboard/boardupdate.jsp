@@ -50,8 +50,9 @@
 		<input type="hidden" name="am_id" value="${loginUser.am_id }">
 		<div class="row">
 			<div class="col-4">
-				<div class="thumb alert alert-info">
+				<div class="alert alert-info">
 					<label>썸네일</label>
+					<div class="thumb"></div>
 				</div>
 			</div>
 			<div class="col-8"></div>
@@ -133,8 +134,9 @@
 		</div>
 		<div class="row">
 			<div class="col-4">
-				<div class="seatmap alert alert-info">
+				<div class="alert alert-info">
 					<label>좌석배치도</label>
+					<div class="seatmap"></div>
 				</div>
 			</div>
 			<div class="col-8"></div>
@@ -159,8 +161,9 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<div class="file alert alert-info">
+				<div class="alert alert-info">
 					<label>사진자료</label>
+					<div class="file"></div>
 				</div>
 			</div>
 		</div>
@@ -175,19 +178,19 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
 	<script>
+	var ttr_no=${boardVO.ttr_no};
 	var sdate=new Date('${boardVO.ttr_sdate}');
 	$(document).ready(function(){
 		var seats=null;
 		var str=""
 		<c:forEach var="seat" items="${boardVO.seat_grd}" varStatus="status">
-		console.log('${boardVO}');
 			str+="<tr>"+
 			"<input type='hidden' name='seat_id' value='${boardVO.seat_id[status.count-1]}'>"+
 			"<td id='seat_info'><input type='text' name='seat_grd' value='${boardVO.seat_grd[status.count-1]}'></td>"+
 			"<td><input type='int' name='seat_no' value='${boardVO.seat_no[status.count-1]}'></td>"+
 			"<td><input type='int' name='seat_pri' value='${boardVO.seat_pri[status.count-1]}'></td>"+
 			"<td><input type='date' name='seat_date' value='<fmt:formatDate pattern='yyyy-MM-dd' value='${boardVO.seat_date[status.count-1]}' />'></td>"+
-			"<td><input type='time' name='seat_time' value='<fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' />'></td><td><input type='button' class='delseat btn btn-primary' value='-'></td>"+
+			"<td><input type='time' name='seat_time' value='<fmt:formatDate pattern='HH:mm' value='${boardVO.seat_time[status.count-1]}' />'></td><td><input type='button' class='delseat' value='-'></td>"+
 		"</tr>"
 		</c:forEach>
 		$('#seat_table').append(str);

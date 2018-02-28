@@ -25,7 +25,7 @@
 	
 	<update id="deleteBoard">
 		update theater set status=2
-		where ttr_no=${ttr_no}
+		where ttr_no=#{ttr_no}
 	</update>
 	
 	<select id="selectBoardList" resultType="board">

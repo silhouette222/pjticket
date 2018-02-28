@@ -55,6 +55,9 @@
           <ul class="navbar-nav ml-auto">
           	<sec:authorize access="hasAuthority('ROLE_ADMIN')">
             <li class="nav-item">
+              <a class="nav-link" href="/aboard/main">메인수정</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/aboard/res">예약관리</a>
             </li>
             <li class="nav-item">

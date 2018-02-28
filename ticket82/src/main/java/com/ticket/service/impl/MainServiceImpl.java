@@ -50,11 +50,10 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	public void updateMain2(MainVO main) throws SQLException {
-		System.out.println(main.getMain_id());
-		System.out.println(main.getTtr_no());
 		String path=mainDAO.selectthumb(main.getTtr_no());
-		System.out.println(path);
-		main.setMain_path(path);
+		String front = path.substring(0, 12);
+		String end = path.substring(14);
+		main.setMain_path(front+end);
 		mainDAO.updateMain(main);
 	}
 }

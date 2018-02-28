@@ -50,9 +50,11 @@ public class BoardServiceImpl implements BoardService {
 		}
 		}
 		String thumb = board.getThumb_name();
-		String seatmap = board.getThumb_name();
+		String seatmap = board.getSeatmap_name();
 		boardDAO.insertThumb(thumb, ttr_no);
-		boardDAO.insertseatmap(seatmap, ttr_no);
+		if(seatmap!=null){
+			boardDAO.insertseatmap(seatmap, ttr_no);
+		}
 		if (files == null)
 			return;
 		for (String file_name : files) {
@@ -89,12 +91,14 @@ public class BoardServiceImpl implements BoardService {
 		
 		if(seat_grds!=null){
 		for (int i = 0; i < seat_grds.length; i++) {
-			seats[i]=new Seatinfo(seat_ids[i],ttr_no,seat_grds[i],seat_nos[i],seat_pris[i],seat_dates[i],seat_times[i]);
+			seats[i]=new Seatinfo("",ttr_no,seat_grds[i],seat_nos[i],seat_pris[i],seat_dates[i],seat_times[i]);
 		}
 		}
 		
 		boardDAO.insertThumb(board.getThumb_name(), ttr_no);
-		boardDAO.insertseatmap(board.getThumb_name(), ttr_no);
+		if(board.getSeatmap_name()!=null){
+			boardDAO.insertseatmap(board.getSeatmap_name(), ttr_no);
+		}
 		if (files == null)
 			return;
 		for (String file_name : files) {
@@ -102,30 +106,24 @@ public class BoardServiceImpl implements BoardService {
 		}
 		if (seat_grds != null)
 		for (int i = 0; i < seat_grds.length; i++) {
-			if(seats[i].getSeat_id()!=null){
-			boardDAO.updateseatbyttr_no(seats[i]);
-			}else if(seats[i].getSeat_id()==null){
-				boardDAO.insertseat(seats[i]);
-			}
+			boardDAO.insertseat(seats[i]);
 		}
 		String ids="";
 		for(String id:seat_ids){
 			ids+=id+",";
 		}
 		for(Seatinfo seat:seat_bef){
-			if(!ids.contains(seat.getSeat_id())){
-				boardDAO.deleteseatbyseat_id(seat.getSeat_id());
-			}
+			boardDAO.deleteseatbyseat_id(seat.getSeat_id());
 		}
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	@Override
 	public void deleteBoard(int ttr_no) throws SQLException {
-		boardDAO.deletefile(ttr_no);
-		boardDAO.deleteThumb(ttr_no);
-		boardDAO.deleteseatmap(ttr_no);
-		boardDAO.deleteseatbyttr_no(ttr_no);
+		//boardDAO.deletefile(ttr_no);
+		//boardDAO.deleteThumb(ttr_no);
+		//boardDAO.deleteseatmap(ttr_no);
+		//boardDAO.deleteseatbyttr_no(ttr_no);
 		boardDAO.deleteBoard(ttr_no);
 	}
 

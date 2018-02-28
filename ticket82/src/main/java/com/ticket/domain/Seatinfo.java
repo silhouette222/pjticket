@@ -11,6 +11,7 @@ public class Seatinfo {
 	private int seat_pri;
 	private Date seat_date;
 	private Date seat_time;
+	private int status;
 	public String getSeat_id() {
 		return seat_id;
 	}
@@ -54,6 +55,12 @@ public class Seatinfo {
 	public void setSeat_date(Date seat_date) {
 		this.seat_date = seat_date;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public Seatinfo(){}
 	public Seatinfo(String seat_id, int ttr_no, String seat_grd, int seat_no,
 			int seat_pri, Date seat_date, Date seat_time) {
@@ -66,11 +73,23 @@ public class Seatinfo {
 		this.seat_date = seat_date;
 		this.seat_time = seat_time;
 	}
+	public Seatinfo(String seat_id, int ttr_no, String seat_grd, int seat_no,
+			int seat_pri, Date seat_date, Date seat_time, int status) {
+		super();
+		this.seat_id = seat_id;
+		this.ttr_no = ttr_no;
+		this.seat_grd = seat_grd;
+		this.seat_no = seat_no;
+		this.seat_pri = seat_pri;
+		this.seat_date = seat_date;
+		this.seat_time = seat_time;
+		this.status = status;
+	}
 	@Override
 	public String toString() {
 		return "Seatinfo [seat_id=" + seat_id + ", ttr_no=" + ttr_no
 				+ ", seat_grd=" + seat_grd + ", seat_no=" + seat_no
 				+ ", seat_pri=" + seat_pri + ", seat_date=" + seat_date
-				+ ", seat_time=" + seat_time + "]";
-	};
+				+ ", seat_time=" + seat_time + ", status=" + status + "]";
+	}
 }

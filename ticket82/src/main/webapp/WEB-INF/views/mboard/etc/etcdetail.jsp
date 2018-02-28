@@ -190,7 +190,7 @@ html, body {
 			</div>
 			<div class="col-1"></div>
 		</div>
-		<c:if test="${loginUser.mem_id eq '' }">
+		<c:if test="${loginUser.mem_id ne '' }">
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
@@ -235,8 +235,8 @@ html, body {
 	<script src="/resources/js/map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEUizQMxkLRFbx6bcg5-NyEQ3qZTVGCaw&libraries=places&callback=initMap" async defer></script>
 <script>
-lat=${lat};
-lng=${lng};
+/* lat=${lat};
+lng=${lng}; */
 	var ttr_no=${boardVO.ttr_no};
 	var sdate=new Date('${boardVO.ttr_sdate}');
 	var now=new Date();
@@ -309,6 +309,7 @@ lng=${lng};
 					}
 				});
 			$('#zzim').on('click',function(){
+				console.log('asd')
 				$.ajax({
 					type:'get',
 					url:zzim_url,

@@ -3,13 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-<%
-	String cp = request.getContextPath();
-	request.setCharacterEncoding("UTF-8");//쿠키 가져오기
-	Cookie[] ck = request.getCookies();
-%>
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -109,6 +103,10 @@
   			font-family: "malgun gothic";
   			letter-spacing: -1px;
 		}
+		.ticketFamous .ticketFamousCube .item a img{
+			width: 228px;
+			height: 340px;
+		}
 		
 		.ticketFamous .ticketFamousCube .item .contents .contentTxt b{
 			overflow: hidden;
@@ -141,34 +139,34 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active"
+          <div class="carousel-item active">
           		<c:forEach items="${mlist}" var="mainVO">
 						<c:if test="${mainVO.main_id eq 'main1' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+							 <img style="width: 100%;" src="/displayFile?fileName=${mainVO.main_path }">
 						</c:if>
-					</c:forEach>>
+					</c:forEach>
             <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item"<c:forEach items="${mlist}" var="mainVO">
+          <div class="carousel-item"><c:forEach items="${mlist}" var="mainVO">
 						<c:if test="${mainVO.main_id eq 'main2' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+							 <img style="width: 100%;" src="/displayFile?fileName=${mainVO.main_path }">
 						</c:if>
-					</c:forEach>>
+					</c:forEach>
             <div class="carousel-caption d-none d-md-block">
               <h3>Second Slide</h3>
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" <c:forEach items="${mlist}" var="mainVO">
+          <div class="carousel-item"> <c:forEach items="${mlist}" var="mainVO">
 						<c:if test="${mainVO.main_id eq 'main3' }">
-							 style="background-image: url('/displayFile?fileName=${mainVO.main_path }')"
+							 <img style="width: 100%;" src="/displayFile?fileName=${mainVO.main_path }">
 						</c:if>
-					</c:forEach>>
+					</c:forEach>
             <div class="carousel-caption d-none d-md-block">
               <h3>Third Slide</h3>
               <button class="btn btn-danger">상세보기</button>
@@ -196,7 +194,6 @@
         </a>
       </div>
     </header>
-    
     
    	<!-- 인기작 -->
    	<div class="ticketFamous">

@@ -19,7 +19,11 @@
 
     <!-- Custom styles for this template -->
     <link href="/resources/main/css/modern-business.css" rel="stylesheet">
-
+	<style type="text/css">
+    	#mtable{
+    		width: 75%;
+    	}
+    </style>
   </head>
 
   <body>
@@ -50,7 +54,7 @@
         <!-- Content Column -->
         
         <!-- 예약정보 -->
-    	<div class="box">
+    	<div class="box" id="mtable">
 			<div class="box-header with-border">
 				<h3 class="box-title">예약정보</h3>
 			</div>
