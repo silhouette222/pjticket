@@ -54,16 +54,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/mclistA">뮤지컬</a>
+              <a class="nav-link" href="/mboard/mc">뮤지컬</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cclistA">콘서트</a>
+              <a class="nav-link" href="/mboard/cc">콘서트</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="services.html">연극</a>
+              <a class="nav-link" href="/mboard/play">연극</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">연주회</a>
+              <a class="nav-link" href="/mboard/classic">연주회</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/mboard/gal">전시회</a>

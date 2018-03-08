@@ -127,6 +127,130 @@ public class MBoardController {
 		return url;
 	}
 	
+	@RequestMapping(value = "/classic", method = RequestMethod.GET)
+	public String readclassic(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		String url="mboard/classic";
+		cri.setTtr_cat("classic");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		for(BoardVO b:boardList){
+			if(b.getTtr_content()!=null&&b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(1, 25));
+			}
+		}
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/classic/classicdetail",method=RequestMethod.GET)
+	public String classicdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="mboard/classic/classicdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value = "/play", method = RequestMethod.GET)
+	public String readplay(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		String url="mboard/play";
+		cri.setTtr_cat("play");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		for(BoardVO b:boardList){
+			if(b.getTtr_content()!=null&&b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(1, 25));
+			}
+		}
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/play/playdetail",method=RequestMethod.GET)
+	public String playdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="mboard/play/playdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value = "/mc", method = RequestMethod.GET)
+	public String readmc(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		String url="mboard/mc";
+		cri.setTtr_cat("mc");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		for(BoardVO b:boardList){
+			if(b.getTtr_content()!=null&&b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(1, 25));
+			}
+		}
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/mc/mcdetail",method=RequestMethod.GET)
+	public String mcdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="mboard/mc/mcdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value = "/cc", method = RequestMethod.GET)
+	public String readcc(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		String url="mboard/cc";
+		cri.setTtr_cat("cc");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		for(BoardVO b:boardList){
+			if(b.getTtr_content()!=null&&b.getTtr_content().length()>30){
+				b.setTtr_content(b.getTtr_content().substring(1, 25));
+			}
+		}
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/cc/ccdetail",method=RequestMethod.GET)
+	public String ccdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="mboard/cc/ccdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
 	@RequestMapping(value="/reserve",method=RequestMethod.GET)
 	public String reserve(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
 		String url="mboard/reserve";

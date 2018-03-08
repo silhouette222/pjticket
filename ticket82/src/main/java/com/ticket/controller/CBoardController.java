@@ -477,6 +477,222 @@ public class CBoardController {
 		return url;
 	}
 	
+	@RequestMapping(value = "/classic", method = RequestMethod.GET)
+	public String readclassic(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		//테스트용
+		String url="cboard/classic";
+		cri.setTtr_cat("classic");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/classic/classicdetail",method=RequestMethod.GET)
+	public String classicdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/classic/classicdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value="/classic/classicupdate",method=RequestMethod.GET)
+	public String classicupdate(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/classic/classicupdate";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		return url;
+	}
+	
+	@RequestMapping(value="/classic/classicupdate",method=RequestMethod.POST)
+	public String classicupdate(BoardVO board,Model model) throws Exception{
+		String url="redirect:/cboard/classic";
+		try{
+			bs.updateBoard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/classic/delete",method=RequestMethod.GET)
+	public String classicdelete(int ttr_no) throws Exception{
+		String url="redirect:/cboard/classic";
+		bs.deleteBoard(ttr_no);
+		return url;
+	}
+	
+	@RequestMapping(value = "/play", method = RequestMethod.GET)
+	public String readplay(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		//테스트용
+		String url="cboard/classic";
+		cri.setTtr_cat("play");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/play/playdetail",method=RequestMethod.GET)
+	public String playdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/play/playdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value="/play/playupdate",method=RequestMethod.GET)
+	public String playupdate(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/play/playupdate";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		return url;
+	}
+	
+	@RequestMapping(value="/play/playupdate",method=RequestMethod.POST)
+	public String playupdate(BoardVO board,Model model) throws Exception{
+		String url="redirect:/cboard/play";
+		try{
+			bs.updateBoard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/play/delete",method=RequestMethod.GET)
+	public String playdelete(int ttr_no) throws Exception{
+		String url="redirect:/cboard/play";
+		bs.deleteBoard(ttr_no);
+		return url;
+	}
+	
+	@RequestMapping(value = "/mc", method = RequestMethod.GET)
+	public String readmc(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		//테스트용
+		String url="cboard/mc";
+		cri.setTtr_cat("mc");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/mc/mcdetail",method=RequestMethod.GET)
+	public String mcdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/mc/mcdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value="/mc/mcupdate",method=RequestMethod.GET)
+	public String mcupdate(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/mc/mcupdate";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		return url;
+	}
+	
+	@RequestMapping(value="/mc/mcupdate",method=RequestMethod.POST)
+	public String mcupdate(BoardVO board,Model model) throws Exception{
+		String url="redirect:/cboard/mc";
+		try{
+			bs.updateBoard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/mc/delete",method=RequestMethod.GET)
+	public String mcdelete(int ttr_no) throws Exception{
+		String url="redirect:/cboard/mc";
+		bs.deleteBoard(ttr_no);
+		return url;
+	}
+	
+	@RequestMapping(value = "/cc", method = RequestMethod.GET)
+	public String readcc(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
+		//테스트용
+		String url="cboard/cc";
+		cri.setTtr_cat("cc");
+		List<BoardVO> boardList=bs.searchBoardList(cri);
+		model.addAttribute("list",boardList);
+		return url;
+	}
+	
+	@RequestMapping(value="/cc/mcdetail",method=RequestMethod.GET)
+	public String ccdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/cc/ccdetail";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		
+		/*String key="AIzaSyBpdwpdpcgThSmCAME3OJ8esqYy_d2Tc5M";
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(key).build();
+		PlacesSearchResult[] res2=PlacesApi.textSearchQuery(context,board.getTtr_place()).await().results;
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String lat=gson.toJson(res2[0].geometry.location.lat);
+		String lng=gson.toJson(res2[0].geometry.location.lng);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value="/cc/ccupdate",method=RequestMethod.GET)
+	public String ccupdate(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
+		String url="cboard/cc/ccupdate";
+		BoardVO board=bs.readBoardByNo(ttr_no);
+		model.addAttribute(board);
+		return url;
+	}
+	
+	@RequestMapping(value="/cc/ccupdate",method=RequestMethod.POST)
+	public String ccupdate(BoardVO board,Model model) throws Exception{
+		String url="redirect:/cboard/cc";
+		try{
+			bs.updateBoard(board);
+			model.addAttribute(board);
+		}catch(SQLException e){
+			throw e;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/cc/delete",method=RequestMethod.GET)
+	public String ccdelete(int ttr_no) throws Exception{
+		String url="redirect:/cboard/cc";
+		bs.deleteBoard(ttr_no);
+		return url;
+	}
+	
 	@RequestMapping("/getFiles/{ttr_no}")
 	@ResponseBody
 	public List<String> getFiles(@PathVariable("ttr_no") int ttr_no) throws Exception{
