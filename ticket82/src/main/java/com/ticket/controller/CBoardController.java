@@ -693,6 +693,21 @@ public class CBoardController {
 		return url;
 	}
 	
+	@RequestMapping(value="/eventList",method=RequestMethod.GET)
+	public String readEvent(Model model)throws Exception{
+		List<EventVO> eventList=es.readEventList();
+		model.addAttribute("list",eventList);
+		return "/cboard/event/eventList";
+	}
+	
+	@RequestMapping(value="/eventread",method=RequestMethod.GET)
+	public String eventRead(@RequestParam("et_no")int et_no,Model model) throws Exception{
+		String url="cboard/event/read";
+		EventVO event=es.readEventByNo(et_no);
+		model.addAttribute(event);
+		return url;
+	}
+	
 	@RequestMapping("/getFiles/{ttr_no}")
 	@ResponseBody
 	public List<String> getFiles(@PathVariable("ttr_no") int ttr_no) throws Exception{

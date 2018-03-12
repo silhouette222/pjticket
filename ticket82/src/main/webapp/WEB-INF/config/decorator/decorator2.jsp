@@ -72,7 +72,7 @@
               <a class="nav-link" href="/cboard/etc">기타</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/event/eventList">이벤트</a>
+              <a class="nav-link" href="/cboard/eventList">이벤트</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

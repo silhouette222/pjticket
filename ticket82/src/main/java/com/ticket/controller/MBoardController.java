@@ -26,18 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.maps.GeoApiContext;
-import com.google.maps.PlacesApi;
-import com.google.maps.model.PlacesSearchResult;
 import com.ticket.domain.BoardVO;
+import com.ticket.domain.EventVO;
 import com.ticket.domain.MemberVO;
 import com.ticket.domain.PayVO;
 import com.ticket.domain.ResVO;
 import com.ticket.domain.SearchCriteria;
 import com.ticket.domain.Seatinfo;
 import com.ticket.service.BoardService;
+import com.ticket.service.EventService;
 import com.ticket.service.ResService;
 import com.ticket.service.UserService;
 
@@ -53,6 +50,9 @@ public class MBoardController {
 	
 	@Autowired
 	private UserService us;
+	
+	@Autowired
+	private EventService es;
 	
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
@@ -248,6 +248,21 @@ public class MBoardController {
 		String lng=gson.toJson(res2[0].geometry.location.lng);
 		model.addAttribute("lat", lat);
 		model.addAttribute("lng", lng);*/
+		return url;
+	}
+	
+	@RequestMapping(value="/eventList",method=RequestMethod.GET)
+	public String readEvent(Model model)throws Exception{
+		List<EventVO> eventList=es.readEventList();
+		model.addAttribute("list",eventList);
+		return "/mboard/event/eventList";
+	}
+	
+	@RequestMapping(value="/eventread",method=RequestMethod.GET)
+	public String eventRead(@RequestParam("et_no")int et_no,Model model) throws Exception{
+		String url="mboard/event/read";
+		EventVO event=es.readEventByNo(et_no);
+		model.addAttribute(event);
 		return url;
 	}
 	
