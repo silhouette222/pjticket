@@ -124,21 +124,29 @@
 			class="com.ticket.service.impl.MusicalServiceImpl"
 			p:musicalDAO-ref="MusicalDAO"/>
 	
-	<bean 	id="ReservationDAO"
-			class="com.ticket.dao.impl.ReservationDAOImpl"
-			p:sqlSession-ref="sqlSession"
-			/>
-	<bean	id="ReservationService"
-			class="com.ticket.service.impl.ReservationServiceImpl"
-			p:reservationDAO-ref="ReservationDAO"/>      
-	
 	<bean 	id="mainDAO"
 			class="com.ticket.dao.impl.MainDAOImpl"
 			p:sqlSession-ref="sqlSession"/>
 			
 	<bean	id="mainService"
 			class="com.ticket.service.impl.MainServiceImpl"
-			p:mainDAO-ref="mainDAO"/>		
+			p:mainDAO-ref="mainDAO"/>
+			
+	<bean 	id="qnaDAO"
+			class="com.ticket.dao.impl.QNADAOImpl"
+			p:sqlSession-ref="sqlSession"/>
+			
+	<bean	id="qnaService"
+			class="com.ticket.service.impl.QNAServiceImpl"
+			p:QNADAO-ref="qnaDAO"/>
+			
+	<bean	id="answerDAO"
+			class="com.ticket.dao.impl.AnswerDAOImpl"
+			p:sqlSession-ref="sqlSession"/>
+			
+	<bean	id="answerService"
+			class="com.ticket.service.impl.AnswerServiceImpl"
+			p:answerDAO-ref="answerDAO"/>	
 			
 	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="javaMailProperties">

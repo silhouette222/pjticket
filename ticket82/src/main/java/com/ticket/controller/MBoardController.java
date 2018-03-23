@@ -29,12 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.EventVO;
 import com.ticket.domain.MemberVO;
+import com.ticket.domain.PageMaker;
 import com.ticket.domain.PayVO;
+import com.ticket.domain.QNAVO;
 import com.ticket.domain.ResVO;
 import com.ticket.domain.SearchCriteria;
 import com.ticket.domain.Seatinfo;
 import com.ticket.service.BoardService;
 import com.ticket.service.EventService;
+import com.ticket.service.QNAService;
 import com.ticket.service.ResService;
 import com.ticket.service.UserService;
 
@@ -53,6 +56,9 @@ public class MBoardController {
 	
 	@Autowired
 	private EventService es;
+	
+	@Autowired
+	private QNAService qs;
 	
 	@InitBinder public void initBinder(WebDataBinder binder) 
 	{ 
@@ -474,5 +480,31 @@ public class MBoardController {
 		int age601=age60*100/seatall;
 		model.addAttribute("age60",age601);
 		}
+	}
+	
+	@RequestMapping(value="/qna",method=RequestMethod.GET)
+	public void qnaList(@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
+		List<QNAVO> qnaList=qs.readSearchQNAList(cri);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(qs.readSearchQNAListCount(cri));
+		
+		model.addAttribute("list",qnaList);
+		model.addAttribute("pageMaker",pageMaker);
+	}
+	
+	@RequestMapping(value="/createQNA", method=RequestMethod.GET)
+	public void createGET()throws Exception{}
+	
+	@RequestMapping(value="/createQNA",method=RequestMethod.POST)
+	public String createPOST(QNAVO qna, Model model)throws Exception{
+		try{
+			qs.createQNA(qna);
+			model.addAttribute("qna",qna);
+		}catch(SQLException e){
+			throw e;
+		}
+		return "/mboard/qna";
 	}
 }

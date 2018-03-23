@@ -20,7 +20,8 @@
 		<typeAlias alias="zzim" type="com.ticket.domain.ZzimVO"/>
 		<typeAlias alias="board" type="com.ticket.domain.BoardVO"/>
 		<typeAlias alias="seatinfo" type="com.ticket.domain.Seatinfo"/>
-		<typeAlias alias="Resv" type="com.ticket.domain.ReservationVO" />
 		<typeAlias alias="main" type="com.ticket.domain.MainVO"/>
+		<typeAlias alias="qna" type="com.ticket.domain.QNAVO"/>
+		<typeAlias alias="answer" type="com.ticket.domain.AnswerVO"/>
 	</typeAliases>	
 </configuration>

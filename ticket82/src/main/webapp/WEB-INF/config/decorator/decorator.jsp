@@ -80,7 +80,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
                 <a class="dropdown-item" href="faq.html">공지사항</a>
-                <a class="dropdown-item" href="faq.html">Q&A</a>
+                <a class="dropdown-item" href="/mboard/qna">Q&A</a>
                 <a class="dropdown-item" href="faq.html">FAQ</a>
               </div>
             </li>            
