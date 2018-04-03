@@ -25,5 +25,7 @@ public interface QNADAO {
 	
 	int selectSearchListCount(SearchCriteria cri) throws SQLException;
 	
+	void qnareply(QNAVO qna) throws SQLException;
+	
 	
 }

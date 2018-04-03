@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ticket.domain.BoardVO;
 import com.ticket.domain.EventVO;
@@ -485,7 +486,6 @@ public class MBoardController {
 	@RequestMapping(value="/qna",method=RequestMethod.GET)
 	public void qnaList(@ModelAttribute("cri")SearchCriteria cri,Model model) throws Exception{
 		List<QNAVO> qnaList=qs.readSearchQNAList(cri);
-		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(qs.readSearchQNAListCount(cri));
@@ -495,7 +495,9 @@ public class MBoardController {
 	}
 	
 	@RequestMapping(value="/createQNA", method=RequestMethod.GET)
-	public void createGET()throws Exception{}
+	public String createGET()throws Exception{
+		return "/mboard/qna/createQNA";
+	}
 	
 	@RequestMapping(value="/createQNA",method=RequestMethod.POST)
 	public String createPOST(QNAVO qna, Model model)throws Exception{
@@ -505,6 +507,62 @@ public class MBoardController {
 		}catch(SQLException e){
 			throw e;
 		}
-		return "/mboard/qna";
+		return "redirect:/mboard/qna";
+	}
+	
+	@RequestMapping(value="/updateQNA", method=RequestMethod.GET)
+	public String updateGET()throws Exception{
+		return "/mboard/qna/updateQNA";
+	}
+	
+	@RequestMapping(value="/updateQNA", method=RequestMethod.POST)
+	public String updatePOST(QNAVO qna, SearchCriteria cri,
+			 RedirectAttributes rttr)throws Exception{
+		qs.updateQNA(qna);
+		
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("searchType",cri.getSearchType());
+		rttr.addAttribute("keyword",cri.getKeyword());
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/mboard/qna";
+	}
+	
+	@RequestMapping(value="/removeQNA",method=RequestMethod.POST)
+	public String removeQNA(@RequestParam("qna_no")int qna_no, SearchCriteria cri,
+						 RedirectAttributes rttr)throws Exception{
+		
+		qs.deleteQNA(qna_no);
+		
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("searchType",cri.getSearchType());
+		rttr.addAttribute("keyword",cri.getKeyword());
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/mboard/qna";
+	}
+	
+	@RequestMapping(value="/qnareply/{qna_no}", method=RequestMethod.GET)
+	public String prereply(@PathVariable int qna_no, Model model) throws Exception{
+		
+		QNAVO qna = qs.readQNAByNo(qna_no);
+		
+		qna.setQna_title("RE: "+qna.getQna_title());
+		qna.setQna_content("----- 원본글 내용 -----<br/>"+ qna.getQna_content()
+				+"<br/> ------ 원본글 끝-----<br/>");
+		
+		model.addAttribute("item",qna);
+		
+		return "/mboard/updateQNA";
+	}
+	
+	@RequestMapping(value="qnareply", method=RequestMethod.POST)
+	public String qnaReply(QNAVO qna) throws Exception{
+		qs.qnareply(qna);
+		return "redirect:/mboard/qna";
 	}
 }

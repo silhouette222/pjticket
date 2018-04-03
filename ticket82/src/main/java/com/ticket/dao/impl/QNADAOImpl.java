@@ -62,8 +62,9 @@ public class QNADAOImpl implements QNADAO {
 		int offset = cri.getPageStart();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		
+		System.out.println(cri);
 		List<QNAVO> qnaList = sqlSession.selectList(NAMESPACE+".selectSearchQNAList", cri, rowBounds);
+		System.out.println(qnaList);
 		return qnaList;
 	}
 
@@ -71,6 +72,12 @@ public class QNADAOImpl implements QNADAO {
 	public int selectSearchListCount(SearchCriteria cri) throws SQLException {
 		int listCount=(Integer)sqlSession.selectOne(NAMESPACE+".selectSearchQNACount", cri);
 		return listCount;
+	}
+
+	@Override
+	public void qnareply(QNAVO qna) throws SQLException {
+		sqlSession.update(NAMESPACE+".addStep",qna);
+		sqlSession.update(NAMESPACE+".qnareply",qna);
 	}
 
 }

@@ -4,21 +4,21 @@
 <mapper namespace="QNAMapper">
 	<select id="selectQNAByNo" resultType="qna">
 		select * from qna
-		where no=#{no}	
+		where qna_no=#{qna_no}	
 	</select>
 	
 	<select id="selectQNAList" resultType="qna">
 		select * from qna
-		order by no desc, date desc
+		order by qna_no desc
 	</select>
 	
 	<update id="insertQNA">
-		insert into qna (qna_no, qna_title, qna_content, qna_pw, qna_pwin, qna_reply, am_id, mem_id)
-		values(qna_seq.nextval, #{qna_title}, #{qna_content}, #{qna_pw}, #{qna_pwin}, #{qna_reply}, #{am_id}, #{mem_id})
+		insert into qna (qna_no, qna_title, qna_content, qna_pw, qna_pwin, qna_reply, am_id, mem_id, com_id, step, depth, ref)
+		values(qna_seq.nextval, #{qna_title, jdbcType=VARCHAR}, #{qna_content, jdbcType=VARCHAR}, #{qna_pw, jdbcType=VARCHAR}, #{qna_pwin, jdbcType=VARCHAR}, #{qna_reply, jdbcType=VARCHAR}, #{am_id, jdbcType=VARCHAR}, #{mem_id, jdbcType=VARCHAR}, #{com_id, jdbcType=VARCHAR}, 0, 0, seq_re.currval)
 	</update>
 	
 	<update id="updateQNA">
-		update qna set qna_title=#{qna_title}, qna_content=#{qna_content}, qna_pw=#{qna_pw}, qna_pwin=#{qna_pwin}, qna_reply=#{qna_reply}, am_id=#{am_id}, mem_id=#{mem_id}
+		update qna set qna_title=#{qna_title}, qna_content=#{qna_content}, qna_pw=#{qna_pw}, qna_pwin=#{qna_pwin}, qna_reply=#{qna_reply}
 		where qna_no = #{qna_no}
 	</update>
 	
@@ -26,9 +26,22 @@
 		delete from qna where qna_no=#{qna_no}
 	</update>
 	
+	<update id="addStep">
+		<![CDATA[
+			update qna 
+			set step = step + 1 
+			where ref = #{ref} and step > #{step} 
+		]]>
+	</update>
+	
 	<select id="selectCountPaging" resultType="int">
-		select count(no) from qna
+		select count(qna_no) from qna
 	</select>
+	
+	<update id="qnareply">
+		insert into qna (qna_no, qna_title, qna_content, qna_pw, qna_pwin, qna_reply, am_id, mem_id, com_id, step, depth, ref)
+		values(qna_seq.nextval, #{qna_title, jdbcType=VARCHAR}, #{qna_content, jdbcType=VARCHAR}, #{qna_pw, jdbcType=VARCHAR}, #{qna_pwin, jdbcType=VARCHAR}, #{qna_reply, jdbcType=VARCHAR}, #{am_id, jdbcType=VARCHAR}, #{mem_id, jdbcType=VARCHAR}, #{com_id, jdbcType=VARCHAR}, #{step}+1, #{depth}+1, #{ref})
+	</update>
 	
 	<sql id="search">
 		<if test="searchType != null">
@@ -42,15 +55,15 @@
 				and mem_id like '%'||#{keyword}||'%'
 			</if>
 			<if test="searchType == 'tc'.toString()">
-				and( qna_title like '%'||#{keyword}||'%' OR
+				and (qna_title like '%'||#{keyword}||'%' OR
 				qna_content like '%'||#{keyword}||'%')
 			</if>
 			<if test="searchType == 'tw'.toString()">
-				and( qna_title like '%'||#{keyword}||'%' OR
+				and (qna_title like '%'||#{keyword}||'%' OR
 				mem_id like '%'||#{keyword}||'%')
 			</if>
 			<if test="searchType == 'tcw'.toString()">
-				and( qna_title like '%'||#{keyword}||'%' OR
+				and (qna_title like '%'||#{keyword}||'%' OR
 				qna_content like '%'||#{keyword}||'%' OR
 				mem_id like '%'||#{keyword}||'%')
 			</if>
@@ -58,14 +71,22 @@
 	</sql>
 	
 	<select id="selectSearchQNAList" resultType="qna">
-		select * from qna
+	<![CDATA[ 
+		select * 
+		from qna
+		where qna_no > 0
+	]]>
 		<include refid="search"></include>
 		order by qna_no desc
 	</select>
 	
 	<select id="selectSearchQNACount" resultType="int">
+	<![CDATA[
 		select count(qna_no) from qna
+		where qna_no > 0
+	]]>	
 		<include refid="search"></include>
+		
 	</select>
 	
 	<select id="selectMaxNo" resultType="int">

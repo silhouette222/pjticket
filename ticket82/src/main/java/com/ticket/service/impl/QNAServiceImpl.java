@@ -62,4 +62,9 @@ public class QNAServiceImpl implements QNAService {
 		return countList;
 	}
 
+	@Override
+	public void qnareply(QNAVO qna) throws SQLException {
+		qnaDAO.qnareply(qna);
+	}
+
 }

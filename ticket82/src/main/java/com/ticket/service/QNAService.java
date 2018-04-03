@@ -19,4 +19,6 @@ public interface QNAService {
 	List<QNAVO> readSearchQNAList(SearchCriteria cri) throws SQLException;
 	int readSearchQNAListCount(SearchCriteria cri)throws SQLException;
 	
+	void qnareply(QNAVO qna) throws SQLException;
+	
 }

@@ -210,7 +210,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/mc/mcdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -226,7 +226,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/mc/mcdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -242,7 +242,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/mc/mcdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -258,7 +258,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/mc/mcdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -278,7 +278,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/cc/ccdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -294,7 +294,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/cc/ccdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -310,7 +310,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/cc/ccdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -326,7 +326,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/cc/ccdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -346,7 +346,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/play/playdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -362,7 +362,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/play/playdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -378,7 +378,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/play/playdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -394,7 +394,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/play/playdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -414,7 +414,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/classic/classicdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -430,7 +430,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/classic/classicdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -446,7 +446,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/classic/classicdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>
@@ -462,7 +462,7 @@
    						<a class="contentTxt" href="#">
    						</a>
    					</div>
-					<a href="/mc/readMcPage?ttr_no=${mainVO.ttr_no}">
+					<a href="/mboard/classic/classicdetail?ttr_no=${mainVO.ttr_no}">
 						<img src="/displayFile?fileName=${mainVO.main_path}">
 					</a>
    				</div>

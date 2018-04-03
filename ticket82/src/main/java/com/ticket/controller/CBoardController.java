@@ -534,7 +534,7 @@ public class CBoardController {
 	@RequestMapping(value = "/play", method = RequestMethod.GET)
 	public String readplay(@ModelAttribute("cri")SearchCriteria cri,Model model,HttpSession session) throws Exception{
 		//테스트용
-		String url="cboard/classic";
+		String url="cboard/play";
 		cri.setTtr_cat("play");
 		List<BoardVO> boardList=bs.searchBoardList(cri);
 		model.addAttribute("list",boardList);
@@ -649,7 +649,7 @@ public class CBoardController {
 		return url;
 	}
 	
-	@RequestMapping(value="/cc/mcdetail",method=RequestMethod.GET)
+	@RequestMapping(value="/cc/ccdetail",method=RequestMethod.GET)
 	public String ccdetail(@RequestParam("ttr_no")int ttr_no,Model model) throws Exception{
 		String url="cboard/cc/ccdetail";
 		BoardVO board=bs.readBoardByNo(ttr_no);

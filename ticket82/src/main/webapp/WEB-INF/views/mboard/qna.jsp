@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
   <head>
-
+  	
   </head>
 
   <body>
@@ -65,22 +65,21 @@
           <div class="card-header" role="tab" id="headingOne">
             <h5 class="mb-0">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">${qnaVO.qna_title}</a>
+              <fmt:formatDate pattern="yyyy-MM-dd"
+				value="${qnaVO.qna_date}" />
               <button id='del' onclick="javascript:location.href='<%=request.getContextPath() %>/mboard/qna/delete'" class="btn btn-primary">삭제</button>
             </h5>
           </div>
 
           <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
             <div class="card-body">
-              ${qnaVO.qna_date}<br/>
               ${qnaVO.qna_content}
             </div>
             <!-- 답변 -->
             <div class="row">
 				<div class="col-md-12">
 					<div class="box box-success">
-						<div class="box-header">
-							<h3 class="box-title">ADD NEW ANSWER</h3>
-						</div>
+						
 						<div class="box-body">
 							<label for="newAnswerWriter">Writer</label>
 								<input class="form-control" type='text' 
@@ -147,15 +146,41 @@
         
        </c:forEach> 
       </div>
-      
+      <div class="box-footer">
+
+					<div class="text-center">
+						<ul class="pagination">
+
+							<c:if test="${pageMaker.prev}">
+								<li><a
+									href="qna${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="qna${pageMaker.makeSearch(idx)}">${idx}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="qna${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+
+						</ul>
+					</div>
+
+				</div>
+				<!-- /.box-footer-->
       
 
     </div>
     <!-- /.container -->
-
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
+	
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
-
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script id="template" type="text/x-handlebars-template">
 		{{#each .}}
 			<li class="answerLi" data-ano={{ano}} >
@@ -190,7 +215,7 @@
 		target.after(html);
 	};
 	
-	var qna_no=${qnaVO.bno};
+	var qna_no=${qnaVO.qna_no};
 	
 	var answerPage=1;
 	
@@ -234,7 +259,7 @@
 						
 		var am_id=$('#newAnswerWriter').val();
 		var ans_content=$('#newAnswerText').val();
-		
+		var qna_no=${qnaVO.qna_no};
 		$.ajax({
 			type:'post',
 			url:'/answer',
@@ -322,7 +347,7 @@
 <script>
 	$(document).ready(function(){
 		$('#searchBtn').on("click",function(event){
-			self.location = "list"
+			self.location = "qna"
 							+ '${pageMaker.makeQuery(1)}'
 							+ "&searchType="
 							+ $("select option:selected").val()
@@ -330,7 +355,7 @@
 		});
 		
 		$('#newBtn').on("click", function(evt){
-				self.location = "createQNA";
+			self.location = "createQNA";
 		});
 	});
 </script>
