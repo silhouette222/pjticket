@@ -179,7 +179,7 @@
 						</c:if>
 					</c:forEach>>
             <div class="carousel-caption d-none d-md-block">
-              <h3>asas</h3>
+              <!-- <h3>asas</h3> -->
               <button class="btn btn-danger">상세보기</button>
             </div>
           </div>
